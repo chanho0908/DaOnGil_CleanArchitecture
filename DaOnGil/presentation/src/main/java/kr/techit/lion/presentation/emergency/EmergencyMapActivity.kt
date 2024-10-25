@@ -57,7 +57,7 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val viewModel: EmergencyMapViewModel by viewModels()
 
     private val connectivityObserver: ConnectivityObserver by lazy {
-        NetworkConnectivityObserver.getInstance(this)
+        NetworkConnectivityObserver(applicationContext)
     }
 
     private lateinit var launcherForPermission: ActivityResultLauncher<Array<String>>

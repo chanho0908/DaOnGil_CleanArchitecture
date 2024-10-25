@@ -18,7 +18,7 @@ import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
 class EmergencyMainFragment : Fragment(R.layout.fragment_emergency_main) {
 
     private val connectivityObserver: ConnectivityObserver by lazy {
-        NetworkConnectivityObserver.getInstance(requireActivity())
+        NetworkConnectivityObserver(requireContext().applicationContext)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

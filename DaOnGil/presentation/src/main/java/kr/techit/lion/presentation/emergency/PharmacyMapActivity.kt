@@ -67,7 +67,7 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private val viewModel: PharmacyMapViewModel by viewModels()
 
     private val connectivityObserver: ConnectivityObserver by lazy {
-        NetworkConnectivityObserver.getInstance(this)
+        NetworkConnectivityObserver(this)
     }
 
     private var selectedMarker: Marker? = null
