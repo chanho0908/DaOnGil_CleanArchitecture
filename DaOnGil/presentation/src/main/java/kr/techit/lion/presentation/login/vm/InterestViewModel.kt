@@ -27,18 +27,12 @@ class InterestViewModel @Inject constructor(
 
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _concernType = MutableStateFlow(ConcernType(
-        isPhysical = false,
-        isHear = false,
-        isVisual = false,
-        isElderly = false,
-        isChild = false
-    ))
+    private val _state = MutableStateFlow(ConcernType.create())
 
-    val concernType get() = _concernType.asStateFlow()
+    val state get() = _state.asStateFlow()
 
     fun onSelectInterest(type: InterestType) {
-        val currentInterests = _concernType.value
+        val currentInterests = _state.value
 
         val updatedInterests = when(type) {
             InterestType.Physical -> currentInterests.copy(isPhysical = !currentInterests.isPhysical)
@@ -48,12 +42,12 @@ class InterestViewModel @Inject constructor(
             InterestType.Elderly -> currentInterests.copy(isElderly = !currentInterests.isElderly)
         }
 
-        _concernType.update { updatedInterests }
+        _state.update { updatedInterests }
     }
 
     fun onClickSubmitButton() {
         viewModelScope.launch(recordExceptionHandler){
-            memberRepository.updateConcernType(_concernType.value).onSuccess {
+            memberRepository.updateConcernType(_state.value).onSuccess {
                 networkErrorDelegate.handleNetworkSuccess()
             }.onError {
                 networkErrorDelegate.handleNetworkError(it)

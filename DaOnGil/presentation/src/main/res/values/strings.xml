@@ -420,5 +420,9 @@
     <string name="text_my_review_img">후기 이미지 두 번 탭하면 이미지 보기 화면으로 이동합니다</string>
     <string name="text_my_review_modify_move">후기 수정하기</string>
     <string name="text_my_review_delete">후기 삭제하기</string>
-    <string name="text_common_error">오류가 발갱했습니다. 앱 종료 후 다시 시도해주세요.</string>
+    <string name="text_common_error">오류가 발생했습니다. 앱 종료 후 다시 시도해주세요.</string>
+    <string name="text_complete">완료</string>
+    <string name="text_retry">다시 시도</string>
+    <string name="plz_select_interest_type">"관심유형을 한개 이상선택해주세요"</string>
+    <string name="plz_retry">서버 호출에 실패했어요. 버튼을 눌러 다시 시도해주세요.</string>
 </resources>
