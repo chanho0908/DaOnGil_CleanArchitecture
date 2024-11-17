@@ -63,6 +63,7 @@ import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
 import kr.techit.lion.presentation.main.vm.home.HomeViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import java.io.File
 import java.io.IOException
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
@@ -171,6 +172,46 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     override fun onDetach() {
         super.onDetach()
         Log.d("HomeMainView", "onDetach")
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+
+        clearCache()
+    }
+
+    private fun clearCache() {
+        val cacheDir = requireContext().applicationContext.cacheDir
+        if (cacheDir.exists()) {
+            deleteCacheFiles(cacheDir)
+        }
+    }
+
+    private fun deleteCacheFiles(directory: File) {
+        if (directory.isDirectory) {
+            val files = directory.listFiles()
+            files?.forEach {
+                if (it.isDirectory) {
+                    deleteCacheFiles(it)
+                } else {
+                    if (it.name.endsWith(".cache")) {
+                        if (it.delete()) {
+                            Log.d("clearCache", "Deleted: ${it.name}")
+                        } else {
+                            Log.e("clearCache", "Failed to delete: ${it.name}")
+                        }
+                    }
+                }
+            }
+        } else {
+            if (directory.name.endsWith(".cache")) {
+                if (directory.delete()) {
+                    Log.d("clearCache", "Deleted: ${directory.name}")
+                } else {
+                    Log.e("clearCache", "Failed to delete: ${directory.name}")
+                }
+            }
+        }
     }
 
     private fun settingAppTheme(binding: FragmentHomeMainBinding) {
@@ -406,6 +447,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                         }
 
                         if (result.locationSettingsStates?.isLocationUsable == true) {
+                            Log.e("HomeMainView", "위치 설정 성공")
                             fusedLocationProviderClient =
                                 LocationServices.getFusedLocationProviderClient(requireContext())
                             startLocationUpdates(binding)
