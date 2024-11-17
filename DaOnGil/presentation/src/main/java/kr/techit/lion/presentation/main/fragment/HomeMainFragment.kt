@@ -119,6 +119,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         settingSearchBanner(binding)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        viewModel.deactivateView()
+    }
+
     private fun settingAppTheme(binding: FragmentHomeMainBinding) {
         childFragmentManager.setFragmentResultListener(
             "negativeButtonClick",
