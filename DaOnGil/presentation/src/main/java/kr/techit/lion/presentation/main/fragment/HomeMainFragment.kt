@@ -10,7 +10,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -100,6 +102,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeMainBinding.bind(view)
 
+        Log.d("HomeMainView", "onViewCreated")
+
         viewModel.checkAppTheme()
         viewModel.activateView()
 
@@ -123,6 +127,50 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onDestroyView()
 
         viewModel.deactivateView()
+        Log.d("HomeMainView", "onDestroyView")
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d("HomeMainView", "onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("HomeMainView", "onCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d("HomeMainView", "onCreateView")
+        return inflater.inflate(R.layout.fragment_home_main, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("HomeMainView", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("HomeMainView", "onResume")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("HomeMainView", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("HomeMainView", "onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("HomeMainView", "onDetach")
     }
 
     private fun settingAppTheme(binding: FragmentHomeMainBinding) {
@@ -466,6 +514,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         if (::locationCallback.isInitialized) {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
+
+        Log.d("HomeMainView", "onPause")
     }
 
     private fun hideLocationRv(binding: FragmentHomeMainBinding) {
