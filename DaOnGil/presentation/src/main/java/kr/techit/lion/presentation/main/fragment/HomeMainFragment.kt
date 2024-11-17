@@ -73,7 +73,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
-    private val retryDelayMillis = 5000L
     private var snapHelper: SnapHelper? = null
     private val connectivityObserver: ConnectivityObserver by lazy {
         NetworkConnectivityObserver(requireContext().applicationContext)
