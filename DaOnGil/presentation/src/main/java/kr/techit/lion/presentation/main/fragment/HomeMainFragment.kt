@@ -361,11 +361,11 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                 LocationServices.getFusedLocationProviderClient(requireContext())
                             startLocationUpdates(binding)
                         } else {
-                            retryLocationPermissionCheck(binding)
+                            setDefaultLocation(binding)
                         }
 
                     } catch (e: Exception) {
-                        retryLocationPermissionCheck(binding)
+                        setDefaultLocation(binding)
                     }
                 }
             } else {
@@ -388,7 +388,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         }
     }
 
-    private fun retryLocationPermissionCheck(binding: FragmentHomeMainBinding) {
+    private fun setDefaultLocation(binding: FragmentHomeMainBinding) {
             getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
             binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
     }
@@ -432,24 +432,14 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                         }
 
                                         else -> {
-                                            getAroundPlaceInfo(
-                                                binding,
-                                                DEFAULT_AREA,
-                                                DEFAULT_SIGUNGU
-                                            )
-                                            binding.homeMyLocationTv.text =
-                                                "$DEFAULT_AREA $DEFAULT_SIGUNGU"
-                                            binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
+                                            setDefaultLocation(binding)
                                         }
                                     }
                                 }
                             }
                             return
                         } catch (e: IOException) {
-                            if (i == 4) {
-                                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-                                binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
-                            }
+                            setDefaultLocation(binding)
                         }
                         // 재시도 전 대기 시간
                         Thread.sleep(1000)
