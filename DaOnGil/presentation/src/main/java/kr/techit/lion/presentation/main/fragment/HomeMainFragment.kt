@@ -9,6 +9,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -349,6 +350,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         // 위치 설정이 성공적으로 확인된 경우 위치 업데이트 시작
         viewModel.isViewActive.observe(viewLifecycleOwner) { isActive ->
             if (isActive) {
+                Log.e("HomeMainView", "isActive : $isActive")
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val result = withContext(Dispatchers.IO) {
@@ -360,10 +362,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                 LocationServices.getFusedLocationProviderClient(requireContext())
                             startLocationUpdates(binding)
                         } else {
+                            Log.e("HomeMainView", "위치 설정 실패")
                             setDefaultLocation(binding)
                         }
 
                     } catch (e: Exception) {
+                        Log.e("HomeMainView", "위치 설정 실패, ${e.message}")
                         setDefaultLocation(binding)
                     }
                 }
@@ -480,6 +484,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         areaCode: String,
         sigunguCode: String
     ) {
+        Log.e("HomeMainView", "getAroundPlaceInfo 함수 호출")
+
         viewModel.getPlaceMain(areaCode, sigunguCode)
 
         viewModel.locationMessage.observe(viewLifecycleOwner) { message ->
