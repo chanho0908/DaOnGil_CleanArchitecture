@@ -29,7 +29,7 @@ class NetworkErrorDelegate @Inject constructor() {
             is ConnectException -> ConnectError
             is SocketTimeoutException -> TimeoutError
             is UnknownHostException -> UnknownHostError
-            is HttpException -> { // HttpException으로 변경
+            is HttpException -> {
                 when (e.code()) {
                     400 -> BadRequestError
                     401 -> AuthenticationError
