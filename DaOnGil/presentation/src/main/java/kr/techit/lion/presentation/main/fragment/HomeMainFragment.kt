@@ -389,8 +389,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private fun setDefaultLocation(binding: FragmentHomeMainBinding) {
-            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-            binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
+        getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
+        binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
     }
 
     private fun startLocationUpdates(binding: FragmentHomeMainBinding) {
@@ -559,8 +559,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private suspend fun observeUserActivation() {
-        viewModel.userActivationState.collect{ isFirstUser ->
-            if (isFirstUser){
+        viewModel.userActivationState.collect { isFirstUser ->
+            if (isFirstUser) {
                 if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
                 else showThemeSettingDialog()
             }
