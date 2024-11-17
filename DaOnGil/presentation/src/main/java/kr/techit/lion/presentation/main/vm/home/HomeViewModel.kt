@@ -67,6 +67,9 @@ class HomeViewModel @Inject constructor(
     private val _locationMessage = MutableLiveData<String>()
     val locationMessage: LiveData<String> get() = _locationMessage
 
+    private val _isViewActive = MutableLiveData(false)
+    val isViewActive: LiveData<Boolean> get() = _isViewActive
+
     fun checkAppTheme() = viewModelScope.launch {
         val appTheme = appThemeRepository.getAppTheme()
         _appTheme.value = appTheme
@@ -150,6 +153,14 @@ class HomeViewModel @Inject constructor(
         }.onError {
             networkErrorDelegate.handleNetworkError(it)
         }
+    }
+
+    fun activateView() {
+        _isViewActive.value = true
+    }
+
+    fun deactivateView() {
+        _isViewActive.value = false
     }
 
 }
