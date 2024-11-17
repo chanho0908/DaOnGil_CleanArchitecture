@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -30,14 +29,15 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsResponse
 import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.withContext
 import kr.techit.lion.domain.model.AppTheme
 import kr.techit.lion.domain.model.mainplace.AroundPlace
 import kr.techit.lion.domain.model.mainplace.RecommendPlace
@@ -63,6 +63,9 @@ import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
 import java.io.IOException
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -338,34 +341,49 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val task = client.checkLocationSettings(builder.build())
 
         // 위치 설정이 성공적으로 확인된 경우 위치 업데이트 시작
-        task.addOnSuccessListener {
-            if (isAdded && view != null) {
-                fusedLocationProviderClient =
-                    LocationServices.getFusedLocationProviderClient(requireContext())
-                startLocationUpdates(binding)
+        viewModel.isViewActive.observe(viewLifecycleOwner) { isActive ->
+            if (isActive) {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    try {
+                        val result = withContext(Dispatchers.IO) {
+                            getTaskResult(task)
+                        }
+
+                        if (result.locationSettingsStates?.isLocationUsable == true) {
+                            fusedLocationProviderClient =
+                                LocationServices.getFusedLocationProviderClient(requireContext())
+                            startLocationUpdates(binding)
+                        } else {
+                            retryLocationPermissionCheck(binding)
+                        }
+
+                    } catch (e: Exception) {
+                        retryLocationPermissionCheck(binding)
+                    }
+                }
             } else {
-                retryLocationPermissionCheck(binding)
+                with(binding) {
+                    homeProgressbar.visibility = View.VISIBLE
+                    homeMainLayout.visibility = View.VISIBLE
+                    homeErrorLayout.visibility = View.GONE
+                }
             }
-        }.addOnFailureListener { // 위치 설정 확인 실패 시
-            retryLocationPermissionCheck(binding)
+        }
+    }
+
+    private suspend fun getTaskResult(task: Task<LocationSettingsResponse>): LocationSettingsResponse {
+        return suspendCoroutine { continuation ->
+            task.addOnSuccessListener { result ->
+                continuation.resume(result)
+            }.addOnFailureListener { exception ->
+                continuation.resumeWithException(exception)
+            }
         }
     }
 
     private fun retryLocationPermissionCheck(binding: FragmentHomeMainBinding) {
-        binding.root.showSnackbar("위치를 설정 중입니다. 잠시 기다려주세요.")
-
-        if (isAdded && view != null && viewLifecycleOwner.lifecycle.currentState.isAtLeast(
-                Lifecycle.State.STARTED
-            )
-        ) {
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                delay(retryDelayMillis)
-                initLocationClient(binding)
-            }
-        } else if (!isAdded && view == null) {
             getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
             binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
-        }
     }
 
     private fun startLocationUpdates(binding: FragmentHomeMainBinding) {
