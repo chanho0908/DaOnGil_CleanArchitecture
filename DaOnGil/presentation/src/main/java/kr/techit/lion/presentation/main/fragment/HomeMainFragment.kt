@@ -176,11 +176,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
     override fun onLowMemory() {
         super.onLowMemory()
-
+        Log.d("clearCache", "onLowMemory 호출")
         clearCache()
     }
 
     private fun clearCache() {
+        Log.d("clearCache", "clearCache 호출")
         val cacheDir = requireContext().applicationContext.cacheDir
         if (cacheDir.exists()) {
             deleteCacheFiles(cacheDir)
@@ -188,6 +189,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private fun deleteCacheFiles(directory: File) {
+        Log.d("clearCache", "deleteCacheFiles 호출")
         if (directory.isDirectory) {
             val files = directory.listFiles()
             files?.forEach {
