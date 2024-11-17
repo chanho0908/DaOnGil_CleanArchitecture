@@ -101,6 +101,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val binding = FragmentHomeMainBinding.bind(view)
 
         viewModel.checkAppTheme()
+        viewModel.activateView()
 
         repeatOnViewStarted {
             supervisorScope {
