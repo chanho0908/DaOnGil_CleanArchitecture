@@ -483,7 +483,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     ) {
         viewModel.getPlaceMain(areaCode, sigunguCode)
 
-        viewModel.locationMessage.observe(requireActivity()) { message ->
+        viewModel.locationMessage.observe(viewLifecycleOwner) { message ->
             binding.root.showSnackbar(message)
 
             binding.homeMyLocationTv.text = "$DEFAULT_AREA $DEFAULT_SIGUNGU"
