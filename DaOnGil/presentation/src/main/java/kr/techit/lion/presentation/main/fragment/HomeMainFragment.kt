@@ -363,12 +363,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                             startLocationUpdates(binding)
                         } else {
                             Log.e("HomeMainView", "위치 설정 실패")
-                            setDefaultLocation(binding)
+                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                         }
 
                     } catch (e: Exception) {
                         Log.e("HomeMainView", "위치 설정 실패, ${e.message}")
-                        setDefaultLocation(binding)
+                        getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                     }
                 }
             } else {
@@ -389,11 +389,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                 continuation.resumeWithException(exception)
             }
         }
-    }
-
-    private fun setDefaultLocation(binding: FragmentHomeMainBinding) {
-        getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-        binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
     }
 
     private fun startLocationUpdates(binding: FragmentHomeMainBinding) {
@@ -435,14 +430,14 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                         }
 
                                         else -> {
-                                            setDefaultLocation(binding)
+                                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                                         }
                                     }
                                 }
                             }
                             return
                         } catch (e: IOException) {
-                            setDefaultLocation(binding)
+                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                         }
                         // 재시도 전 대기 시간
                         Thread.sleep(1000)
