@@ -36,7 +36,10 @@ import com.google.android.gms.location.LocationSettingsResponse
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -81,6 +84,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private val connectivityObserver: ConnectivityObserver by lazy {
         NetworkConnectivityObserver(requireContext().applicationContext)
     }
+
+    private val customScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     companion object {
         const val DEFAULT_AREA = "서울특별시"
@@ -128,6 +133,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onDestroyView()
 
         viewModel.deactivateView()
+        Log.e("HomeMainView", "isActive : ${viewModel.isViewActive.value.toString()}")
         Log.d("HomeMainView", "onDestroyView")
     }
 
@@ -166,54 +172,13 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
     override fun onDestroy() {
         super.onDestroy()
+        customScope.cancel()
         Log.d("HomeMainView", "onDestroy")
     }
 
     override fun onDetach() {
         super.onDetach()
         Log.d("HomeMainView", "onDetach")
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        Log.d("clearCache", "onLowMemory 호출")
-        clearCache()
-    }
-
-    private fun clearCache() {
-        Log.d("clearCache", "clearCache 호출")
-        val cacheDir = requireContext().applicationContext.cacheDir
-        if (cacheDir.exists()) {
-            deleteCacheFiles(cacheDir)
-        }
-    }
-
-    private fun deleteCacheFiles(directory: File) {
-        Log.d("clearCache", "deleteCacheFiles 호출")
-        if (directory.isDirectory) {
-            val files = directory.listFiles()
-            files?.forEach {
-                if (it.isDirectory) {
-                    deleteCacheFiles(it)
-                } else {
-                    if (it.name.endsWith(".cache")) {
-                        if (it.delete()) {
-                            Log.d("clearCache", "Deleted: ${it.name}")
-                        } else {
-                            Log.e("clearCache", "Failed to delete: ${it.name}")
-                        }
-                    }
-                }
-            }
-        } else {
-            if (directory.name.endsWith(".cache")) {
-                if (directory.delete()) {
-                    Log.d("clearCache", "Deleted: ${directory.name}")
-                } else {
-                    Log.e("clearCache", "Failed to delete: ${directory.name}")
-                }
-            }
-        }
     }
 
     private fun settingAppTheme(binding: FragmentHomeMainBinding) {
@@ -442,22 +407,23 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         viewModel.isViewActive.observe(viewLifecycleOwner) { isActive ->
             if (isActive) {
                 Log.e("HomeMainView", "isActive : $isActive")
-                viewLifecycleOwner.lifecycleScope.launch {
+                customScope.launch {
                     try {
                         val result = withContext(Dispatchers.IO) {
                             getTaskResult(task)
                         }
 
-                        if (result.locationSettingsStates?.isLocationUsable == true) {
-                            Log.e("HomeMainView", "위치 설정 성공")
-                            fusedLocationProviderClient =
-                                LocationServices.getFusedLocationProviderClient(requireContext())
-                            startLocationUpdates(binding)
-                        } else {
-                            Log.e("HomeMainView", "위치 설정 실패")
-                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
+                        withContext(Dispatchers.Main) {
+                            if (result.locationSettingsStates?.isLocationUsable == true) {
+                                Log.e("HomeMainView", "위치 설정 성공")
+                                fusedLocationProviderClient =
+                                    LocationServices.getFusedLocationProviderClient(requireContext())
+                                startLocationUpdates(binding)
+                            } else {
+                                Log.e("HomeMainView", "위치 설정 실패")
+                                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
+                            }
                         }
-
                     } catch (e: Exception) {
                         Log.e("HomeMainView", "위치 설정 실패, ${e.message}")
                         getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
@@ -522,7 +488,11 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                         }
 
                                         else -> {
-                                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
+                                            getAroundPlaceInfo(
+                                                binding,
+                                                DEFAULT_AREA,
+                                                DEFAULT_SIGUNGU
+                                            )
                                         }
                                     }
                                 }
@@ -610,8 +580,9 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         return (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 
-    private suspend fun collectAppTheme() {
-        viewModel.appTheme.collect {
+    private fun collectAppTheme() {
+        viewModel.appTheme.observe(viewLifecycleOwner) {
+            Log.e("MainViewTheme", it.toString())
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -621,6 +592,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
                 AppTheme.SYSTEM ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+                AppTheme.LOADING -> return@observe
             }
         }
     }

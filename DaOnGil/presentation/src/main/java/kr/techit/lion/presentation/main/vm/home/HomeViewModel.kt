@@ -48,8 +48,8 @@ class HomeViewModel @Inject constructor(
     lateinit var networkErrorDelegate: NetworkErrorDelegate
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _appTheme = MutableStateFlow(AppTheme.SYSTEM)
-    val appTheme = _appTheme.asStateFlow()
+    private val _appTheme = MutableLiveData<AppTheme>()
+    val appTheme get() : LiveData<AppTheme> = _appTheme
 
     private val _aroundPlaceInfo = MutableLiveData<List<AroundPlace>>()
     val aroundPlaceInfo: LiveData<List<AroundPlace>> = _aroundPlaceInfo
@@ -78,7 +78,7 @@ class HomeViewModel @Inject constructor(
     private fun setAppTheme(appTheme: AppTheme) {
         viewModelScope.launch {
             appThemeRepository.saveAppTheme(appTheme)
-            _appTheme.update { appTheme }
+            _appTheme.value = appTheme
         }
     }
 
@@ -91,6 +91,9 @@ class HomeViewModel @Inject constructor(
             AppTheme.SYSTEM -> {
                 if (isDarkTheme) AppTheme.LIGHT else AppTheme.HIGH_CONTRAST
             }
+            AppTheme.LOADING -> return
+
+            null -> return
         }
 
         setAppTheme(newAppTheme)
