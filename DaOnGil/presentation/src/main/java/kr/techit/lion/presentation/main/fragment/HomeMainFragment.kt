@@ -407,7 +407,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         viewModel.isViewActive.observe(viewLifecycleOwner) { isActive ->
             if (isActive) {
                 Log.e("HomeMainView", "isActive : $isActive")
-                customScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val result = withContext(Dispatchers.IO) {
                             getTaskResult(task)
@@ -553,7 +553,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             binding.homeMyLocationTv.text = "$DEFAULT_AREA $DEFAULT_SIGUNGU"
         }
 
-        viewModel.aroundPlaceInfo.observe(requireActivity()) { aroundPlaceInfo ->
+        viewModel.aroundPlaceInfo.observe(viewLifecycleOwner) { aroundPlaceInfo ->
             if (aroundPlaceInfo.isNotEmpty()) {
                 val aroundPlaceList = aroundPlaceInfo.map {
                     AroundPlace(it.address, it.disability, it.image, it.name, it.placeId)
@@ -566,7 +566,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private fun getRecommendPlaceInfo(binding: FragmentHomeMainBinding) {
         viewModel.getPlaceMain(DEFAULT_AREA, DEFAULT_SIGUNGU)
 
-        viewModel.recommendPlaceInfo.observe(requireActivity()) { recommendPlaceInfo ->
+        viewModel.recommendPlaceInfo.observe(viewLifecycleOwner) { recommendPlaceInfo ->
             if (recommendPlaceInfo.isNotEmpty()) {
                 val recommendPlaceList = recommendPlaceInfo.map {
                     RecommendPlace(it.address, it.disability, it.image, it.name, it.placeId)
