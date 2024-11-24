@@ -57,6 +57,7 @@ import kr.techit.lion.presentation.main.customview.CustomPageIndicator
 import kr.techit.lion.presentation.main.customview.ItemOffsetDecoration
 import kr.techit.lion.presentation.main.dialog.ThemeGuideDialog
 import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
+import kr.techit.lion.presentation.main.dialog.ThemeTempDialog
 import kr.techit.lion.presentation.main.vm.home.HomeViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
@@ -98,6 +99,9 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val binding = FragmentHomeMainBinding.bind(view)
 
         viewModel.checkAppTheme()
+
+        // 임시로 고대비 전환 버튼 숨김 처리
+        binding.homeHighcontrastBtn.visibility = View.GONE
 
         repeatOnViewStarted {
             supervisorScope {
@@ -311,6 +315,12 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         dialog.show(childFragmentManager, "ThemeGuideDialog")
     }
 
+    private fun showThemeTempDialog() {
+        val dialog = ThemeTempDialog()
+        dialog.isCancelable = false
+        dialog.show(childFragmentManager, "ThemeTempDialog")
+    }
+
     private fun checkLocationPermission(binding: FragmentHomeMainBinding) {
         if (ContextCompat.checkSelfPermission(
                 requireActivity(),
@@ -352,7 +362,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private fun retryLocationPermissionCheck(binding: FragmentHomeMainBinding) {
-        binding.root.showSnackbar("위치를 설정 중입니다. 잠시 기다려주세요.")
+//        binding.root.showSnackbar("위치를 설정 중입니다. 잠시 기다려주세요.")
 
         if (isAdded && view != null && viewLifecycleOwner.lifecycle.currentState.isAtLeast(
                 Lifecycle.State.STARTED
@@ -546,8 +556,9 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private suspend fun observeUserActivation() {
         viewModel.userActivationState.collect{ isFirstUser ->
             if (isFirstUser){
-                if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
-                else showThemeSettingDialog()
+//                if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
+//                else showThemeSettingDialog()
+                showThemeTempDialog()
             }
         }
     }
