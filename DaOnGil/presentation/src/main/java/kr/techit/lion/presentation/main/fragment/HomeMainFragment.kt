@@ -9,6 +9,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -98,8 +99,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeMainBinding.bind(view)
 
-        viewModel.checkAppTheme()
-
         // 임시로 고대비 전환 버튼 숨김 처리
         binding.homeHighcontrastBtn.visibility = View.GONE
 
@@ -132,7 +131,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             viewLifecycleOwner
         ) { _, _ ->
             viewModel.onClickThemeChangeButton(AppTheme.HIGH_CONTRAST)
-            requireActivity().recreate()
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -144,7 +142,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
         binding.homeHighcontrastBtn.setOnClickListener {
             viewModel.onClickThemeToggleButton(isDarkTheme(resources.configuration))
-            requireActivity().recreate()
         }
     }
 
@@ -516,12 +513,13 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
                 AppTheme.HIGH_CONTRAST ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
                 AppTheme.SYSTEM ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+                AppTheme.LOADING -> return@collect
             }
         }
     }
