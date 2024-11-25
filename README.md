@@ -48,7 +48,8 @@
 <br/>
 
 ## 📱 App Download
-_**Comming Soon...**_
+[<img src="https://github.com/user-attachments/assets/cd9b1a83-f3c3-40b9-a1e9-bff374ac20b2" width="25%" height="25%"/>](https://play.google.com/store/apps/details?id=kr.techit.lion.daongil_cleanarchitecture&hl=ko)
+
 
 <br/>
 

@@ -45,8 +45,12 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
             }
         }
 
-        binding.selectInterestCompleteButton.setOnClickListener {
+        binding.btnSubmit.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
+            viewModel.onClickSubmitButton()
+        }
+
+        binding.btnRetry.setOnClickListener {
             viewModel.onClickSubmitButton()
         }
 
@@ -63,8 +67,9 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
             when(it) {
                 is NetworkState.Loading -> return@collect
                 is NetworkState.Error -> {
+                    binding.btnRetry.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
-                    Snackbar.make(binding.root, it.msg, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, getString(R.string.plz_retry), Snackbar.LENGTH_SHORT).show()
                 }
                 is NetworkState.Success -> {
                     binding.progressBar.visibility = View.GONE
@@ -76,7 +81,7 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
     }
 
     private suspend fun collectConcernType(binding: FragmentSelectInterestBinding) {
-        viewModel.concernType.collectLatest { concernType ->
+        viewModel.state.collectLatest { concernType ->
             updateUI(binding, concernType)
         }
     }
@@ -99,9 +104,9 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
         )
 
         val anySelected = concernType.hasAnyTrue()
-        binding.selectInterestCompleteButton.isEnabled = anySelected
+        binding.btnSubmit.isEnabled = anySelected
         if (requireContext().isTallBackEnabled() && !anySelected){
-            binding.selectInterestCompleteButton.contentDescription = "관심유형을 한개 이상선택해주세요"
+            binding.btnSubmit.contentDescription = getString(R.string.plz_select_interest_type)
         }
     }
 }

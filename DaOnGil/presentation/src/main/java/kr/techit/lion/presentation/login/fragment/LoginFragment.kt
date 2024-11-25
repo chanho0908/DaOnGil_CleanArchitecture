@@ -19,6 +19,7 @@ import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentLoginBinding
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.login.model.LoginType
+import kr.techit.lion.presentation.login.model.UserState
 import kr.techit.lion.presentation.login.vm.LoginViewModel
 import kr.techit.lion.presentation.main.MainActivity
 
@@ -32,9 +33,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val binding = FragmentLoginBinding.bind(view)
 
         with(binding) {
-
             kakaoLoginButton.setOnClickListener {
-                kakaoLogin(binding)
+                //kakaoLogin(binding)
+                
             }
 
             naverLoginButton.setOnClickListener {
@@ -47,13 +48,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         repeatOnViewStarted {
-            viewModel.sigInInUiState.collectLatest {
-                if (it) {
-                    if (viewModel.isFirstUser.value) {
+            viewModel.userState.collect { state ->
+                when (state) {
+                    UserState.Checking -> return@collect
+                    UserState.NewUser -> {
+                        Navigation.findNavController(view).navigate(R.id.to_selectInterestFragment)
+                    }
+                    UserState.ExistingUser -> {
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         requireActivity().finish()
-                    }else{
-                        Navigation.findNavController(view).navigate(R.id.to_selectInterestFragment)
                     }
                 }
             }
@@ -81,7 +84,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     }
 
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                    UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
+                    UserApiClient.instance.loginWithKakaoAccount(
+                        requireContext(),
+                        callback = callback
+                    )
                 } else if (token != null) {
                     viewModel.onCompleteLogIn(kakao, token.accessToken, token.refreshToken)
                 }
@@ -111,7 +117,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 binding.progressbar.visibility = View.GONE
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
                 val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
-                Log.d("NaverLoginFailed", "$errorCode : $errorDescription" )
+                Log.d("NaverLoginFailed", "$errorCode : $errorDescription")
             }
 
             override fun onError(errorCode: Int, message: String) {
