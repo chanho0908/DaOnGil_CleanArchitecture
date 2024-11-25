@@ -34,8 +34,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         with(binding) {
             kakaoLoginButton.setOnClickListener {
-                //kakaoLogin(binding)
-                
+                kakaoLogin(binding)
             }
 
             naverLoginButton.setOnClickListener {
