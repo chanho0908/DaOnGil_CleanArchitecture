@@ -9,10 +9,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -36,10 +33,7 @@ import com.google.android.gms.location.LocationSettingsResponse
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -66,7 +60,6 @@ import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
 import kr.techit.lion.presentation.main.vm.home.HomeViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
-import java.io.File
 import java.io.IOException
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
@@ -84,8 +77,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private val connectivityObserver: ConnectivityObserver by lazy {
         NetworkConnectivityObserver(requireContext().applicationContext)
     }
-
-    private val customScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     companion object {
         const val DEFAULT_AREA = "서울특별시"
@@ -108,10 +99,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeMainBinding.bind(view)
 
-        Log.d("HomeMainView", "onViewCreated")
-
         viewModel.checkAppTheme()
-        viewModel.activateView()
 
         repeatOnViewStarted {
             supervisorScope {
@@ -127,58 +115,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         settingVPAdapter(binding)
         getRecommendPlaceInfo(binding)
         settingSearchBanner(binding)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        viewModel.deactivateView()
-        Log.e("HomeMainView", "isActive : ${viewModel.isViewActive.value.toString()}")
-        Log.d("HomeMainView", "onDestroyView")
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("HomeMainView", "onAttach")
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("HomeMainView", "onCreate")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d("HomeMainView", "onCreateView")
-        return inflater.inflate(R.layout.fragment_home_main, container, false)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("HomeMainView", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("HomeMainView", "onResume")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("HomeMainView", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        customScope.cancel()
-        Log.d("HomeMainView", "onDestroy")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("HomeMainView", "onDetach")
     }
 
     private fun settingAppTheme(binding: FragmentHomeMainBinding) {
@@ -404,37 +340,23 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val task = client.checkLocationSettings(builder.build())
 
         // 위치 설정이 성공적으로 확인된 경우 위치 업데이트 시작
-        viewModel.isViewActive.observe(viewLifecycleOwner) { isActive ->
-            if (isActive) {
-                Log.e("HomeMainView", "isActive : $isActive")
-                viewLifecycleOwner.lifecycleScope.launch {
-                    try {
-                        val result = withContext(Dispatchers.IO) {
-                            getTaskResult(task)
-                        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    getTaskResult(task)
+                }
 
-                        withContext(Dispatchers.Main) {
-                            if (result.locationSettingsStates?.isLocationUsable == true) {
-                                Log.e("HomeMainView", "위치 설정 성공")
-                                fusedLocationProviderClient =
-                                    LocationServices.getFusedLocationProviderClient(requireContext())
-                                startLocationUpdates(binding)
-                            } else {
-                                Log.e("HomeMainView", "위치 설정 실패")
-                                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-                            }
-                        }
-                    } catch (e: Exception) {
-                        Log.e("HomeMainView", "위치 설정 실패, ${e.message}")
+                withContext(Dispatchers.Main) {
+                    if (result.locationSettingsStates?.isLocationUsable == true) {
+                        fusedLocationProviderClient =
+                            LocationServices.getFusedLocationProviderClient(requireContext())
+                        startLocationUpdates(binding)
+                    } else {
                         getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                     }
                 }
-            } else {
-                with(binding) {
-                    homeProgressbar.visibility = View.VISIBLE
-                    homeMainLayout.visibility = View.VISIBLE
-                    homeErrorLayout.visibility = View.GONE
-                }
+            } catch (e: Exception) {
+                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
             }
         }
     }
@@ -528,8 +450,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         if (::locationCallback.isInitialized) {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
-
-        Log.d("HomeMainView", "onPause")
     }
 
     private fun hideLocationRv(binding: FragmentHomeMainBinding) {
@@ -543,8 +463,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         areaCode: String,
         sigunguCode: String
     ) {
-        Log.e("HomeMainView", "getAroundPlaceInfo 함수 호출")
-
         viewModel.getPlaceMain(areaCode, sigunguCode)
 
         viewModel.locationMessage.observe(viewLifecycleOwner) { message ->
@@ -582,7 +500,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
     private fun collectAppTheme() {
         viewModel.appTheme.observe(viewLifecycleOwner) {
-            Log.e("MainViewTheme", it.toString())
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
