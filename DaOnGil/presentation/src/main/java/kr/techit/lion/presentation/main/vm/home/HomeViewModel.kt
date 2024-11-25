@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
@@ -66,9 +63,6 @@ class HomeViewModel @Inject constructor(
 
     private val _locationMessage = MutableLiveData<String>()
     val locationMessage: LiveData<String> get() = _locationMessage
-
-    private val _isViewActive = MutableLiveData(false)
-    val isViewActive: LiveData<Boolean> get() = _isViewActive
 
     fun checkAppTheme() = viewModelScope.launch {
         val appTheme = appThemeRepository.getAppTheme()
@@ -157,13 +151,4 @@ class HomeViewModel @Inject constructor(
             networkErrorDelegate.handleNetworkError(it)
         }
     }
-
-    fun activateView() {
-        _isViewActive.value = true
-    }
-
-    fun deactivateView() {
-        _isViewActive.value = false
-    }
-
 }
