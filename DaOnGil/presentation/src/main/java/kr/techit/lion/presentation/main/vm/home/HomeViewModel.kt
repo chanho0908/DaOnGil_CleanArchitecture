@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.model.AppTheme
+import kr.techit.lion.domain.model.AppTheme.Companion.getNewTheme
 import kr.techit.lion.domain.model.mainplace.AroundPlace
 import kr.techit.lion.domain.model.mainplace.RecommendPlace
 import kr.techit.lion.domain.repository.ActivationRepository
@@ -25,6 +26,7 @@ import kr.techit.lion.domain.repository.SigunguCodeRepository
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.shareInUi
+import kr.techit.lion.presentation.ext.stateInUi
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -48,9 +50,6 @@ class HomeViewModel @Inject constructor(
     lateinit var networkErrorDelegate: NetworkErrorDelegate
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _appTheme = MutableStateFlow(AppTheme.SYSTEM)
-    val appTheme = _appTheme.asStateFlow()
-
     private val _aroundPlaceInfo = MutableLiveData<List<AroundPlace>>()
     val aroundPlaceInfo: LiveData<List<AroundPlace>> = _aroundPlaceInfo
 
@@ -67,10 +66,6 @@ class HomeViewModel @Inject constructor(
     private val _locationMessage = MutableLiveData<String>()
     val locationMessage: LiveData<String> get() = _locationMessage
 
-    fun checkAppTheme() = viewModelScope.launch {
-        val appTheme = appThemeRepository.getAppTheme()
-        _appTheme.value = appTheme
-    }
     val appTheme = appThemeRepository.getAppTheme().stateInUi(
         viewModelScope, AppTheme.LOADING
     )
