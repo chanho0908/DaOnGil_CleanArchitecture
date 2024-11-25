@@ -71,32 +71,28 @@ class HomeViewModel @Inject constructor(
         val appTheme = appThemeRepository.getAppTheme()
         _appTheme.value = appTheme
     }
+    val appTheme = appThemeRepository.getAppTheme().stateInUi(
+        viewModelScope, AppTheme.LOADING
+    )
 
     private fun setAppTheme(appTheme: AppTheme) {
         viewModelScope.launch {
             appThemeRepository.saveAppTheme(appTheme)
-            _appTheme.update { appTheme }
         }
     }
 
     // 상단 테마 토글 버튼 클릭시
     fun onClickThemeToggleButton(isDarkTheme: Boolean) {
-
-        val newAppTheme = when (_appTheme.value) {
-            AppTheme.LIGHT -> AppTheme.HIGH_CONTRAST
-            AppTheme.HIGH_CONTRAST -> AppTheme.LIGHT
-            AppTheme.SYSTEM -> {
-                if (isDarkTheme) AppTheme.LIGHT else AppTheme.HIGH_CONTRAST
-            }
-        }
-
+        val newAppTheme = getNewTheme(appTheme.value, isDarkTheme)
         setAppTheme(newAppTheme)
     }
 
     // 테마 설정 다이얼로그 클릭시
-    fun onClickThemeChangeButton(theme: AppTheme) = viewModelScope.launch {
-        setAppTheme(theme)
-        activationRepository.saveUserActivation(false)
+    fun onClickThemeChangeButton(theme: AppTheme){
+        viewModelScope.launch {
+            setAppTheme(theme)
+            activationRepository.saveUserActivation(false)
+        }
     }
 
     fun getPlaceMain(area: String, sigungu: String) = viewModelScope.launch(Dispatchers.IO) {
