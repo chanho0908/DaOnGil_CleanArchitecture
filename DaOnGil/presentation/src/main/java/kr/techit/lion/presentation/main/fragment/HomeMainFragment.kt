@@ -34,7 +34,6 @@ import com.google.android.gms.location.Priority
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -57,7 +56,6 @@ import kr.techit.lion.presentation.main.customview.CustomPageIndicator
 import kr.techit.lion.presentation.main.customview.ItemOffsetDecoration
 import kr.techit.lion.presentation.main.dialog.ThemeGuideDialog
 import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
-import kr.techit.lion.presentation.main.dialog.ThemeTempDialog
 import kr.techit.lion.presentation.main.vm.home.HomeViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
@@ -312,12 +310,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         dialog.show(childFragmentManager, "ThemeGuideDialog")
     }
 
-    private fun showThemeTempDialog() {
-        val dialog = ThemeTempDialog()
-        dialog.isCancelable = false
-        dialog.show(childFragmentManager, "ThemeTempDialog")
-    }
-
     private fun checkLocationPermission(binding: FragmentHomeMainBinding) {
         if (ContextCompat.checkSelfPermission(
                 requireActivity(),
@@ -557,7 +549,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             if (isFirstUser) {
                 if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
                 else showThemeSettingDialog()
-                //showThemeTempDialog()
             }
         }
     }
