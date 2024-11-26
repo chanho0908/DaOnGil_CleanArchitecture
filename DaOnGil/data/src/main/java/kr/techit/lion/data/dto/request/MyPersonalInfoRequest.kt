@@ -15,7 +15,7 @@ internal data class MyPersonalInfoRequest(
 internal fun PersonalInfo.toRequestBody(): RequestBody {
     return JsonAdapter(MyPersonalInfoRequest::class.java).toJson(
         MyPersonalInfoRequest(
-            this.useName,
+            this.userName,
             this.nickname,
             this.phone
         )
