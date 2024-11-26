@@ -147,6 +147,7 @@
     <string name="content_emergency_area_dialog">시도와 시군구 모두 선택해주세요</string>
     <string name="text_relation">관계</string>
     <string name="text_birth">생년월일</string>
+    <string name="text_plz_enter_name">이름을 입력해주세요</string>
     <string name="text_plz_enter_nickname">닉네임을 입력해주세요</string>
     <string name="text_plz_enter_birth">생년월일을 입력해주세요</string>
     <string name="text_blood_type">혈액형</string>

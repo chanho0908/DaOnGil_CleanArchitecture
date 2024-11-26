@@ -51,7 +51,6 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_basic"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.card.MaterialCardView
@@ -76,7 +75,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <Button
-                android:id="@+id/btn_modify"
+                android:id="@+id/btn_img_modify"
                 style="?attr/materialIconButtonFilledTonalStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,12 +94,49 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="@dimen/margin_basic"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/tv_userName_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small1"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="@string/text_name"
+                android:textSize="@dimen/font_big2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUserName"
+                style="?attr/materialAlertDialogBodyTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small2"
+                app:boxBackgroundColor="@color/text_field_background"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/text_field_background"
+                app:boxStrokeWidth="0dp"
+                app:cursorColor="@color/text_primary"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                tools:boxBackgroundMode="outline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendard_medium"
+                    android:hint="@string/text_plz_enter_name"
+                    android:inputType="text"
+                    android:textSize="@dimen/font_big3" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_nickname_title"
@@ -116,7 +152,7 @@
                 style="?attr/materialAlertDialogBodyTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_big4"
+                android:layout_marginBottom="@dimen/margin_small2"
                 app:boxBackgroundColor="@color/text_field_background"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="@color/text_field_background"
@@ -150,7 +186,6 @@
                 android:id="@+id/textInputLayoutUserPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_big2"
                 app:boxBackgroundColor="@color/text_field_background"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="@color/text_field_background"
@@ -163,30 +198,28 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tv_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/pretendard_medium"
                     android:hint="@string/text_contact_ex"
                     android:inputType="phone"
                     android:textSize="@dimen/font_big3" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/linearLayout"
+
+
+        <Button
+            android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_basic"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_radius_10"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="@string/text_modify"
-                android:textSize="@dimen/font_big2" />
-        </LinearLayout>
+            android:background="@drawable/background_radius_10"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="@string/text_modify"
+            android:layout_marginHorizontal="@dimen/margin_big3"
+            android:layout_marginBottom="@dimen/margin_big3"
+            android:textSize="@dimen/font_big2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
