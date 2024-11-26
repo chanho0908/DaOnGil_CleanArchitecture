@@ -4,20 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.model.IceInfo
+import kr.techit.lion.domain.model.MyInfo
 import kr.techit.lion.domain.model.PersonalInfo
 import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
 import kr.techit.lion.presentation.myinfo.model.ImgModifyState
+import kr.techit.lion.presentation.myinfo.model.MyInfoState
 import kr.techit.lion.presentation.myinfo.model.UserProfileImg
 import javax.inject.Inject
 
@@ -31,52 +36,22 @@ class MyInfoViewModel @Inject constructor(
 
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _personalModifyState = MutableLiveData<NetworkState>()
-    val personalModifyState: LiveData<NetworkState> get() = _personalModifyState
+    private val _state = MutableStateFlow(MyInfoState.create())
+    val state = _state.asStateFlow()
 
-    private val _iceModifyState = MutableLiveData<NetworkState>()
-    val iceModifyState: LiveData<NetworkState> get() = _iceModifyState
+    fun onChangeUiEvent(intent: MyInfoIntent) {
+        when (intent) {
+            is MyInfoIntent.OnUiEventInitializeUiData -> initUiData()
+            is MyInfoIntent.OnUiEventModifyPersonalInfo -> onCompleteModifyPersonal(intent.PersonalInfo)
+            is MyInfoIntent.OnUiEventModifyIceInfo -> onCompleteModifyIce(intent.newIceInfo)
+            is MyInfoIntent.OnUiEventSelectProfileImage -> onSelectProfileImage(intent.imgUrl)
+        }
+    }
 
-    private val _imgSelectedState = MutableStateFlow(ImgModifyState.ImgUnSelected)
-    val imgSelectedState = _imgSelectedState.asStateFlow()
-
-    private val _myPersonalInfo = MutableStateFlow(PersonalInfo())
-    val myPersonalInfo = _myPersonalInfo.asStateFlow()
-
-    private val _profileImg = MutableStateFlow(UserProfileImg(""))
-    val profileImg = _profileImg.asStateFlow()
-
-    private val _name = MutableStateFlow("")
-    val name = _name.asStateFlow()
-
-    private val _iceInfo = MutableStateFlow(IceInfo())
-    val myIceInfo = _iceInfo.asStateFlow()
-
-    private val _isPersonalInfoModified = MutableStateFlow(false)
-    val isPersonalInfoModified = _isPersonalInfoModified.asStateFlow()
-
-    fun initUiData() {
+    private fun initUiData() {
         viewModelScope.launch(recordExceptionHandler) {
             memberRepository.getMyIfo().onSuccess { myInfo ->
-                _name.update { myInfo.name ?: "" }
-
-                _myPersonalInfo.update {
-                    it.copy(nickname = myInfo.nickname ?: "", phone = myInfo.phone ?: "")
-                }
-
-                _profileImg.update { it.copy(imagePath = myInfo.profileImage ?: "") }
-
-                _iceInfo.value = IceInfo(
-                    bloodType = myInfo.bloodType ?: "",
-                    birth = myInfo.birth ?: "",
-                    disease = myInfo.disease ?: "",
-                    allergy = myInfo.allergy ?: "",
-                    medication = myInfo.medication ?: "",
-                    part1Rel = myInfo.part1Rel ?: "",
-                    part1Phone = myInfo.part1Phone ?: "",
-                    part2Rel = myInfo.part2Rel ?: "",
-                    part2Phone = myInfo.part2Phone ?: ""
-                )
+                initPersonalInfo(myInfo)
                 networkErrorDelegate.handleNetworkSuccess()
             }.onError {
                 networkErrorDelegate.handleNetworkError(it)
@@ -84,69 +59,100 @@ class MyInfoViewModel @Inject constructor(
         }
     }
 
-    fun onCompleteModifyPersonal(nickname: String, phone: String) {
+    private fun initPersonalInfo(myInfo: MyInfo) {
+        _state.value = _state.value.copy(
+            personalInfo = PersonalInfo(
+                userName = myInfo.name ?: "",
+                nickname = myInfo.nickname ?: "",
+                phone = myInfo.phone ?: "",
+            ),
+            profileImg = UserProfileImg(myInfo.profileImage ?: ""),
+            iceInfo = IceInfo(
+                bloodType = myInfo.bloodType ?: "",
+                birth = myInfo.birth ?: "",
+                disease = myInfo.disease ?: "",
+                allergy = myInfo.allergy ?: "",
+                medication = myInfo.medication ?: "",
+                part1Rel = myInfo.part1Rel ?: "",
+                part1Phone = myInfo.part1Phone ?: "",
+                part2Rel = myInfo.part2Rel ?: "",
+                part2Phone = myInfo.part2Phone ?: "",
+            )
+        )
+    }
+
+    private fun onCompleteModifyPersonal(personalInfo: PersonalInfo) {
+        when (_state.value.imgSelectedState) {
+            ImgModifyState.ImgSelected -> modifyPersonalWithImg(personalInfo)
+            ImgModifyState.ImgUnSelected -> modifyPersonal(personalInfo)
+        }
+    }
+
+    private fun modifyPersonal(personalInfo: PersonalInfo) {
         viewModelScope.launch {
-            _myPersonalInfo.update { it.copy(nickname = nickname, phone = phone) }
-            _personalModifyState.value = NetworkState.Loading
-            memberRepository.modifyMyPersonalInfo(PersonalInfo(nickname, phone))
+            _state.value = _state.value.copy(
+                personalInfo = _state.value.personalInfo.copy(
+                    personalInfo.userName, personalInfo.nickname, personalInfo.phone
+                ),
+                personalModifyNetworkState = NetworkState.Loading
+            )
+            memberRepository.modifyMyPersonalInfo(_state.value.personalInfo)
                 .onSuccess {
-                    _isPersonalInfoModified.value = true
-                    _personalModifyState.value = NetworkState.Success
+                    whenModifyMyInfoSuccess()
                 }.onError { e ->
-                    _personalModifyState.value = NetworkState.Error("${e.title} \n ${e.message}")
+                    whenModifyMyInfoFail(e.title, e.message)
                 }
         }
     }
 
-    fun onCompleteModifyPersonalWithImg(nickname: String, phone: String) {
-        onCompleteModifyPersonal(nickname, phone)
-
+    private fun modifyPersonalWithImg(personalInfo: PersonalInfo) {
+        modifyPersonal(personalInfo)
         viewModelScope.launch(recordExceptionHandler) {
-            _personalModifyState.value = NetworkState.Loading
-
-            val imgModel = profileImg.value.toDomainModel()
+            _state.value = _state.value.copy(personalModifyNetworkState = NetworkState.Loading)
+            val imgModel = _state.value.profileImg.toDomainModel()
             memberRepository.modifyMyProfileImg(imgModel)
                 .onSuccess {
-                    _isPersonalInfoModified.value = true
-                    _personalModifyState.value = NetworkState.Success
+                    whenModifyMyInfoSuccess()
                 }.onError { e ->
-                    networkErrorDelegate.handleNetworkError(e)
-                    _personalModifyState.value =
-                        NetworkState.Error("${e.title} \n ${e.message}")
+                    whenModifyMyInfoFail(e.title, e.message)
                 }
         }
     }
 
-    fun onCompleteModifyIce(newIceInfo: IceInfo) {
+    private fun whenModifyMyInfoSuccess() {
+        _state.value = _state.value.copy(
+            isPersonalInfoModified = true,
+            personalModifyNetworkState = NetworkState.Success
+        )
+    }
+
+    private fun whenModifyMyInfoFail(title: String, message: String) {
+        _state.value = _state.value.copy(
+            personalModifyNetworkState = NetworkState.Error("$title\n$message")
+        )
+    }
+
+    private fun onCompleteModifyIce(newIceInfo: IceInfo) {
         viewModelScope.launch(recordExceptionHandler) {
-            _iceModifyState.value = NetworkState.Loading
-            _iceInfo.update {
-                it.copy(
-                    birth = newIceInfo.birth,
-                    bloodType = newIceInfo.bloodType,
-                    disease = newIceInfo.disease,
-                    allergy = newIceInfo.allergy,
-                    medication = newIceInfo.medication,
-                    part1Rel = newIceInfo.part1Rel,
-                    part1Phone = newIceInfo.part1Phone,
-                    part2Rel = newIceInfo.part2Rel,
-                    part2Phone = newIceInfo.part2Phone
-                )
-            }
-            memberRepository.modifyMyIceInfo(myIceInfo.value)
+            _state.value = _state.value.copy(
+                iceModifyNetworkState = NetworkState.Loading,
+                iceInfo = newIceInfo
+            )
+            memberRepository.modifyMyIceInfo(newIceInfo)
                 .onSuccess {
-                    _iceModifyState.value = NetworkState.Success
+                    _state.value = _state.value.copy(iceModifyNetworkState = NetworkState.Success)
                 }.onError { e ->
-                    _iceModifyState.value = NetworkState.Error("${e.title} \n ${e.message}")
+                    _state.value = _state.value.copy(
+                        iceModifyNetworkState = NetworkState.Error("${e.title} \n ${e.message}")
+                    )
                 }
         }
     }
 
-    fun onSelectProfileImage(imgUrl: String?) {
-        imgUrl?.let { _profileImg.update { it.copy(imagePath = imgUrl) } }
-    }
-
-    fun modifyStateChange() {
-        _imgSelectedState.value = ImgModifyState.ImgSelected
+    private fun onSelectProfileImage(imgUrl: String?) {
+        _state.value = _state.value.copy(
+            profileImg = _state.value.profileImg.copy(imagePath = imgUrl ?: ""),
+            imgSelectedState = ImgModifyState.ImgSelected
+        )
     }
 }
