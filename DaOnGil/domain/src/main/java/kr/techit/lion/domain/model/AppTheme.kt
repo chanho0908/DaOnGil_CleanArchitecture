@@ -1,7 +1,7 @@
 package kr.techit.lion.domain.model
 
 enum class AppTheme {
-    LIGHT, HIGH_CONTRAST, SYSTEM, LOADING
+    LIGHT, HIGH_CONTRAST, SYSTEM, LOADING;
 
     companion object {
         fun getNewTheme(theme: AppTheme, isDarkTheme: Boolean): AppTheme{
