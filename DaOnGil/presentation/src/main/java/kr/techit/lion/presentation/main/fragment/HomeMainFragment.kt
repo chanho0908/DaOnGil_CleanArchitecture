@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -30,13 +29,16 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsResponse
 import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.withContext
 import kr.techit.lion.domain.model.AppTheme
 import kr.techit.lion.domain.model.mainplace.AroundPlace
 import kr.techit.lion.domain.model.mainplace.RecommendPlace
@@ -62,6 +64,9 @@ import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
 import java.io.IOException
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -69,7 +74,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
-    private val retryDelayMillis = 5000L
     private var snapHelper: SnapHelper? = null
     private val connectivityObserver: ConnectivityObserver by lazy {
         NetworkConnectivityObserver(requireContext().applicationContext)
@@ -337,33 +341,34 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val task = client.checkLocationSettings(builder.build())
 
         // 위치 설정이 성공적으로 확인된 경우 위치 업데이트 시작
-        task.addOnSuccessListener {
-            if (isAdded && view != null) {
-                fusedLocationProviderClient =
-                    LocationServices.getFusedLocationProviderClient(requireContext())
-                startLocationUpdates(binding)
-            } else {
-                retryLocationPermissionCheck(binding)
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    getTaskResult(task)
+                }
+
+                withContext(Dispatchers.Main) {
+                    if (result.locationSettingsStates?.isLocationUsable == true) {
+                        fusedLocationProviderClient =
+                            LocationServices.getFusedLocationProviderClient(requireContext())
+                        startLocationUpdates(binding)
+                    } else {
+                        getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
+                    }
+                }
+            } catch (e: Exception) {
+                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
             }
-        }.addOnFailureListener { // 위치 설정 확인 실패 시
-            retryLocationPermissionCheck(binding)
         }
     }
 
-    private fun retryLocationPermissionCheck(binding: FragmentHomeMainBinding) {
-//        binding.root.showSnackbar("위치를 설정 중입니다. 잠시 기다려주세요.")
-
-        if (isAdded && view != null && viewLifecycleOwner.lifecycle.currentState.isAtLeast(
-                Lifecycle.State.STARTED
-            )
-        ) {
-            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-                delay(retryDelayMillis)
-                initLocationClient(binding)
+    private suspend fun getTaskResult(task: Task<LocationSettingsResponse>): LocationSettingsResponse {
+        return suspendCoroutine { continuation ->
+            task.addOnSuccessListener { result ->
+                continuation.resume(result)
+            }.addOnFailureListener { exception ->
+                continuation.resumeWithException(exception)
             }
-        } else if (!isAdded && view == null) {
-            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-            binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
         }
     }
 
@@ -411,19 +416,13 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                                 DEFAULT_AREA,
                                                 DEFAULT_SIGUNGU
                                             )
-                                            binding.homeMyLocationTv.text =
-                                                "$DEFAULT_AREA $DEFAULT_SIGUNGU"
-                                            binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
                                         }
                                     }
                                 }
                             }
                             return
                         } catch (e: IOException) {
-                            if (i == 4) {
-                                getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
-                                binding.root.showSnackbar("위치를 찾을 수 없어 기본값($DEFAULT_AREA $DEFAULT_SIGUNGU)으로 설정합니다")
-                            }
+                            getAroundPlaceInfo(binding, DEFAULT_AREA, DEFAULT_SIGUNGU)
                         }
                         // 재시도 전 대기 시간
                         Thread.sleep(1000)
@@ -473,7 +472,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             binding.homeMyLocationTv.text = "$DEFAULT_AREA $DEFAULT_SIGUNGU"
         }
 
-        viewModel.aroundPlaceInfo.observe(requireActivity()) { aroundPlaceInfo ->
+        viewModel.aroundPlaceInfo.observe(viewLifecycleOwner) { aroundPlaceInfo ->
             if (aroundPlaceInfo.isNotEmpty()) {
                 val aroundPlaceList = aroundPlaceInfo.map {
                     AroundPlace(it.address, it.disability, it.image, it.name, it.placeId)
@@ -486,7 +485,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     private fun getRecommendPlaceInfo(binding: FragmentHomeMainBinding) {
         viewModel.getPlaceMain(DEFAULT_AREA, DEFAULT_SIGUNGU)
 
-        viewModel.recommendPlaceInfo.observe(requireActivity()) { recommendPlaceInfo ->
+        viewModel.recommendPlaceInfo.observe(viewLifecycleOwner) { recommendPlaceInfo ->
             if (recommendPlaceInfo.isNotEmpty()) {
                 val recommendPlaceList = recommendPlaceInfo.map {
                     RecommendPlace(it.address, it.disability, it.image, it.name, it.placeId)
@@ -500,8 +499,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         return (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 
-    private suspend fun collectAppTheme() {
-        viewModel.appTheme.collect {
+    private fun collectAppTheme() {
+        viewModel.appTheme.observe(viewLifecycleOwner) {
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
