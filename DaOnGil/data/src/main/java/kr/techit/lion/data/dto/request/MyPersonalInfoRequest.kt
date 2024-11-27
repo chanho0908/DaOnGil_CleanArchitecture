@@ -7,6 +7,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 internal data class MyPersonalInfoRequest(
+    val name: String,
     val nickname: String,
     val phone: String
 )
@@ -14,6 +15,7 @@ internal data class MyPersonalInfoRequest(
 internal fun PersonalInfo.toRequestBody(): RequestBody {
     return JsonAdapter(MyPersonalInfoRequest::class.java).toJson(
         MyPersonalInfoRequest(
+            this.userName,
             this.nickname,
             this.phone
         )

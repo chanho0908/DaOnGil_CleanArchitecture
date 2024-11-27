@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
+import kr.techit.lion.domain.model.MyDefaultInfo
 import kr.techit.lion.presentation.concerntype.ConcernTypeActivity
 import kr.techit.lion.presentation.myinfo.DeleteUserActivity
 import kr.techit.lion.presentation.R
@@ -27,6 +28,7 @@ import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.login.LoginActivity
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
 import kr.techit.lion.presentation.main.vm.myinfo.MyInfoMainViewModel
+import kr.techit.lion.presentation.main.vm.myinfo.model.ProfileState
 import kr.techit.lion.presentation.myinfo.MyInfoActivity
 import kr.techit.lion.presentation.myreview.MyReviewActivity
 import kr.techit.lion.presentation.setting.PolicyActivity
@@ -69,70 +71,82 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
 
         repeatOnViewStarted {
             supervisorScope {
-                launch { handleLoginState(binding, isTalkbackEnabled, textToAnnounce) }
+                launch { collectState(binding, isTalkbackEnabled, textToAnnounce) }
                 launch { handleNetworkState(binding) }
-                launch { collectMyInfo(binding, isTalkbackEnabled, textToAnnounce) }
             }
         }
     }
 
-    private suspend fun handleLoginState(
+    private suspend fun collectState(
         binding: FragmentMyInfoMainBinding,
         isTalkbackEnabled: Boolean,
         talkbackText: StringBuilder
     ) {
-        viewModel.loginState.collect { loginState ->
-            when (loginState) {
-                is LogInState.Checking -> return@collect
-                is LogInState.LoggedIn -> {
-                    viewModel.onStateLoggedIn()
-                    setUiLoggedInState(binding)
-                }
-                is LogInState.LoginRequired -> {
-                    setUiLoginRequiredState(binding, isTalkbackEnabled, talkbackText)
-                }
-            }
+        viewModel.state.collect {
+            collectLoginState(binding, isTalkbackEnabled, talkbackText, it.loginState)
+            collectMyInfo(binding, isTalkbackEnabled, talkbackText, it.myInfo)
         }
     }
 
-    private suspend fun collectMyInfo(
+    private suspend fun collectLoginState(
         binding: FragmentMyInfoMainBinding,
         isTalkbackEnabled: Boolean,
-        talkbackText: StringBuilder
+        talkbackText: StringBuilder,
+        logInState: LogInState
     ) {
-        viewModel.myInfo.collect { myInfo ->
-            with(binding) {
-                val name = "${myInfo.name}님"
-                val review = "${tvReview.text} ${myInfo.reviewNum}개"
-                val registeredData = "${myInfo.date + 1}일째"
+        when (logInState) {
+            is LogInState.Checking -> return
+            is LogInState.LoggedIn -> {
+                viewModel.onStateLoggedIn()
+                setUiLoggedInState(binding)
+            }
 
-                tvNameOrLogin.text = name
-                tvReviewCnt.text = myInfo.reviewNum.toString()
-                tvRegisteredData.visibility = View.VISIBLE
-                tvRegisteredData.text = registeredData
+            is LogInState.LoginRequired -> setUiLoginRequiredState(
+                binding,
+                isTalkbackEnabled,
+                talkbackText
+            )
+        }
+    }
 
-                Glide.with(imgProfile.context)
-                    .load(myInfo.profileImg)
-                    .fallback(R.drawable.default_profile)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(imgProfile)
+    private fun collectMyInfo(
+        binding: FragmentMyInfoMainBinding,
+        isTalkbackEnabled: Boolean,
+        talkbackText: StringBuilder,
+        myInfo: MyDefaultInfo
+    ) {
 
-                if (isTalkbackEnabled) {
-                    talkbackText
-                        .append(name)
-                        .append(review)
-                        .append("${textViewMyInfoMainRegister.text} $registeredData")
-                        .append(getString(R.string.text_script_read_all_text))
+        with(binding) {
+            val name = myInfo.toNameFormat()
+            val review = myInfo.toReviewFormat(tvReview.text.toString())
+            val registeredData = myInfo.toRegisterDateFormat()
 
-                    requireContext().announceForAccessibility(talkbackText.toString())
+            tvNameOrLogin.text = name
+            tvReviewCnt.text = myInfo.reviewNum.toString()
+            tvRegisteredData.visibility = View.VISIBLE
+            tvRegisteredData.text = registeredData
 
-                    tvNameOrLogin.setAccessibilityText(name)
-                    tvReview.setAccessibilityText(review)
-                    textViewMyInfoMainRegister.setAccessibilityText(
-                        "${textViewMyInfoMainRegister.text} $registeredData"
-                    )
-                }
+            Glide.with(imgProfile.context)
+                .load(myInfo.profileImg)
+                .fallback(R.drawable.default_profile)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(imgProfile)
+
+            if (isTalkbackEnabled) {
+                talkbackText
+                    .append(name)
+                    .append(review)
+                    .append("${textViewMyInfoMainRegister.text} $registeredData")
+                    .append(getString(R.string.text_script_read_all_text))
+
+                requireContext().announceForAccessibility(talkbackText.toString())
+
+                tvNameOrLogin.setAccessibilityText(name)
+                tvReview.setAccessibilityText(review)
+                textViewMyInfoMainRegister.setAccessibilityText(
+                    "${textViewMyInfoMainRegister.text} $registeredData"
+                )
             }
         }
     }
@@ -147,6 +161,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
                         progressBar.visibility = View.GONE
                         errorContainer.visibility = View.GONE
                     }
+
                     is NetworkState.Error -> {
                         mainContainer.visibility = View.GONE
                         binding.progressBar.visibility = View.GONE
@@ -163,10 +178,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
             mainContainer.visibility = View.GONE
             progressBar.visibility = View.GONE
             textMsg.text = msg
-
-            if (requireContext().isTallBackEnabled()) {
-                requireActivity().announceForAccessibility(msg)
-            }
+            if (requireContext().isTallBackEnabled()) requireActivity().announceForAccessibility(msg)
         }
     }
 
@@ -241,7 +253,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
         }
     }
 
-    private fun navigateToPolicy(binding: FragmentMyInfoMainBinding){
+    private fun navigateToPolicy(binding: FragmentMyInfoMainBinding) {
         binding.layoutPolicy.setOnClickListener {
             val intent = Intent(requireActivity(), PolicyActivity::class.java)
             startActivity(intent)
@@ -264,20 +276,13 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
 
     private fun logout() {
         viewModel.logout {
-            startActivity(Intent(requireActivity(), LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            startActivity(
+                Intent(
+                    requireActivity(),
+                    LoginActivity::class.java
+                ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
             requireActivity().finish()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (requireContext().isNetworkConnected()
-            && viewModel.networkState.value is NetworkState.Error
-            && viewModel.loginState.value is LogInState.LoggedIn
-        ) {
-            repeatOnViewStarted {
-                viewModel.onStateLoggedIn()
-            }
         }
     }
 
