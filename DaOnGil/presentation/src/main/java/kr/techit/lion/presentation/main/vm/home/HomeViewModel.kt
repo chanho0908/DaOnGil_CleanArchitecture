@@ -46,9 +46,6 @@ class HomeViewModel @Inject constructor(
     @Inject
     lateinit var networkErrorDelegate: NetworkErrorDelegate
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
-  
-    private val _appTheme = MutableLiveData<AppTheme>()
-    val appTheme get() : LiveData<AppTheme> = _appTheme
 
     private val _aroundPlaceInfo = MutableLiveData<List<AroundPlace>>()
     val aroundPlaceInfo: LiveData<List<AroundPlace>> = _aroundPlaceInfo
@@ -78,22 +75,12 @@ class HomeViewModel @Inject constructor(
 
     // 상단 테마 토글 버튼 클릭시
     fun onClickThemeToggleButton(isDarkTheme: Boolean) {
-
-        val newAppTheme = when (_appTheme.value) {
-            AppTheme.LIGHT -> AppTheme.HIGH_CONTRAST
-            AppTheme.HIGH_CONTRAST -> AppTheme.LIGHT
-            AppTheme.SYSTEM -> {
-                if (isDarkTheme) AppTheme.LIGHT else AppTheme.HIGH_CONTRAST
-            }
-            AppTheme.LOADING -> return
-
-            null -> return
-        }
+        val newAppTheme = getNewTheme(appTheme.value, isDarkTheme)
         setAppTheme(newAppTheme)
     }
 
     // 테마 설정 다이얼로그 클릭시
-    fun onClickThemeChangeButton(theme: AppTheme){
+    fun onClickThemeChangeButton(theme: AppTheme) {
         viewModelScope.launch {
             setAppTheme(theme)
             activationRepository.saveUserActivation(false)

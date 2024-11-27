@@ -34,7 +34,6 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -499,8 +498,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         return (configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     }
 
-    private fun collectAppTheme() {
-        viewModel.appTheme.observe(viewLifecycleOwner) {
+    private suspend fun collectAppTheme() {
+        viewModel.appTheme.collect {
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
