@@ -8,12 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
-import kr.techit.lion.domain.model.IceInfo
-import kr.techit.lion.domain.model.PersonalInfo
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentMyInfoBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -28,6 +24,8 @@ import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.domain.model.PersonalInfo
+import kr.techit.lion.domain.model.IceInfo
 
 @AndroidEntryPoint
 class MyInfoFragment : Fragment(R.layout.fragment_my_info) {

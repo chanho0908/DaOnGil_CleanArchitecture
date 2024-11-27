@@ -21,14 +21,12 @@ import kr.techit.lion.presentation.bookmark.BookmarkActivity
 import kr.techit.lion.presentation.databinding.FragmentMyInfoMainBinding
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.announceForAccessibility
-import kr.techit.lion.presentation.ext.isNetworkConnected
 import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.login.LoginActivity
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
 import kr.techit.lion.presentation.main.vm.myinfo.MyInfoMainViewModel
-import kr.techit.lion.presentation.main.vm.myinfo.model.ProfileState
 import kr.techit.lion.presentation.myinfo.MyInfoActivity
 import kr.techit.lion.presentation.myreview.MyReviewActivity
 import kr.techit.lion.presentation.setting.PolicyActivity
