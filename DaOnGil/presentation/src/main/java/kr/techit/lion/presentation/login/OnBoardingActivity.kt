@@ -150,33 +150,35 @@ class OnBoardingActivity : AppCompatActivity() {
                         }
                     }
 
-                    if (this@OnBoardingActivity.isTallBackEnabled()) {
-                        when (position) {
-                            1 -> {
-                                if (viewModel.focusOn.value != FocusOn.ViewPager) {
-                                    this@OnBoardingActivity.announceForAccessibility(
-                                        getString(R.string.text_onboarding_second_text1) +
-                                                getString(R.string.text_onboarding_second_text2)
-                                    )
-                                }
-                            }
-                            2 -> if (viewModel.focusOn.value != FocusOn.ViewPager) {
-                                this@OnBoardingActivity.announceForAccessibility(
-                                    getString(R.string.text_onboarding_third_text1) +
-                                            getString(R.string.text_onboarding_third_text2)
-                                )
-                            }
-                            3 -> if (viewModel.focusOn.value != FocusOn.ViewPager) {
-                                this@OnBoardingActivity.announceForAccessibility(
-                                    getString(R.string.text_onboarding_fourth_text1) +
-                                            getString(R.string.text_onboarding_fourth_text2) +
-                                            getString(R.string.text_onboarding_fourth_text3)
-                                )
-                            }
-                        }
-                    }
+                    if (this@OnBoardingActivity.isTallBackEnabled()) setViewPagerTallBack(position)
                 }
             })
+        }
+    }
+
+    private fun setViewPagerTallBack(position: Int){
+        when (position) {
+            1 -> {
+                if (viewModel.focusOn.value != FocusOn.ViewPager) {
+                    this@OnBoardingActivity.announceForAccessibility(
+                        getString(R.string.text_onboarding_second_text1) +
+                                getString(R.string.text_onboarding_second_text2)
+                    )
+                }
+            }
+            2 -> if (viewModel.focusOn.value != FocusOn.ViewPager) {
+                this@OnBoardingActivity.announceForAccessibility(
+                    getString(R.string.text_onboarding_third_text1) +
+                            getString(R.string.text_onboarding_third_text2)
+                )
+            }
+            3 -> if (viewModel.focusOn.value != FocusOn.ViewPager) {
+                this@OnBoardingActivity.announceForAccessibility(
+                    getString(R.string.text_onboarding_fourth_text1) +
+                            getString(R.string.text_onboarding_fourth_text2) +
+                            getString(R.string.text_onboarding_fourth_text3)
+                )
+            }
         }
     }
 }
