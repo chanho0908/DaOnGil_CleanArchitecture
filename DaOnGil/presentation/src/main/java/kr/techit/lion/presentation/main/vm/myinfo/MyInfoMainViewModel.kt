@@ -1,5 +1,7 @@
 package kr.techit.lion.presentation.main.vm.myinfo
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +18,7 @@ import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.main.vm.myinfo.model.ProfileState
 import kr.techit.lion.presentation.splash.model.LogInState
 import javax.inject.Inject
 
@@ -36,29 +39,24 @@ class MyInfoMainViewModel @Inject constructor(
 
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _loginState = MutableStateFlow<LogInState>(LogInState.Checking)
-    val loginState = _loginState.asStateFlow()
-
-    private val _myInfo = MutableSharedFlow<MyDefaultInfo>()
-    val myInfo = _myInfo.asSharedFlow()
+    private val _state = MutableStateFlow(ProfileState.create())
+    val state get() = _state.asStateFlow()
 
     private suspend fun checkLoginState(){
         authRepository.loggedIn.collect{ isLoggedIn ->
             if (isLoggedIn){
-                _loginState.value = LogInState.LoggedIn
+                _state.value = _state.value.copy(loginState = LogInState.LoggedIn)
             }
             else{
-                _loginState.value = LogInState.LoginRequired
+                _state.value = _state.value.copy(loginState = LogInState.LoginRequired)
                 networkErrorDelegate.handleNetworkSuccess()
             }
         }
     }
 
     suspend fun onStateLoggedIn(){
-        memberRepository.getMyDefaultInfo().onSuccess { myInfo ->
-            viewModelScope.launch {
-                _myInfo.emit(myInfo)
-            }
+        memberRepository.getMyDefaultInfo().onSuccess { profile ->
+            _state.value = _state.value.copy(myInfo = profile)
             networkErrorDelegate.handleNetworkSuccess()
         }.onError {
             networkErrorDelegate.handleNetworkError(it)

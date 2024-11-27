@@ -3,7 +3,6 @@ package kr.techit.lion.data.datasource
 import android.content.Context
 import androidx.datastore.core.DataStore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kr.techit.lion.data.database.AppSettings
 import kr.techit.lion.data.database.dataStore

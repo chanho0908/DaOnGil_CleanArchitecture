@@ -9,7 +9,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -35,6 +34,7 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
@@ -58,7 +58,6 @@ import kr.techit.lion.presentation.main.customview.CustomPageIndicator
 import kr.techit.lion.presentation.main.customview.ItemOffsetDecoration
 import kr.techit.lion.presentation.main.dialog.ThemeGuideDialog
 import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
-import kr.techit.lion.presentation.main.dialog.ThemeTempDialog
 import kr.techit.lion.presentation.main.vm.home.HomeViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
 import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
@@ -101,9 +100,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHomeMainBinding.bind(view)
 
-        // 임시로 고대비 전환 버튼 숨김 처리
-        binding.homeHighcontrastBtn.visibility = View.GONE
-
         repeatOnViewStarted {
             supervisorScope {
                 launch { collectAppTheme() }
@@ -133,6 +129,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             viewLifecycleOwner
         ) { _, _ ->
             viewModel.onClickThemeChangeButton(AppTheme.HIGH_CONTRAST)
+            requireActivity().recreate()
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -144,6 +141,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
         binding.homeHighcontrastBtn.setOnClickListener {
             viewModel.onClickThemeToggleButton(isDarkTheme(resources.configuration))
+            requireActivity().recreate()
         }
     }
 
@@ -224,7 +222,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         binding: FragmentHomeMainBinding,
         recommendPlaceList: List<RecommendPlace>
     ) {
-        val homeRecommendRVAdapter = HomeRecommendRVAdapter(recommendPlaceList,
+        val homeRecommendRVAdapter = HomeRecommendRVAdapter(
+            recommendPlaceList,
             onClick = { position ->
                 val context: Context = binding.root.context
                 val intent = Intent(context, DetailActivity::class.java)
@@ -292,7 +291,8 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         binding: FragmentHomeMainBinding,
         aroundPlaceList: List<AroundPlace>
     ) {
-        val homeLocationRVAdapter = HomeLocationRVAdapter(aroundPlaceList,
+        val homeLocationRVAdapter = HomeLocationRVAdapter(
+            aroundPlaceList,
             onClick = { position ->
                 val context: Context = binding.root.context
                 val intent = Intent(context, DetailActivity::class.java)
@@ -312,12 +312,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val dialog = ThemeGuideDialog()
         dialog.isCancelable = false
         dialog.show(childFragmentManager, "ThemeGuideDialog")
-    }
-
-    private fun showThemeTempDialog() {
-        val dialog = ThemeTempDialog()
-        dialog.isCancelable = false
-        dialog.show(childFragmentManager, "ThemeTempDialog")
     }
 
     private fun checkLocationPermission(binding: FragmentHomeMainBinding) {
@@ -510,6 +504,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             when (it) {
                 AppTheme.LIGHT ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
                 AppTheme.HIGH_CONTRAST ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
@@ -549,11 +544,10 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private suspend fun observeUserActivation() {
-        viewModel.userActivationState.collect{ isFirstUser ->
-            if (isFirstUser){
-//                if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
-//                else showThemeSettingDialog()
-                showThemeTempDialog()
+        viewModel.userActivationState.collect { isFirstUser ->
+            if (isFirstUser) {
+                if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
+                else showThemeSettingDialog()
             }
         }
     }
