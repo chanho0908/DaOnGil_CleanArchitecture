@@ -14,12 +14,11 @@ import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentLoginBinding
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.login.model.LoginType
-import kr.techit.lion.presentation.login.model.UserState
+import kr.techit.lion.presentation.login.model.UserType
 import kr.techit.lion.presentation.login.vm.LoginViewModel
 import kr.techit.lion.presentation.main.MainActivity
 
@@ -47,13 +46,16 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         repeatOnViewStarted {
-            viewModel.userState.collect { state ->
+            viewModel.state.collect { state ->
                 when (state) {
-                    UserState.Checking -> return@collect
-                    UserState.NewUser -> {
+                    UserType.Checking -> return@collect
+                    UserType.NewUser -> {
+                        binding.progressbar.visibility = View.VISIBLE
                         Navigation.findNavController(view).navigate(R.id.to_selectInterestFragment)
                     }
-                    UserState.ExistingUser -> {
+
+                    UserType.ExistingUser -> {
+                        binding.progressbar.visibility = View.VISIBLE
                         startActivity(Intent(requireContext(), MainActivity::class.java))
                         requireActivity().finish()
                     }
@@ -78,7 +80,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
                     // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        binding.progressbar.visibility = View.GONE
                         return@loginWithKakaoTalk
                     }
 

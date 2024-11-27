@@ -14,7 +14,8 @@ import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
-import kr.techit.lion.presentation.login.model.UserState
+import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.login.model.UserType
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,8 +28,8 @@ class LoginViewModel @Inject constructor(
     lateinit var networkErrorDelegate: NetworkErrorDelegate
     val networkState get() = networkErrorDelegate.networkState
 
-    private val _userState = MutableStateFlow<UserState>(UserState.Checking)
-    val userState = _userState.asStateFlow()
+    private val _state = MutableStateFlow(UserType.Checking)
+    val state get() = _state.asStateFlow()
 
     fun onCompleteLogIn(type: String, accessToken: String, refreshToken: String) {
         viewModelScope.launch(recordExceptionHandler) {
@@ -39,6 +40,7 @@ class LoginViewModel @Inject constructor(
 
     private fun checkUserState() {
         viewModelScope.launch {
+            networkErrorDelegate.handleNetworkLoading()
             memberRepository.getConcernType().onSuccess { type ->
                 modifyUserState(type)
                 networkErrorDelegate.handleNetworkSuccess()
@@ -48,11 +50,11 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun modifyUserState(type: ConcernType){
+    private fun modifyUserState(type: ConcernType) {
         if (type.hasAnyTrue()) {
-            _userState.update { UserState.ExistingUser }
+            _state.value = UserType.ExistingUser
         } else {
-            _userState.update { UserState.NewUser }
+            _state.value = UserType.NewUser
         }
     }
 }
