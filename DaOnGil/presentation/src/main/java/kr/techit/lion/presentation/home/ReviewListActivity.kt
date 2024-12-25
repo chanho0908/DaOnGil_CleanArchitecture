@@ -125,17 +125,10 @@ class ReviewListActivity : AppCompatActivity() {
     private suspend fun collectLoginState(placeId: Long) {
         viewModel.loginState.collect { uiState ->
             when (uiState) {
-                is LogInState.Checking -> {
-                    return@collect
-                }
+                LogInState.Checking -> return@collect
+                LogInState.LoggedIn -> getReviewListInfo(placeId)
+                LogInState.LoginRequired -> getReviewListInfoGuest(placeId)
 
-                is LogInState.LoggedIn -> {
-                    getReviewListInfo(placeId)
-                }
-
-                is LogInState.LoginRequired -> {
-                    getReviewListInfoGuest(placeId)
-                }
             }
         }
     }

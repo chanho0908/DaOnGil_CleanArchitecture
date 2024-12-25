@@ -108,10 +108,10 @@ class ScheduleDetailActivity : AppCompatActivity() {
                         scheduleDetailLayout.visibility = View.VISIBLE
                         val planId = intent.getLongExtra("planId", -1)
                         when (viewModel.loginState.value) {
-                            is LogInState.LoggedIn -> {
+                            LogInState.LoggedIn -> {
                                 viewModel.getScheduleDetailInfo(planId)
                             }
-                            is LogInState.LoginRequired -> {
+                            LogInState.LoginRequired -> {
                                 viewModel.getScheduleDetailInfoGuest(planId)
                             }
 

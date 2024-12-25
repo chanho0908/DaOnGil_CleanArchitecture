@@ -344,15 +344,15 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
         repeatOnStarted {
             viewModel.loginState.collect { uiState ->
                 when (uiState) {
-                    is LogInState.Checking -> {
+                    LogInState.Checking -> {
                         return@collect
                     }
 
-                    is LogInState.LoggedIn -> {
+                    LogInState.LoggedIn -> {
                         getDetailPlaceInfo(recommendPlaceId)
                     }
 
-                    is LogInState.LoginRequired -> {
+                    LogInState.LoginRequired -> {
                         getDetailPlaceInfoGuest(recommendPlaceId)
                     }
                 }
