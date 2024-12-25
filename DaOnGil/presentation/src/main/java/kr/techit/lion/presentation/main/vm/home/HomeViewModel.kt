@@ -6,10 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
+import kr.techit.lion.domain.model.Activation
 import kr.techit.lion.domain.model.AppTheme
 import kr.techit.lion.domain.model.AppTheme.Companion.getNewTheme
 import kr.techit.lion.domain.model.mainplace.AroundPlace
@@ -54,8 +59,8 @@ class HomeViewModel @Inject constructor(
     val recommendPlaceInfo: LiveData<List<RecommendPlace>> = _recommendPlaceInfo
 
     val userActivationState = activationRepository
-        .userActivation
-        .shareInUi(scope = viewModelScope)
+        .activation
+        .stateInUi(scope = viewModelScope, initialValue = Activation.Loading)
 
     private val _area = MutableLiveData<String>()
     val area: LiveData<String> = _area
@@ -83,7 +88,7 @@ class HomeViewModel @Inject constructor(
     fun onClickThemeChangeButton(theme: AppTheme) {
         viewModelScope.launch {
             setAppTheme(theme)
-            activationRepository.saveUserActivation(false)
+            activationRepository.saveUserActivation(Activation.Activate)
         }
     }
 

@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
+import kr.techit.lion.domain.model.Activation
 import kr.techit.lion.domain.model.AppTheme
 import kr.techit.lion.domain.model.mainplace.AroundPlace
 import kr.techit.lion.domain.model.mainplace.RecommendPlace
@@ -543,10 +544,17 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
     }
 
     private suspend fun observeUserActivation() {
-        viewModel.userActivationState.collect { isFirstUser ->
-            if (isFirstUser) {
-                if (isDarkTheme(resources.configuration)) showThemeGuideDialog()
-                else showThemeSettingDialog()
+        viewModel.userActivationState.collect {
+            when(it){
+                Activation.Loading,
+                Activation.Activate -> return@collect
+                Activation.DeActivate -> {
+                    if (isDarkTheme(resources.configuration)) {
+                        showThemeGuideDialog()
+                    }else{
+                        showThemeSettingDialog()
+                    }
+                }
             }
         }
     }
