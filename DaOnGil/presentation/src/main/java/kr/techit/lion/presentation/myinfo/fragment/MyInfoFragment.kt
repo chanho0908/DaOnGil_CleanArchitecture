@@ -19,7 +19,7 @@ import kr.techit.lion.presentation.ext.formatPhoneNumber
 import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.ext.setAccessibilityText
-import kr.techit.lion.presentation.main.fragment.MyInfoMainFragment.Companion.MODIFY_RESULT_CODE
+import kr.techit.lion.presentation.main.myinfo.MyInfoMainFragment.Companion.MODIFY_RESULT_CODE
 import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
 import kr.techit.lion.presentation.observer.ConnectivityObserver
