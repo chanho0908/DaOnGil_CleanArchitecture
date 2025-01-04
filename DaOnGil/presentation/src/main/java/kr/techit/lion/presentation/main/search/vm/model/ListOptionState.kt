@@ -1,5 +1,6 @@
 package kr.techit.lion.presentation.main.search.vm.model
 
+import kr.techit.lion.domain.model.search.Arrange
 import kr.techit.lion.domain.model.search.ListSearchOption
 import java.util.TreeSet
 
@@ -35,7 +36,7 @@ data class ListOptionState(
                 detailFilter = TreeSet(),
                 areaCode = null,
                 sigunguCode = null,
-                arrange = SortByLatest.sortCode
+                arrange = Arrange.SortByLatest.sortCode
             )
         }
     }

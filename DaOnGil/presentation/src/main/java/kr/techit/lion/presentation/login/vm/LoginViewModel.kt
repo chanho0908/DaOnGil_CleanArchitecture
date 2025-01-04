@@ -3,6 +3,7 @@ package kr.techit.lion.presentation.login.vm
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class LoginViewModel @Inject constructor(
 
     @Inject
     lateinit var networkErrorDelegate: NetworkErrorDelegate
-    val networkState get() = networkErrorDelegate.networkState
+    val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
     private val _state = MutableStateFlow(UserType.Checking)
     val state get() = _state.asStateFlow()

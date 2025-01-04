@@ -2,7 +2,6 @@ package kr.techit.lion.presentation.keyword.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
@@ -55,7 +54,6 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             repeatOnViewStarted {
                 launch {
                     viewModel.connectivityStatus.collect { status ->
-                        Log.d("dasdasdsa", status.toString())
                         when (status) {
                             ConnectivityStatus.Loading -> Unit
                             ConnectivityStatus.Available -> {

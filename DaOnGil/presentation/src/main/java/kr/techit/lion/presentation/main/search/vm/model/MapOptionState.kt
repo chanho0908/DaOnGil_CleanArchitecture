@@ -1,5 +1,6 @@
 package kr.techit.lion.presentation.main.search.vm.model
 
+import kr.techit.lion.domain.model.search.Arrange
 import kr.techit.lion.domain.model.search.MapSearchOption
 import java.util.TreeSet
 
@@ -35,7 +36,7 @@ data class MapOptionState (
                 ),
                 disabilityType = DisabilityType.createDisabilityTypeCodes(),
                 detailFilter = DisabilityType.createFilterCodes(),
-                arrange = SortByLatest.sortCode
+                arrange = Arrange.SortByLatest.sortCode
             )
         }
     }
