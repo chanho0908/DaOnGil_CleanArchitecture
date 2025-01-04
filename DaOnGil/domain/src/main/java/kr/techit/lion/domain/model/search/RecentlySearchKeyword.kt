@@ -6,11 +6,15 @@ data class RecentlySearchKeyword (
 )
 
 data class RecentlySearchKeywordList(
-    val list: List<RecentlySearchKeyword>
-)
+    val value: List<RecentlySearchKeyword>
+){
+    fun isExistKeyword(keyword: String): Boolean {
+        return value.map { it.keyword }.any { it ==  keyword}
+    }
 
-fun RecentlySearchKeywordList.findKeyword(keyword: String): RecentlySearchKeyword? {
-    return this.list.firstOrNull { it.keyword == keyword }
+    fun findKeyword(keyword: String): Long {
+        return value.find { it.keyword == keyword }?.id ?: 0L
+    }
 }
 
 fun String.toRecentlySearchKeyword() = RecentlySearchKeyword(keyword = this)
