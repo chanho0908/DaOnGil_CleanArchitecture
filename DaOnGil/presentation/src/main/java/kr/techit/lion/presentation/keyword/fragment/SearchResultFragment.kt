@@ -2,6 +2,7 @@ package kr.techit.lion.presentation.keyword.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
@@ -11,7 +12,6 @@ import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchResultBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -21,26 +21,20 @@ import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.home.DetailActivity
 import kr.techit.lion.presentation.keyword.adapter.SearchResultAdapter
 import kr.techit.lion.presentation.keyword.vm.SearchResultViewModel
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
     private val viewModel: SearchResultViewModel by viewModels()
-    private val connectivityObserver: ConnectivityObserver by lazy {
-        NetworkConnectivityObserver(requireContext().applicationContext)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentSearchResultBinding.bind(view)
+        val progressBar = requireActivity().findViewById<ProgressBar>(R.id.search_view_progressBar)
+        val searchText = arguments?.getString("searchText") ?: ""
 
         requireContext().hideSoftInput(binding.noSearchResultContainer)
-
-        val searchText = arguments?.getString("searchText")
-        searchText?.let {
-            requireActivity().findViewById<TextInputEditText>(R.id.search_edit).setText(searchText)
-        }
+        requireActivity().findViewById<TextInputEditText>(R.id.search_edit).setText(searchText)
 
         val rvAdapter = SearchResultAdapter {
             val intent = Intent(requireContext(), DetailActivity::class.java)
@@ -52,25 +46,41 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
             adapter = rvAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             addOnScrollEndListener {
-                val pageState = viewModel.isLastPage.value
+                val pageState = viewModel.uiState.value.isLastPage
                 if (pageState.not()) {
-                    viewModel.whenLastPageReached()
+                    viewModel.loadPlace(searchText)
                 }
             }
-        }
 
-        repeatOnViewStarted {
-            supervisorScope {
+            repeatOnViewStarted {
                 launch {
-                    combine(viewModel.networkState, viewModel.place) { networkState, place ->
-                        val progressBar =
-                            requireActivity().findViewById<ProgressBar>(R.id.search_view_progressBar)
+                    viewModel.connectivityStatus.collect { status ->
+                        Log.d("dasdasdsa", status.toString())
+                        when (status) {
+                            ConnectivityStatus.Loading -> Unit
+                            ConnectivityStatus.Available -> {
+                                viewModel.loadPlace(searchText)
+                            }
+                            is ConnectivityStatus.OnLost -> {
+                                showNetworkErrorPage(
+                                    binding,
+                                    progressBar,
+                                    requireContext().getString(R.string.can_not_access_network)
+                                )
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    combine(viewModel.networkState, viewModel.uiState) { networkState, uiState ->
                         when (networkState) {
                             is NetworkState.Loading -> {
                                 progressBar.visibility = View.VISIBLE
                             }
 
                             is NetworkState.Success -> {
+                                val place = uiState.place
                                 progressBar.visibility = View.GONE
                                 if (place.isEmpty()) {
                                     binding.noSearchResultContainer.visibility = View.VISIBLE
@@ -83,21 +93,25 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                             }
 
                             is NetworkState.Error -> {
-                                progressBar.visibility = View.GONE
-                                binding.noSearchResultContainer.visibility = View.VISIBLE
-                                binding.textMsg.text = networkState.msg
+                                showNetworkErrorPage(binding, progressBar, networkState.msg)
                             }
                         }
                     }.collect { }
                 }
-                launch {
-                    connectivityObserver.getFlow().collect { status ->
-                        if (status == ConnectivityObserver.Status.Available) {
-                            searchText?.let { viewModel.onChangeQuery(searchText) }
-                        }
-                    }
-                }
             }
+        }
+    }
+
+    private fun showNetworkErrorPage(
+        binding: FragmentSearchResultBinding,
+        progressBar: ProgressBar,
+        msg: String
+    ) {
+        with(binding) {
+            searchResultRv.visibility = View.GONE
+            progressBar.visibility = View.GONE
+            noSearchResultContainer.visibility = View.VISIBLE
+            textMsg.text = msg
         }
     }
 }

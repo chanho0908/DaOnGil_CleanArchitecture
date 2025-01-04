@@ -1,7 +1,7 @@
-package kr.techit.lion.presentation.keyword.model
+package kr.techit.lion.presentation.keyword.vm.model
 
+import kr.techit.lion.domain.model.search.Arrange
 import kr.techit.lion.domain.model.search.ListSearchOption
-import kr.techit.lion.presentation.main.model.SortByLatest
 
 data class KeywordSearch(
     val keyword: String,
@@ -17,7 +17,7 @@ data class KeywordSearch(
             areaCode = null,
             sigunguCode = null,
             query = keyword,
-            arrange = SortByLatest.sortCode
+            arrange = Arrange.SortByLatest.sortCode
         )
     }
 }
