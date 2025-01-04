@@ -1,7 +1,14 @@
 package kr.techit.lion.domain.model
+import kotlinx.serialization.Serializable
 
+@Serializable
 sealed interface Activation {
-    data object Loading: Activation
-    data object Activate: Activation
-    data object DeActivate: Activation
+    @Serializable
+    data object Loading : Activation
+
+    @Serializable
+    data object Activate : Activation
+
+    @Serializable
+    data object DeActivate : Activation
 }
