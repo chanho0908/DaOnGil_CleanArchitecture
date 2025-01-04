@@ -22,8 +22,8 @@ import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.main.myinfo.MyInfoMainFragment.Companion.MODIFY_RESULT_CODE
 import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import kr.techit.lion.domain.model.PersonalInfo
 import kr.techit.lion.domain.model.IceInfo
 

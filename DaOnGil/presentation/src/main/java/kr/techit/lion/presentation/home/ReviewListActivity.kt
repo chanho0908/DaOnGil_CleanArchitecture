@@ -23,8 +23,8 @@ import kr.techit.lion.presentation.ext.updateToolbarColors
 import kr.techit.lion.presentation.ext.updateVisibility
 import kr.techit.lion.presentation.home.adapter.ReviewListRVAdapter
 import kr.techit.lion.presentation.home.vm.ReviewListViewModel
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import kr.techit.lion.presentation.splash.model.LogInState
 
 @AndroidEntryPoint

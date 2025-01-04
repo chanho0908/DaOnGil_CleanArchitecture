@@ -11,8 +11,8 @@ import kr.techit.lion.presentation.databinding.FragmentEmergencyMainBinding
 import kr.techit.lion.presentation.emergency.EmergencyMapActivity
 import kr.techit.lion.presentation.emergency.PharmacyMapActivity
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 
 class EmergencyMainFragment : Fragment(R.layout.fragment_emergency_main) {
 

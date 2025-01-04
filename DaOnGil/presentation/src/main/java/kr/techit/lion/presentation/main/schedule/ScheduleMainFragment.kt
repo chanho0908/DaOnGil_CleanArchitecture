@@ -26,8 +26,8 @@ import kr.techit.lion.presentation.main.adapter.SchedulePublicAdapter
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
 import kr.techit.lion.presentation.main.schedule.vm.ScheduleMainViewModel
 import kr.techit.lion.presentation.myschedule.MyScheduleActivity
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import kr.techit.lion.presentation.schedule.PublicScheduleActivity
 import kr.techit.lion.presentation.schedule.ResultCode
 import kr.techit.lion.presentation.schedulereview.WriteScheduleReviewActivity

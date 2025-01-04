@@ -59,8 +59,8 @@ import kr.techit.lion.presentation.main.customview.ItemOffsetDecoration
 import kr.techit.lion.presentation.main.dialog.ThemeGuideDialog
 import kr.techit.lion.presentation.main.dialog.ThemeSettingDialog
 import kr.techit.lion.presentation.main.home.vm.HomeViewModel
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import java.io.IOException
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
