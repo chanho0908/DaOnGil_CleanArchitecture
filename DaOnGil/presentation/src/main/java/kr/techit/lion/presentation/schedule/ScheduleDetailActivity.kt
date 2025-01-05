@@ -28,8 +28,8 @@ import kr.techit.lion.presentation.ext.showSnackbar
 import kr.techit.lion.presentation.home.DetailActivity
 import kr.techit.lion.presentation.login.LoginActivity
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
-import kr.techit.lion.presentation.observer.ConnectivityObserver
-import kr.techit.lion.presentation.observer.NetworkConnectivityObserver
+import kr.techit.lion.presentation.connectivity.ConnectivityObserver
+import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import kr.techit.lion.presentation.report.ReportActivity
 import kr.techit.lion.presentation.schedule.ResultCode.RESULT_REVIEW_EDIT
 import kr.techit.lion.presentation.schedule.ResultCode.RESULT_REVIEW_WRITE
@@ -108,10 +108,10 @@ class ScheduleDetailActivity : AppCompatActivity() {
                         scheduleDetailLayout.visibility = View.VISIBLE
                         val planId = intent.getLongExtra("planId", -1)
                         when (viewModel.loginState.value) {
-                            is LogInState.LoggedIn -> {
+                            LogInState.LoggedIn -> {
                                 viewModel.getScheduleDetailInfo(planId)
                             }
-                            is LogInState.LoginRequired -> {
+                            LogInState.LoginRequired -> {
                                 viewModel.getScheduleDetailInfoGuest(planId)
                             }
 

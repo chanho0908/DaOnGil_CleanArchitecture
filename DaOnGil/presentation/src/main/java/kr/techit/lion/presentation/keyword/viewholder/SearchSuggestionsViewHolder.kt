@@ -13,6 +13,6 @@ class SearchSuggestionsViewHolder(
         binding.root.setOnClickListener {
             onClick(item)
         }
-        binding.tvKeyword.text = item.keyword
+        binding.tvKeyword.text = item.placeName
     }
 }

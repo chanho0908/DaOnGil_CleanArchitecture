@@ -5,8 +5,8 @@ import kr.techit.lion.domain.model.search.RecentlySearchKeyword
 import kr.techit.lion.domain.model.search.RecentlySearchKeywordList
 
 interface RecentlySearchKeywordRepository {
-    suspend fun readAllKeyword(): Flow<RecentlySearchKeywordList>
-    suspend fun insertKeyword(keyword: RecentlySearchKeyword)
+    val savedKeyword: Flow<RecentlySearchKeywordList>
+    suspend fun insertKeyword(keyword: String)
     suspend fun deleteKeyword(id: Long)
     suspend fun deleteAllKeyword()
 }
