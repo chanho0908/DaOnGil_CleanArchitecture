@@ -25,7 +25,7 @@ import kr.techit.lion.presentation.home.adapter.ReviewListRVAdapter
 import kr.techit.lion.presentation.home.vm.ReviewListViewModel
 import kr.techit.lion.presentation.connectivity.ConnectivityObserver
 import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 
 @AndroidEntryPoint
 class ReviewListActivity : AppCompatActivity() {
@@ -125,9 +125,9 @@ class ReviewListActivity : AppCompatActivity() {
     private suspend fun collectLoginState(placeId: Long) {
         viewModel.loginState.collect { uiState ->
             when (uiState) {
-                LogInState.Checking -> return@collect
-                LogInState.LoggedIn -> getReviewListInfo(placeId)
-                LogInState.LoginRequired -> getReviewListInfoGuest(placeId)
+                LogInStatus.Checking -> return@collect
+                LogInStatus.LoggedIn -> getReviewListInfo(placeId)
+                LogInStatus.LoginRequired -> getReviewListInfoGuest(placeId)
 
             }
         }

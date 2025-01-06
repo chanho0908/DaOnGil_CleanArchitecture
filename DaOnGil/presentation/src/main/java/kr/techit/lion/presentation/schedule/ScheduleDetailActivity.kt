@@ -42,7 +42,7 @@ import kr.techit.lion.presentation.schedule.vm.ScheduleDetailViewModel
 import kr.techit.lion.presentation.scheduleform.ModifyScheduleFormActivity
 import kr.techit.lion.presentation.schedulereview.ModifyScheduleReviewActivity
 import kr.techit.lion.presentation.schedulereview.WriteScheduleReviewActivity
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 import java.util.Timer
 import kotlin.concurrent.scheduleAtFixedRate
 
@@ -108,14 +108,14 @@ class ScheduleDetailActivity : AppCompatActivity() {
                         scheduleDetailLayout.visibility = View.VISIBLE
                         val planId = intent.getLongExtra("planId", -1)
                         when (viewModel.loginState.value) {
-                            LogInState.LoggedIn -> {
+                            LogInStatus.LoggedIn -> {
                                 viewModel.getScheduleDetailInfo(planId)
                             }
-                            LogInState.LoginRequired -> {
+                            LogInStatus.LoginRequired -> {
                                 viewModel.getScheduleDetailInfoGuest(planId)
                             }
 
-                            LogInState.Checking -> {
+                            LogInStatus.Checking -> {
                                 return@collect
                             }
                         }
@@ -361,16 +361,16 @@ class ScheduleDetailActivity : AppCompatActivity() {
 
 
                     when (loginState) {
-                        is LogInState.Checking -> {
+                        is LogInStatus.Checking -> {
                             return@collect
                         }
 
-                        is LogInState.LoggedIn -> {
+                        is LogInStatus.LoggedIn -> {
                             viewModel.getScheduleDetailInfo(planId)
                             initView(true, planId)
                         }
 
-                        is LogInState.LoginRequired -> {
+                        is LogInStatus.LoginRequired -> {
                             viewModel.getScheduleDetailInfoGuest(planId)
                             initView(false, planId)
                         }

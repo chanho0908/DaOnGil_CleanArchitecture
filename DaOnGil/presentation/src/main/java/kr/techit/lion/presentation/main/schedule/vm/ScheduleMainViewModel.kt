@@ -18,7 +18,7 @@ import kr.techit.lion.domain.model.OpenPlanInfo
 import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.domain.repository.PlanRepository
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,7 +36,7 @@ class ScheduleMainViewModel @Inject constructor(
     private val _openPlanList = MutableLiveData<List<OpenPlanInfo>>()
     val openPlanList: LiveData<List<OpenPlanInfo>> = _openPlanList
 
-    private val _loginState = MutableStateFlow<LogInState>(LogInState.Checking)
+    private val _loginState = MutableStateFlow<LogInStatus>(LogInStatus.Checking)
     val loginState = _loginState.asStateFlow()
 
     val networkState get() = networkErrorDelegate.networkState
@@ -100,8 +100,8 @@ class ScheduleMainViewModel @Inject constructor(
     private fun checkLoginState() =
         viewModelScope.launch {
             authRepository.loggedIn.collect { isLoggedIn ->
-                if (isLoggedIn) _loginState.value = LogInState.LoggedIn
-                else _loginState.value = LogInState.LoginRequired
+                if (isLoggedIn) _loginState.value = LogInStatus.LoggedIn
+                else _loginState.value = LogInStatus.LoginRequired
             }
         }
 }
