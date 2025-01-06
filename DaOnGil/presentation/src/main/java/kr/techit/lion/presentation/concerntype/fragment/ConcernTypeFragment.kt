@@ -1,47 +1,44 @@
 package kr.techit.lion.presentation.concerntype.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
-import kr.techit.lion.domain.model.ConcernType
-import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.concerntype.vm.ConcernTypeViewModel
+import kr.techit.lion.presentation.concerntype.vm.model.ConcernTypeUiModel
+import kr.techit.lion.presentation.concerntype.vm.model.ConcernTypes
+import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 import kr.techit.lion.presentation.databinding.FragmentConcernTypeBinding
 import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
-import kr.techit.lion.presentation.connectivity.ConnectivityObserver
-import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 
 @AndroidEntryPoint
 class ConcernTypeFragment : Fragment(R.layout.fragment_concern_type) {
-
     private val viewModel: ConcernTypeViewModel by activityViewModels()
-    private val connectivityObserver: ConnectivityObserver by lazy {
-        NetworkConnectivityObserver(requireContext().applicationContext)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val binding = FragmentConcernTypeBinding.bind(view)
-
+        viewModel.getConcernType()
         settingToolbar(binding)
-        observeNickname(binding)
-        observeSelection(binding)
         moveConcernTypeModify(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectConcernTypeState(binding) }
-                launch { observeConnectivity(binding) }
-            }
+            launch { collectConcernTypeState(binding) }
+            launch { observeConnectivity(binding) }
+            launch { collectUiState(binding) }
+        }
+    }
+
+    private suspend fun collectUiState(binding: FragmentConcernTypeBinding) {
+        viewModel.uiState.collect { uiState ->
+            setNickName(binding, uiState.nickName)
+            setSelectedConcernTypeImage(binding, uiState.savedConcernType)
         }
     }
 
@@ -52,9 +49,11 @@ class ConcernTypeFragment : Fragment(R.layout.fragment_concern_type) {
                     is NetworkState.Loading -> {
                         concernTypeProgressBar.visibility = View.VISIBLE
                     }
+
                     is NetworkState.Success -> {
                         concernTypeProgressBar.visibility = View.GONE
                     }
+
                     is NetworkState.Error -> {
                         concernTypeProgressBar.visibility = View.GONE
                         concernTypeLayout.visibility = View.GONE
@@ -70,28 +69,23 @@ class ConcernTypeFragment : Fragment(R.layout.fragment_concern_type) {
 
     private suspend fun observeConnectivity(binding: FragmentConcernTypeBinding) {
         with(binding) {
-            connectivityObserver.getFlow().collect { connectivity ->
-                when (connectivity) {
-                    ConnectivityObserver.Status.Available -> {
+            viewModel.connectivityStatus.collect { status ->
+                when (status) {
+                    ConnectivityStatus.Loading -> Unit
+                    ConnectivityStatus.Available -> {
                         concernTypeLayout.visibility = View.VISIBLE
                         concernTypeDivider.visibility = View.VISIBLE
                         concernTypeModifyLayout.visibility = View.VISIBLE
                         concernTypeErrorLayout.visibility = View.GONE
-
-                        if(viewModel.networkState.value is NetworkState.Error) {
-                            viewModel.getConcernType()
-                        }
                     }
-                    ConnectivityObserver.Status.Unavailable,
-                    ConnectivityObserver.Status.Losing,
-                    ConnectivityObserver.Status.Lost -> {
+
+                    is ConnectivityStatus.OnLost -> {
                         concernTypeLayout.visibility = View.GONE
                         concernTypeDivider.visibility = View.GONE
                         concernTypeModifyLayout.visibility = View.GONE
                         concernTypeErrorLayout.visibility = View.VISIBLE
-                        val msg = "${getString(R.string.text_network_is_unavailable)}\n" +
-                                "${getString(R.string.text_plz_check_network)} "
-                        concernTypeErrorMsg.text = msg
+                        concernTypeErrorMsg.text =
+                            requireContext().getString(R.string.can_not_access_network)
                     }
                 }
             }
@@ -99,81 +93,63 @@ class ConcernTypeFragment : Fragment(R.layout.fragment_concern_type) {
     }
 
     private fun settingToolbar(binding: FragmentConcernTypeBinding) {
-        binding.toolbarConcernType.setNavigationOnClickListener {
-            requireActivity().finish()
-        }
-
-        binding.toolbarConcernType.setNavigationContentDescription(R.string.text_back_button)
-    }
-
-    private fun observeNickname(binding: FragmentConcernTypeBinding) {
-        viewModel.nickName.observe(viewLifecycleOwner) { nickName ->
-            binding.textViewConcernTypeUseNickname.text = getString(R.string.concern_type_nickname, nickName)
-        }
-    }
-
-    private fun observeSelection(binding: FragmentConcernTypeBinding) {
-        viewModel.concernType.observe(viewLifecycleOwner) { concernType ->
-            initSelection(binding, concernType)
-            if (requireContext().isTallBackEnabled()) {
-                settingDescriptions(binding, concernType)
+        with(binding.toolbarConcernType) {
+            setNavigationOnClickListener {
+                requireActivity().finish()
             }
+            setNavigationContentDescription(R.string.text_back_button)
         }
     }
 
-    private fun initSelection(binding: FragmentConcernTypeBinding, concernType: ConcernType) {
+    private fun setNickName(binding: FragmentConcernTypeBinding, nickName: String) {
+        binding.textViewConcernTypeUseNickname.text =
+            getString(R.string.concern_type_nickname, nickName)
+    }
+
+    private fun setSelectedConcernTypeImage(
+        binding: FragmentConcernTypeBinding,
+        concernType: ConcernTypeUiModel
+    ) {
         with(binding) {
-            if (concernType.isPhysical) {
-                settingSelected(imageViewConcernTypePhysical, R.drawable.cc_selected_physical_disability_icon)
+            concernType.selectedConcernTypes.forEach {
+                when (it) {
+                    ConcernTypes.Physical -> {
+                        imageViewConcernTypePhysical.setImageResource(R.drawable.cc_selected_physical_disability_icon)
+                    }
+                    ConcernTypes.Child -> {
+                        imageViewConcernTypeInfant.setImageResource(R.drawable.cc_selected_infant_family_icon)
+                    }
+                    ConcernTypes.Elderly -> {
+                        imageViewConcernTypeElderly.setImageResource(R.drawable.cc_selected_elderly_people_icon)
+                    }
+                    ConcernTypes.Hear -> {
+                        imageViewConcernTypeHearing.setImageResource(R.drawable.cc_selected_hearing_impairment_icon)
+                    }
+                    ConcernTypes.Visual -> {
+                        imageViewConcernTypeVisual.setImageResource(R.drawable.cc_selected_visual_impairment_icon)
+                    }
+                }
             }
-            if (concernType.isVisual) {
-                settingSelected(imageViewConcernTypeVisual, R.drawable.cc_selected_visual_impairment_icon)
-            }
-            if (concernType.isHear) {
-                settingSelected(imageViewConcernTypeHearing, R.drawable.cc_selected_hearing_impairment_icon)
-            }
-            if (concernType.isChild) {
-                settingSelected(imageViewConcernTypeInfant, R.drawable.cc_selected_infant_family_icon)
-            }
-            if (concernType.isElderly) {
-                settingSelected(imageViewConcernTypeElderly, R.drawable.cc_selected_elderly_people_icon)
-            }
+        }
+        if (requireContext().isTallBackEnabled()) {
+            settingDescriptions(binding, concernType)
         }
     }
 
-    private fun settingDescriptions(binding: FragmentConcernTypeBinding, concernType: ConcernType) {
+    private fun settingDescriptions(binding: FragmentConcernTypeBinding, concernType: ConcernTypeUiModel) {
         val nicknameDescription = binding.textViewConcernTypeUseNickname.text.toString()
-        val selectedDescriptions = mutableListOf<String>()
-
-        if (concernType.isPhysical) {
-            selectedDescriptions.add(getString(R.string.text_physical_disability))
+        val selectedDescriptions = StringBuilder()
+        concernType.selectedConcernTypes.forEach {
+            when (it) {
+                ConcernTypes.Physical -> selectedDescriptions.append(getString(R.string.text_physical_disability))
+                ConcernTypes.Child -> selectedDescriptions.append(getString(R.string.text_infant_family))
+                ConcernTypes.Elderly -> selectedDescriptions.append(getString(R.string.text_elderly_person))
+                ConcernTypes.Hear -> selectedDescriptions.append(getString(R.string.text_hearing_impairment))
+                ConcernTypes.Visual -> selectedDescriptions.append(getString(R.string.text_visual_impairment))
+            }
         }
-        if (concernType.isVisual) {
-            selectedDescriptions.add(getString(R.string.text_visual_impairment))
-        }
-        if (concernType.isHear) {
-            selectedDescriptions.add(getString(R.string.text_hearing_impairment))
-        }
-        if (concernType.isChild) {
-            selectedDescriptions.add(getString(R.string.text_infant_family))
-        }
-        if (concernType.isElderly) {
-            selectedDescriptions.add(getString(R.string.text_elderly_person))
-        }
-
-        val contentDescription = if (selectedDescriptions.isNotEmpty()) {
-            selectedDescriptions.joinToString(separator = ", ")
-        } else {
-            getString(R.string.text_no_concern_type_selected)
-        }
-
-        val combinedDescription = "$nicknameDescription, $contentDescription"
-
+        val combinedDescription = "$nicknameDescription $selectedDescriptions"
         binding.concernTypeLayout.contentDescription = combinedDescription
-    }
-
-    private fun settingSelected(imageView: ImageView, selectedDrawable: Int) {
-        imageView.setImageResource(selectedDrawable)
     }
 
     private fun moveConcernTypeModify(binding: FragmentConcernTypeBinding) {

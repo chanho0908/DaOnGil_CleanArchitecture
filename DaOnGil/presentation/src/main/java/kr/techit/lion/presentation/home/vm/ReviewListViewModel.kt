@@ -16,7 +16,7 @@ import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +29,7 @@ class ReviewListViewModel @Inject constructor(
     lateinit var networkErrorDelegate: NetworkErrorDelegate
     val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
 
-    private val _loginState = MutableStateFlow<LogInState>(LogInState.Checking)
+    private val _loginState = MutableStateFlow<LogInStatus>(LogInStatus.Checking)
     val loginState = _loginState.asStateFlow()
 
     private val _placeReviewInfo = MutableLiveData<PlaceReviewInfo>()
@@ -52,8 +52,8 @@ class ReviewListViewModel @Inject constructor(
 
     private suspend fun checkLoginState(){
         authRepository.loggedIn.collect{ isLoggedIn ->
-            if (isLoggedIn) _loginState.value = LogInState.LoggedIn
-            else _loginState.value = LogInState.LoginRequired
+            if (isLoggedIn) _loginState.value = LogInStatus.LoggedIn
+            else _loginState.value = LogInStatus.LoginRequired
         }
     }
 

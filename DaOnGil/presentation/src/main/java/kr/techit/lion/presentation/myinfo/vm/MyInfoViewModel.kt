@@ -15,7 +15,7 @@ import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
-import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
+import kr.techit.lion.presentation.myinfo.event.MyInfoEvent
 import kr.techit.lion.presentation.myinfo.model.ImgModifyState
 import kr.techit.lion.presentation.myinfo.model.MyInfoState
 import kr.techit.lion.presentation.myinfo.model.UserProfileImg
@@ -34,12 +34,12 @@ class MyInfoViewModel @Inject constructor(
     private val _state = MutableStateFlow(MyInfoState.create())
     val state = _state.asStateFlow()
 
-    fun onChangeUiEvent(intent: MyInfoIntent) {
-        when (intent) {
-            is MyInfoIntent.OnUiEventInitializeUiData -> initUiData()
-            is MyInfoIntent.OnUiEventModifyPersonalInfo -> onCompleteModifyPersonal(intent.PersonalInfo)
-            is MyInfoIntent.OnUiEventModifyIceInfo -> onCompleteModifyIce(intent.newIceInfo)
-            is MyInfoIntent.OnUiEventSelectProfileImage -> onSelectProfileImage(intent.imgUrl)
+    fun onChangeUiEvent(event: MyInfoEvent) {
+        when (event) {
+            is MyInfoEvent.OnUiEventInitializeUiData -> initUiData()
+            is MyInfoEvent.OnUiEventModifyPersonalInfo -> onCompleteModifyPersonal(event.personalInfo)
+            is MyInfoEvent.OnUiEventModifyIceInfo -> onCompleteModifyIce(event.newIceInfo)
+            is MyInfoEvent.OnUiEventSelectProfileImage -> onSelectProfileImage(event.imgUrl)
         }
     }
 

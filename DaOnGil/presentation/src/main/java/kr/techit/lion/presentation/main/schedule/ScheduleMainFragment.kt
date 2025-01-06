@@ -32,7 +32,7 @@ import kr.techit.lion.presentation.schedule.PublicScheduleActivity
 import kr.techit.lion.presentation.schedule.ResultCode
 import kr.techit.lion.presentation.schedulereview.WriteScheduleReviewActivity
 import kr.techit.lion.presentation.schedule.ScheduleDetailActivity
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 
 @AndroidEntryPoint
 class ScheduleMainFragment : Fragment(R.layout.fragment_schedule_main) {
@@ -115,10 +115,10 @@ class ScheduleMainFragment : Fragment(R.layout.fragment_schedule_main) {
 
 
                 when (loginState) {
-                    LogInState.Checking -> return@collect
+                    LogInStatus.Checking -> return@collect
 
 
-                    LogInState.LoggedIn -> {
+                    LogInStatus.LoggedIn -> {
                         isUser = true
                         viewModel.getScheduleMainLists()
                         binding.textViewMyScheduleMore.visibility = View.VISIBLE
@@ -126,7 +126,7 @@ class ScheduleMainFragment : Fragment(R.layout.fragment_schedule_main) {
                         binding.cardViewEmptySchedule.visibility = View.GONE
                     }
 
-                    LogInState.LoginRequired -> {
+                    LogInStatus.LoginRequired -> {
                         isUser = false
                         viewModel.getOpenPlanList()
                         binding.textViewMyScheduleMore.visibility = View.INVISIBLE

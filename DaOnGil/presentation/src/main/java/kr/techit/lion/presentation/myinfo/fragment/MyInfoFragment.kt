@@ -20,7 +20,7 @@ import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.main.myinfo.MyInfoMainFragment.Companion.MODIFY_RESULT_CODE
-import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
+import kr.techit.lion.presentation.myinfo.event.MyInfoEvent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
 import kr.techit.lion.presentation.connectivity.ConnectivityObserver
 import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
@@ -79,7 +79,7 @@ class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
     private suspend fun observeConnectivity() {
         connectivityObserver.getFlow().collect { status ->
             if (status == ConnectivityObserver.Status.Available) {
-                viewModel.onChangeUiEvent(MyInfoIntent.OnUiEventInitializeUiData)
+                viewModel.onChangeUiEvent(MyInfoEvent.OnUiEventInitializeUiData)
             }
         }
     }

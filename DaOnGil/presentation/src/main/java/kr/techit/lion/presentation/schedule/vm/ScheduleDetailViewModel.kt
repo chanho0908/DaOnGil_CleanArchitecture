@@ -25,7 +25,7 @@ import kr.techit.lion.presentation.scheduleform.model.OriginalScheduleInfo
 import kr.techit.lion.presentation.scheduleform.model.toOriginalScheduleInfo
 import kr.techit.lion.presentation.schedulereview.model.OriginalScheduleReviewInfo
 import kr.techit.lion.presentation.schedulereview.model.toOriginalScheduleReviewInfoModel
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,7 +45,7 @@ class ScheduleDetailViewModel @Inject constructor(
     private val _scheduleDetail = MutableLiveData<ScheduleDetail>()
     val scheduleDetail: LiveData<ScheduleDetail> = _scheduleDetail
 
-    private val _loginState = MutableStateFlow<LogInState>(LogInState.Checking)
+    private val _loginState = MutableStateFlow<LogInStatus>(LogInStatus.Checking)
     val loginState = _loginState.asStateFlow()
 
     private val _snackbarSuccessMessage = MutableLiveData<String>()
@@ -160,8 +160,8 @@ class ScheduleDetailViewModel @Inject constructor(
     private fun checkLoginState() =
         viewModelScope.launch {
             authRepository.loggedIn.collect { isLoggedIn ->
-                if (isLoggedIn) _loginState.value = LogInState.LoggedIn
-                else _loginState.value = LogInState.LoginRequired
+                if (isLoggedIn) _loginState.value = LogInStatus.LoggedIn
+                else _loginState.value = LogInStatus.LoginRequired
             }
         }
 

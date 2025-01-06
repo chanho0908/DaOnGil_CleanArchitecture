@@ -20,10 +20,11 @@ class DeleteUserViewModel @Inject constructor(
 
     val networkState get() = networkErrorDelegate.networkState
 
-    fun withdrawal(onSuccess: () -> Unit){
+    fun withdrawal(action: () -> Unit){
         viewModelScope.launch(recordExceptionHandler) {
-            authRepository.withdraw().onSuccess {
-                onSuccess()
+            authRepository.withdraw()
+            .onSuccess {
+                action()
             }.onError { e ->
                 networkErrorDelegate.handleNetworkError(e)
             }
