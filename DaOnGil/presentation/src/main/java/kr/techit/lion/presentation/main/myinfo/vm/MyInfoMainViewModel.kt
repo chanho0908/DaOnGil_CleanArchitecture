@@ -69,10 +69,10 @@ class MyInfoMainViewModel @Inject constructor(
         }
     }
 
-    fun logout(onSuccess: () -> Unit) {
+    fun logout(action: () -> Unit) {
         viewModelScope.launch {
             authRepository.logout()
-            onSuccess()
+            action()
         }
     }
 }
