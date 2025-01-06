@@ -11,13 +11,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
-import kr.techit.lion.domain.model.MyDefaultInfo
-import kr.techit.lion.presentation.concerntype.ConcernTypeActivity
-import kr.techit.lion.presentation.myinfo.DeleteUserActivity
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.bookmark.BookmarkActivity
+import kr.techit.lion.presentation.concerntype.ConcernTypeActivity
+import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 import kr.techit.lion.presentation.databinding.FragmentMyInfoMainBinding
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.announceForAccessibility
@@ -27,10 +26,12 @@ import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.login.LoginActivity
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
 import kr.techit.lion.presentation.main.myinfo.vm.MyInfoMainViewModel
+import kr.techit.lion.presentation.main.myinfo.vm.model.MyInfoUiModel
+import kr.techit.lion.presentation.myinfo.DeleteUserActivity
 import kr.techit.lion.presentation.myinfo.MyInfoActivity
 import kr.techit.lion.presentation.myreview.MyReviewActivity
 import kr.techit.lion.presentation.setting.PolicyActivity
-import kr.techit.lion.presentation.splash.model.LogInState
+import kr.techit.lion.presentation.splash.model.LogInStatus
 
 @AndroidEntryPoint
 class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
@@ -49,6 +50,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentMyInfoMainBinding.bind(view)
+        viewModel.checkLoginState()
         val isTalkbackEnabled = requireContext().isTallBackEnabled()
         val textToAnnounce = StringBuilder()
 
@@ -68,59 +70,79 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
         }
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectState(binding, isTalkbackEnabled, textToAnnounce) }
-                launch { handleNetworkState(binding) }
-            }
+            launch { handleConnectivityAndLoginState(binding, isTalkbackEnabled, textToAnnounce) }
+            launch { handleNetworkState(binding) }
         }
     }
 
-    private suspend fun collectState(
+    private suspend fun handleConnectivityAndLoginState(
         binding: FragmentMyInfoMainBinding,
         isTalkbackEnabled: Boolean,
         talkbackText: StringBuilder
     ) {
-        viewModel.state.collect {
-            collectLoginState(binding, isTalkbackEnabled, talkbackText, it.loginState)
-            collectMyInfo(binding, isTalkbackEnabled, talkbackText, it.myInfo)
+        combine(
+            viewModel.connectivityStatus,
+            viewModel.loggedIn
+        ) { connectivityStatus, loginStatus ->
+            connectivityStatus to loginStatus
+        }.collect { (connectivityStatus, loginStatus) ->
+            when (connectivityStatus) {
+                ConnectivityStatus.Loading -> Unit
+                ConnectivityStatus.Available -> {
+                    binding.errorContainer.visibility = View.GONE
+                    binding.mainContainer.visibility = View.VISIBLE
+                    handleLoginState(binding, isTalkbackEnabled, talkbackText, loginStatus)
+                }
+                is ConnectivityStatus.OnLost -> {
+                    showErrorPage(binding, getString(R.string.can_not_access_network))
+                }
+            }
         }
     }
 
-    private suspend fun collectLoginState(
+    private suspend fun handleLoginState(
         binding: FragmentMyInfoMainBinding,
         isTalkbackEnabled: Boolean,
         talkbackText: StringBuilder,
-        logInState: LogInState
+        loginStatus: LogInStatus
     ) {
-        when (logInState) {
-            is LogInState.Checking -> return
-            is LogInState.LoggedIn -> {
+        when (loginStatus) {
+            is LogInStatus.Checking -> Unit
+            is LogInStatus.LoggedIn -> {
                 viewModel.onStateLoggedIn()
-                setUiLoggedInState(binding)
+                collectMyInfo(binding, isTalkbackEnabled, talkbackText)
             }
 
-            is LogInState.LoginRequired -> setUiLoginRequiredState(
-                binding,
-                isTalkbackEnabled,
-                talkbackText
-            )
+            is LogInStatus.LoginRequired -> {
+                setUiLoginRequiredState(binding, isTalkbackEnabled, talkbackText)
+            }
         }
     }
 
-    private fun collectMyInfo(
+    private suspend fun collectMyInfo(
+        binding: FragmentMyInfoMainBinding,
+        isTalkbackEnabled: Boolean,
+        talkbackText: StringBuilder
+    ) {
+        viewModel.uiState.collect {
+            setUiLoggedInState(binding)
+            setUpMyInfo(binding, isTalkbackEnabled, talkbackText, it.myInfo)
+        }
+    }
+
+    private fun setUpMyInfo(
         binding: FragmentMyInfoMainBinding,
         isTalkbackEnabled: Boolean,
         talkbackText: StringBuilder,
-        myInfo: MyDefaultInfo
+        myInfo: MyInfoUiModel
     ) {
-
         with(binding) {
-            val name = myInfo.toNameFormat()
-            val review = myInfo.toReviewFormat(tvReview.text.toString())
-            val registeredData = myInfo.toRegisterDateFormat()
+            val name = myInfo.name
+            val review = myInfo.reviewNum
+            val registeredData = myInfo.date
 
             tvNameOrLogin.text = name
-            tvReviewCnt.text = myInfo.reviewNum.toString()
+            tvReviewCnt.text = myInfo.reviewNum
             tvRegisteredData.visibility = View.VISIBLE
             tvRegisteredData.text = registeredData
 
@@ -196,6 +218,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
         talkbackText: StringBuilder
     ) {
         with(binding) {
+            progressBar.visibility = View.GONE
             userContainer.visibility = View.GONE
             tvReviewCnt.visibility = View.GONE
             textViewMyInfoMainRegister.visibility = View.GONE
@@ -203,7 +226,7 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
             readScriptBtn.visibility = View.GONE
             tvReview.text = getString(R.string.text_NameOrLogin)
             tvNameOrLogin.text = getString(R.string.text_myInfo_Review)
-            tvNameOrLogin.contentDescription = "로그인 버튼"
+            tvNameOrLogin.contentDescription = requireContext().getString(R.string.text_login_button)
             layoutProfile.setOnClickListener {
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 startActivity(intent)
@@ -261,9 +284,9 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
     private fun logoutDialog(binding: FragmentMyInfoMainBinding) {
         binding.layoutLogout.setOnClickListener {
             val dialog = ConfirmDialog(
-                "로그아웃",
-                "해당 기기에서 로그아웃 됩니다.",
-                "로그아웃"
+                requireContext().getString(R.string.text_logout),
+                requireContext().getString(R.string.text_logout_to_device),
+                requireContext().getString(R.string.text_logout)
             ) {
                 logout()
             }
@@ -274,12 +297,10 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
 
     private fun logout() {
         viewModel.logout {
-            startActivity(
-                Intent(
-                    requireActivity(),
-                    LoginActivity::class.java
-                ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
+            val intent = Intent(requireActivity(), LoginActivity::class.java).apply {
+                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(intent)
             requireActivity().finish()
         }
     }

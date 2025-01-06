@@ -223,6 +223,7 @@
 
     <string name="text_sign_out">회원탈퇴</string>
     <string name="text_logout">로그아웃</string>
+    <string name="text_logout_to_device">해당 기기에서 로그아웃 됩니다.</string>">
     <string name="text_place_review">나의 여행지 후기</string>
     <string name="text_bookmark">북마크</string>
     <string name="text_interest_type">관심 유형</string>
@@ -371,6 +372,7 @@
     <string name="text_hello_plz_login">안녕하세요!\n간편 로그인을 진행해주세요!</string>
     <string name="text_kakao_login">카카오로그인</string>
     <string name="text_naver_login">네이버로그인</string>
+    <string name="text_login_button">로그인 버튼</string>
     <string name="text_script_guide_last_onboarding_page">
         마지막온보딩화면입니다 화면중간 시작하기버튼을 눌러회원가입없이 이용하실수 있습니다
         회원가입또는 로그인하시려면 시작하기버튼 하단 로그인/회원가입 진행하기 버튼을눌러주세요.
