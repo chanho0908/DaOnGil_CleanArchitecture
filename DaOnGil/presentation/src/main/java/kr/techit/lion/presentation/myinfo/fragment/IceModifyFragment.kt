@@ -31,7 +31,7 @@ import kr.techit.lion.presentation.ext.pronounceEachCharacter
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.ext.setAccessibilityText
 import kr.techit.lion.presentation.ext.showSoftInput
-import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
+import kr.techit.lion.presentation.myinfo.event.MyInfoEvent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
 
 @AndroidEntryPoint
@@ -69,7 +69,7 @@ class IceModifyFragment : Fragment(R.layout.fragment_ice_modify) {
     private fun modifyUiEvent(binding: FragmentIceModifyBinding) {
         with(binding) {
             viewModel.onChangeUiEvent(
-                MyInfoIntent.OnUiEventModifyIceInfo(
+                MyInfoEvent.OnUiEventModifyIceInfo(
                     IceInfo(
                         birth = tvBirth.text.toString(),
                         bloodType = tvBloodType.text.toString(),

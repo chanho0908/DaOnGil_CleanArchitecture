@@ -41,7 +41,7 @@ import kr.techit.lion.presentation.ext.showSnackbar
 import kr.techit.lion.presentation.ext.showSoftInput
 import kr.techit.lion.presentation.ext.toAbsolutePath
 import kr.techit.lion.presentation.main.dialog.ConfirmDialog
-import kr.techit.lion.presentation.myinfo.intent.MyInfoIntent
+import kr.techit.lion.presentation.myinfo.event.MyInfoEvent
 import kr.techit.lion.presentation.myinfo.vm.MyInfoViewModel
 
 @AndroidEntryPoint
@@ -73,7 +73,7 @@ class PersonalInfoModifyFragment : Fragment(R.layout.fragment_personal_info_modi
                     val nickname = tvNickname.text.toString()
                     val phone = tvPhone.text.toString()
                     viewModel.onChangeUiEvent(
-                        MyInfoIntent.OnUiEventModifyPersonalInfo(PersonalInfo(name, nickname, phone))
+                        MyInfoEvent.OnUiEventModifyPersonalInfo(PersonalInfo(name, nickname, phone))
                     )
                 }
             }
@@ -311,7 +311,7 @@ class PersonalInfoModifyFragment : Fragment(R.layout.fragment_personal_info_modi
             .fallback(R.drawable.default_profile)
             .into(view)
         val path = requireContext().toAbsolutePath(imgUrl)
-        viewModel.onChangeUiEvent(MyInfoIntent.OnUiEventSelectProfileImage(path))
+        viewModel.onChangeUiEvent(MyInfoEvent.OnUiEventSelectProfileImage(path))
     }
 
     private fun isFormValid(binding: FragmentPersonalInfoModifyBinding): Boolean {
