@@ -3,6 +3,7 @@ package kr.techit.lion.presentation.main.myinfo.vm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -59,6 +60,7 @@ class MyInfoMainViewModel @Inject constructor(
     }
 
     suspend fun onStateLoggedIn() {
+        networkErrorDelegate.handleNetworkLoading()
         memberRepository.getMyDefaultInfo().onSuccess { profile ->
             _uiState.value = _uiState.value.copy(
                 myInfo = profile.toUiModel()
