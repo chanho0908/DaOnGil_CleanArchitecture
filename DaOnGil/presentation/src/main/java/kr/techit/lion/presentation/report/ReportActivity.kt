@@ -8,7 +8,6 @@ import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityReportBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -41,10 +40,8 @@ class ReportActivity : AppCompatActivity() {
         settingErrorHandling()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectReportState() }
-                launch { observeConnectivity() }
-            }
+            launch { collectReportState() }
+            launch { observeConnectivity() }
         }
     }
 
@@ -53,10 +50,12 @@ class ReportActivity : AppCompatActivity() {
             when (networkState) {
                 is NetworkState.Loading -> {
                 }
+
                 is NetworkState.Success -> {
                     setResult(RESULT_OK)
                     finish()
                 }
+
                 is NetworkState.Error -> {
                     this@ReportActivity.showSnackbar(binding.root, networkState.msg)
                 }
@@ -67,10 +66,11 @@ class ReportActivity : AppCompatActivity() {
     private suspend fun observeConnectivity() {
         with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity) {
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         buttonReport.isEnabled = true
                     }
+
                     ConnectivityObserver.Status.Unavailable -> {}
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -129,7 +129,8 @@ class ReportActivity : AppCompatActivity() {
 
     private fun isFormValid(): Boolean {
         return if (binding.textFieldDetailReason.text.isNullOrBlank()) {
-            binding.textInputLayoutDetailReason.error = getString(R.string.text_report_error_message)
+            binding.textInputLayoutDetailReason.error =
+                getString(R.string.text_report_error_message)
             binding.textFieldDetailReason.requestFocus()
             this@ReportActivity.showSoftInput(binding.textFieldDetailReason)
             false

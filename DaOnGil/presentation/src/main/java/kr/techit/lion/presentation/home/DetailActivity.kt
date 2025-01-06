@@ -25,7 +25,6 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.detailplace.Review
 import kr.techit.lion.domain.model.detailplace.SubDisability
 import kr.techit.lion.presentation.R
@@ -72,10 +71,8 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectDetailNetworkState(binding) }
-                launch { observeConnectivity(binding) }
-            }
+            launch { collectDetailNetworkState(binding) }
+            launch { observeConnectivity(binding) }
         }
 
         settingToolbar()

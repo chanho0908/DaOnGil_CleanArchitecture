@@ -32,7 +32,6 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.AedMapInfo
 import kr.techit.lion.domain.model.EmergencyMapInfo
 import kr.techit.lion.domain.model.HospitalMapInfo
@@ -115,23 +114,22 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
         setToolbar()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { observeConnectivity() }
-                launch { collectEmergencyMapState() }
-            }
+            launch { observeConnectivity() }
+            launch { collectEmergencyMapState() }
         }
     }
 
     private suspend fun observeConnectivity() {
-        with(binding){
+        with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity){
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         emergencyMapErrorLayout.visibility = View.GONE
                         emergencyMapErrorProgressBar.visibility = View.GONE
                         emergencyMapLayout.visibility = View.VISIBLE
                         emergencyMapProgressBar.visibility = View.VISIBLE
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -143,7 +141,8 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                                 "${getString(R.string.text_plz_check_network)} "
                         emergencyMapErrorMsg.text = msg
 
-                        val emergencyAreaDialog = this@EmergencyMapActivity.supportFragmentManager.findFragmentByTag("EmergencyAreaDialog") as? EmergencyAreaDialog
+                        val emergencyAreaDialog =
+                            this@EmergencyMapActivity.supportFragmentManager.findFragmentByTag("EmergencyAreaDialog") as? EmergencyAreaDialog
                         emergencyAreaDialog.let { dialog ->
                             if (dialog?.isVisible == true) {
                                 dialog.dismiss()
@@ -156,20 +155,22 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private suspend fun collectEmergencyMapState() {
-        with(binding){
+        with(binding) {
             viewModel.networkState.collect { networksState ->
-                when(networksState){
+                when (networksState) {
                     is NetworkState.Loading -> {
                         emergencyMapProgressBar.visibility = View.GONE
                         emergencyMapErrorProgressBar.visibility = View.VISIBLE
                         emergencyMapErrorLayout.visibility = View.GONE
                     }
+
                     is NetworkState.Success -> {
                         emergencyMapProgressBar.visibility = View.VISIBLE
                         emergencyMapLayout.visibility = View.VISIBLE
                         emergencyMapErrorProgressBar.visibility = View.GONE
                         emergencyMapErrorLayout.visibility = View.GONE
                     }
+
                     is NetworkState.Error -> {
                         emergencyMapProgressBar.visibility = View.GONE
                         emergencyMapLayout.visibility = View.GONE
@@ -181,12 +182,14 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-    private fun setToolbar(){
+
+    private fun setToolbar() {
         binding.toolbarEmergencyMap.setNavigationOnClickListener {
             finish()
         }
     }
-    private fun setAreaUi(){
+
+    private fun setAreaUi() {
         viewModel.area.observe(this@EmergencyMapActivity) { area ->
             binding.emergencyMapArea.text = area
             binding.emergencyMapProgressBar.setProgressCompat(20, true)
@@ -209,8 +212,9 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    private fun setBottomRecylcerView(emergencyMapInfoList: List<EmergencyMapInfo>){
-        val emergencyBottomSheet = EmergencyBottomSheet(binding.emergencyBottomSheet, emergencyMapInfoList)
+    private fun setBottomRecylcerView(emergencyMapInfoList: List<EmergencyMapInfo>) {
+        val emergencyBottomSheet =
+            EmergencyBottomSheet(binding.emergencyBottomSheet, emergencyMapInfoList)
         emergencyBottomSheet.setRecyclerView()
         emergencyBottomSheet.recyclerViewTopButton()
     }
@@ -314,6 +318,7 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
             permissionGrantedMapUiSetting()
         }
     }
+
     private fun permissionGrantedMapUiSetting() {
         with(naverMap) {
             setMapType(this)
@@ -430,7 +435,7 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                         if (aedList != null && aedLat != null && aedLon != null) {
                             addAedMarker(aedList, aedLat, aedLon)
-                            if(emergencyMapList.isNullOrEmpty()){
+                            if (emergencyMapList.isNullOrEmpty()) {
                                 boundsBuilder.include(LatLng(aedLat, aedLon))
                             }
                         }
@@ -519,7 +524,7 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 if (aedList != null && aedLat != null && aedLon != null) {
                     addAedMarker(aedList, aedLat, aedLon)
-                    if(emergencyMapList.isNullOrEmpty()){
+                    if (emergencyMapList.isNullOrEmpty()) {
                         boundsBuilder.include(LatLng(aedLat, aedLon))
                     }
                 }
@@ -544,7 +549,7 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun getEmergencyMap(){
+    private fun getEmergencyMap() {
         viewModel.area.observe(this@EmergencyMapActivity) { area ->
             area?.split(" ")?.let { parts ->
                 if (parts.isNotEmpty()) {
@@ -553,10 +558,12 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                             val (STAGE1, STAGE2, STAGE3) = parts
                             viewModel.getEmergencyMapInfo(STAGE1, "$STAGE2 $STAGE3")
                         }
+
                         parts.size == 2 -> {
                             val (STAGE1, STAGE2) = parts
                             viewModel.getEmergencyMapInfo(STAGE1, STAGE2)
                         }
+
                         else -> {
                             viewModel.getEmergencyMapInfo(area, null)
                         }
@@ -587,7 +594,8 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
             setOnClickListener {
                 // 이전에 선택된 마커가 있다면 초기 상태로 되돌림
                 this@EmergencyMapActivity.emergencySelectedMarker?.let { previousMarker ->
-                    previousMarker.icon = OverlayImage.fromResource(R.drawable.marker_unselected_emergency_icon)
+                    previousMarker.icon =
+                        OverlayImage.fromResource(R.drawable.marker_unselected_emergency_icon)
                     previousMarker.isHideCollidedMarkers = true
                     previousMarker.isForceShowIcon = false
                     previousMarker.width = 56
@@ -596,7 +604,8 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 this@EmergencyMapActivity.aedSelectedMarker?.let { previousMarker ->
-                    previousMarker.icon = OverlayImage.fromResource(R.drawable.marker_unselected_aed_icon)
+                    previousMarker.icon =
+                        OverlayImage.fromResource(R.drawable.marker_unselected_aed_icon)
                     previousMarker.isHideCollidedMarkers = true
                     previousMarker.isForceShowIcon = false
                     previousMarker.width = 56
@@ -655,7 +664,8 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
             setOnClickListener {
                 // 이전에 선택된 마커가 있다면 초기 상태로 되돌림
                 this@EmergencyMapActivity.emergencySelectedMarker?.let { previousMarker ->
-                    previousMarker.icon = OverlayImage.fromResource(R.drawable.marker_unselected_emergency_icon)
+                    previousMarker.icon =
+                        OverlayImage.fromResource(R.drawable.marker_unselected_emergency_icon)
                     previousMarker.isHideCollidedMarkers = true
                     previousMarker.isForceShowIcon = false
                     previousMarker.width = 56
@@ -664,7 +674,8 @@ class EmergencyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 this@EmergencyMapActivity.aedSelectedMarker?.let { previousMarker ->
-                    previousMarker.icon = OverlayImage.fromResource(R.drawable.marker_unselected_aed_icon)
+                    previousMarker.icon =
+                        OverlayImage.fromResource(R.drawable.marker_unselected_aed_icon)
                     previousMarker.isHideCollidedMarkers = true
                     previousMarker.isForceShowIcon = false
                     previousMarker.width = 56

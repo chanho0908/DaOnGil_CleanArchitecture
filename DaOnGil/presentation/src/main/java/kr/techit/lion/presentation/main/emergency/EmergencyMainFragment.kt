@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentEmergencyMainBinding
 import kr.techit.lion.presentation.emergency.EmergencyMapActivity
@@ -37,21 +36,20 @@ class EmergencyMainFragment : Fragment(R.layout.fragment_emergency_main) {
         }
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { observeConnectivity(binding) }
-            }
+            observeConnectivity(binding)
         }
     }
 
     private suspend fun observeConnectivity(binding: FragmentEmergencyMainBinding) {
-        with(binding){
+        with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity){
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         emergencyMainErrorLayout.visibility = View.GONE
                         emergencyMainProgressBar.visibility = View.GONE
                         emergencyMainLayout.visibility = View.VISIBLE
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {

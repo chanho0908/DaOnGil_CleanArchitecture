@@ -23,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityWriteReviewBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -128,10 +127,8 @@ class WriteReviewActivity : AppCompatActivity() {
         val placeName = intent.getStringExtra("reviewPlaceName") ?: "관광지"
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectWriteReviewNetworkState() }
-                launch { observeConnectivity() }
-            }
+            launch { collectWriteReviewNetworkState() }
+            launch { observeConnectivity() }
         }
         settingToolbar()
         settingReviewData(placeName)

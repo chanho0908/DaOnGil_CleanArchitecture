@@ -36,7 +36,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.withContext
 import kr.techit.lion.domain.model.Activation
 import kr.techit.lion.domain.model.AppTheme
@@ -101,12 +100,10 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         val binding = FragmentHomeMainBinding.bind(view)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectAppTheme() }
-                launch { collectNetworkState(binding) }
-                launch { observeConnectivity(binding) }
-                launch { observeUserActivation() }
-            }
+            launch { collectAppTheme() }
+            launch { collectNetworkState(binding) }
+            launch { observeConnectivity(binding) }
+            launch { observeUserActivation() }
         }
 
         settingAppTheme(binding)
@@ -545,13 +542,14 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
     private suspend fun observeUserActivation() {
         viewModel.userActivationState.collect {
-            when(it){
+            when (it) {
                 Activation.Loading,
                 Activation.Activate -> return@collect
+
                 Activation.DeActivate -> {
                     if (isDarkTheme(resources.configuration)) {
                         showThemeGuideDialog()
-                    }else{
+                    } else {
                         showThemeSettingDialog()
                     }
                 }

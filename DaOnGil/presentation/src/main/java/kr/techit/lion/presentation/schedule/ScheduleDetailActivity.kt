@@ -16,7 +16,6 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.ScheduleDetail
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityScheduleDetailBinding
@@ -51,7 +50,7 @@ class ScheduleDetailActivity : AppCompatActivity() {
 
     private val viewModel: ScheduleDetailViewModel by viewModels()
 
-    private val binding: ActivityScheduleDetailBinding by lazy{
+    private val binding: ActivityScheduleDetailBinding by lazy {
         ActivityScheduleDetailBinding.inflate(layoutInflater)
     }
 
@@ -59,29 +58,33 @@ class ScheduleDetailActivity : AppCompatActivity() {
         NetworkConnectivityObserver(applicationContext)
     }
 
-    private val scheduleReviewLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        val planId = intent.getLongExtra("planId", -1)
-        viewModel.getScheduleDetailInfo(planId)
-        when(result.resultCode){
-            RESULT_REVIEW_WRITE -> {
-                binding.root.showSnackbar("후기가 저장되었습니다")
-            }
-            RESULT_SCHEDULE_EDIT -> {
-                binding.root.showSnackbar("일정이 수정되었습니다")
-            }
-            RESULT_REVIEW_EDIT -> {
-                binding.root.showSnackbar("리뷰가 수정되었습니다")
-            }
-        }
-    }
+    private val scheduleReviewLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val planId = intent.getLongExtra("planId", -1)
+            viewModel.getScheduleDetailInfo(planId)
+            when (result.resultCode) {
+                RESULT_REVIEW_WRITE -> {
+                    binding.root.showSnackbar("후기가 저장되었습니다")
+                }
 
-    private val reportLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        when(result.resultCode){
-            RESULT_OK -> {
-                binding.root.showSnackbar("신고가 완료되었습니다")
+                RESULT_SCHEDULE_EDIT -> {
+                    binding.root.showSnackbar("일정이 수정되었습니다")
+                }
+
+                RESULT_REVIEW_EDIT -> {
+                    binding.root.showSnackbar("리뷰가 수정되었습니다")
+                }
             }
         }
-    }
+
+    private val reportLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    binding.root.showSnackbar("신고가 완료되었습니다")
+                }
+            }
+        }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,17 +95,15 @@ class ScheduleDetailActivity : AppCompatActivity() {
         observeDeleteMyPlan()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectScheduleDetailState() }
-                launch { observeConnectivity() }
-            }
+            launch { collectScheduleDetailState() }
+            launch { observeConnectivity() }
         }
     }
 
     private suspend fun observeConnectivity() {
-        with(binding){
+        with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity){
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         scheduleDetailErrorLayout.visibility = View.GONE
                         scheduleDetailLayout.visibility = View.VISIBLE
@@ -111,6 +112,7 @@ class ScheduleDetailActivity : AppCompatActivity() {
                             LogInStatus.LoggedIn -> {
                                 viewModel.getScheduleDetailInfo(planId)
                             }
+
                             LogInStatus.LoginRequired -> {
                                 viewModel.getScheduleDetailInfoGuest(planId)
                             }
@@ -120,6 +122,7 @@ class ScheduleDetailActivity : AppCompatActivity() {
                             }
                         }
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -138,9 +141,16 @@ class ScheduleDetailActivity : AppCompatActivity() {
     private fun initView(isUser: Boolean, planId: Long) {
         with(binding) {
 
-            viewModel.scheduleDetail.observe(this@ScheduleDetailActivity){ scheduleDetail ->
+            viewModel.scheduleDetail.observe(this@ScheduleDetailActivity) { scheduleDetail ->
 
-                initToolbarMenu(isUser, scheduleDetail.isWriter, scheduleDetail.isPublic, scheduleDetail.isBookmark, scheduleDetail.isReport, planId)
+                initToolbarMenu(
+                    isUser,
+                    scheduleDetail.isWriter,
+                    scheduleDetail.isPublic,
+                    scheduleDetail.isBookmark,
+                    scheduleDetail.isReport,
+                    planId
+                )
 
                 settingScheduleAdapter(scheduleDetail)
                 schedulePublic.visibility = View.VISIBLE
@@ -154,23 +164,27 @@ class ScheduleDetailActivity : AppCompatActivity() {
                     cardViewScheduleEmptyReview.visibility = View.VISIBLE
 
                     // 지나가지 않은 일정 + 내가 작성자
-                    if(scheduleDetail.isWriter){
-                        this.scheduleEmptyReviewTitle.text = getString(R.string.text_schedule_info_writer_not_leave_title)
-                        this.scheduleEmptyReviewContent.text = getString(R.string.text_schedule_info_writer_not_leave_content)
+                    if (scheduleDetail.isWriter) {
+                        this.scheduleEmptyReviewTitle.text =
+                            getString(R.string.text_schedule_info_writer_not_leave_title)
+                        this.scheduleEmptyReviewContent.text =
+                            getString(R.string.text_schedule_info_writer_not_leave_content)
                     }
                     // 지나가지 않은 일정 + 내가 작성자가 아님
-                    else{
-                        this.scheduleEmptyReviewTitle.text = getString(R.string.text_schedule_info_not_leave_title)
-                        this.scheduleEmptyReviewContent.text = getString(R.string.text_schedule_info_not_leave_content)
+                    else {
+                        this.scheduleEmptyReviewTitle.text =
+                            getString(R.string.text_schedule_info_not_leave_title)
+                        this.scheduleEmptyReviewContent.text =
+                            getString(R.string.text_schedule_info_not_leave_content)
                     }
                 } ?: run {
                     // 지나간 일정
                     scheduleDday.visibility = View.GONE
 
                     // 리뷰가 있을때,
-                    if(scheduleDetail.hasReview){
+                    if (scheduleDetail.hasReview) {
                         // 신고 O
-                        if(scheduleDetail.isReport == true){
+                        if (scheduleDetail.isReport == true) {
                             cardViewScheduleReview.visibility = View.GONE
                             cardViewScheduleEmptyReview.visibility = View.GONE
                             cardViewReportReview.visibility = View.VISIBLE
@@ -183,40 +197,77 @@ class ScheduleDetailActivity : AppCompatActivity() {
 
                             cardViewScheduleReview.visibility = View.VISIBLE
                             cardViewScheduleEmptyReview.visibility = View.GONE
-                            this@ScheduleDetailActivity.setImageSmall(ivProfileImage, scheduleDetail.profileUrl)
+                            this@ScheduleDetailActivity.setImageSmall(
+                                ivProfileImage,
+                                scheduleDetail.profileUrl
+                            )
                             textNickname.text = scheduleDetail.nickname
-                            ratingBarScheduleSatisfaction.rating = scheduleDetail.grade?.toFloat() ?: 0F
+                            ratingBarScheduleSatisfaction.rating =
+                                scheduleDetail.grade?.toFloat() ?: 0F
                             textViewScheduleReviewContent.text = scheduleDetail.content
 
                             scheduleDetail.reviewImages?.let { reviewImages ->
                                 when (reviewImages.size) {
                                     1 -> {
                                         scheduleReviewImg1.visibility = View.VISIBLE
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg1, reviewImages[0])
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg1,
+                                            reviewImages[0]
+                                        )
                                     }
+
                                     2 -> {
                                         scheduleReviewImg1.visibility = View.VISIBLE
                                         scheduleReviewImg2.visibility = View.VISIBLE
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg1, reviewImages[0])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg2, reviewImages[1])
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg1,
+                                            reviewImages[0]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg2,
+                                            reviewImages[1]
+                                        )
                                     }
+
                                     3 -> {
                                         scheduleReviewImg1.visibility = View.VISIBLE
                                         scheduleReviewImg2.visibility = View.VISIBLE
                                         scheduleReviewImg3.visibility = View.VISIBLE
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg1, reviewImages[0])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg2, reviewImages[1])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg3, reviewImages[2])
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg1,
+                                            reviewImages[0]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg2,
+                                            reviewImages[1]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg3,
+                                            reviewImages[2]
+                                        )
                                     }
+
                                     4 -> {
                                         scheduleReviewImg1.visibility = View.VISIBLE
                                         scheduleReviewImg2.visibility = View.VISIBLE
                                         scheduleReviewImg3.visibility = View.VISIBLE
                                         scheduleReviewImg4.visibility = View.VISIBLE
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg1, reviewImages[0])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg2, reviewImages[1])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg3, reviewImages[2])
-                                        this@ScheduleDetailActivity.setImageSmall(scheduleReviewImg4, reviewImages[3])
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg1,
+                                            reviewImages[0]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg2,
+                                            reviewImages[1]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg3,
+                                            reviewImages[2]
+                                        )
+                                        this@ScheduleDetailActivity.setImageSmall(
+                                            scheduleReviewImg4,
+                                            reviewImages[3]
+                                        )
                                     }
                                 }
                             }
@@ -293,7 +344,7 @@ class ScheduleDetailActivity : AppCompatActivity() {
 
                 }
 
-                if(scheduleDetail.isReport == true){
+                if (scheduleDetail.isReport == true) {
                     schedulePublic.text = getString(R.string.text_schedule_private)
                 } else {
                     if (scheduleDetail.isPublic) {
@@ -321,9 +372,9 @@ class ScheduleDetailActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun collectScheduleDetailState(){
+    private suspend fun collectScheduleDetailState() {
         val planId = intent.getLongExtra("planId", -1)
-        with(binding){
+        with(binding) {
             repeatOnStarted {
 
                 viewModel.networkState.combine(viewModel.loginState) { networkState, loginState ->
@@ -336,19 +387,21 @@ class ScheduleDetailActivity : AppCompatActivity() {
                             scheduleDetailErrorLayout.visibility = View.GONE
                             scheduleDetailLayout.visibility = View.GONE
                         }
+
                         is NetworkState.Success -> {
                             scheduleDetailProgressBar.visibility = View.GONE
                             scheduleDetailErrorLayout.visibility = View.GONE
                             scheduleDetailLayout.visibility = View.VISIBLE
                         }
+
                         is NetworkState.Error -> {
-                            if(viewModel.deletePlanSuccess.value == false){
+                            if (viewModel.deletePlanSuccess.value == false) {
                                 binding.root.showSnackbar(networkState.msg)
-                            } else if(viewModel.deleteReviewSuccess.value == false){
+                            } else if (viewModel.deleteReviewSuccess.value == false) {
                                 binding.root.showSnackbar(networkState.msg)
-                            } else if(viewModel.updatePublicSuccess.value == false) {
+                            } else if (viewModel.updatePublicSuccess.value == false) {
                                 binding.root.showSnackbar(networkState.msg)
-                            } else if(viewModel.updateBookmarkSuccess.value == false){
+                            } else if (viewModel.updateBookmarkSuccess.value == false) {
                                 binding.root.showSnackbar(networkState.msg)
                             } else {
                                 scheduleDetailProgressBar.visibility = View.GONE
@@ -432,9 +485,16 @@ class ScheduleDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun initToolbarMenu(isUser: Boolean, isWriter: Boolean, isPublic: Boolean, isBookmark: Boolean, isReport: Boolean?, planId: Long) {
+    private fun initToolbarMenu(
+        isUser: Boolean,
+        isWriter: Boolean,
+        isPublic: Boolean,
+        isBookmark: Boolean,
+        isReport: Boolean?,
+        planId: Long
+    ) {
 
-        with(binding.toolbarViewSchedule){
+        with(binding.toolbarViewSchedule) {
             menu.clear()
             setNavigationOnClickListener {
                 setResult(Activity.RESULT_CANCELED)
@@ -511,7 +571,7 @@ class ScheduleDetailActivity : AppCompatActivity() {
             "로그인이 필요해요!",
             subtitle,
             "로그인하기",
-        ){
+        ) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -520,10 +580,14 @@ class ScheduleDetailActivity : AppCompatActivity() {
     }
 
     private fun settingScheduleAdapter(scheduleDetail: ScheduleDetail) {
-        binding.rvScheduleFullList.adapter = ScheduleListAdapter(scheduleDetail.dailyPlans,
+        binding.rvScheduleFullList.adapter = ScheduleListAdapter(
+            scheduleDetail.dailyPlans,
             scheduleListListener = { schedulePosition, placePosition ->
                 val intent = Intent(this, DetailActivity::class.java)
-                intent.putExtra("detailPlaceId", scheduleDetail.dailyPlans[schedulePosition].schedulePlaces[placePosition].placeId)
+                intent.putExtra(
+                    "detailPlaceId",
+                    scheduleDetail.dailyPlans[schedulePosition].schedulePlaces[placePosition].placeId
+                )
                 startActivity(intent)
             })
     }

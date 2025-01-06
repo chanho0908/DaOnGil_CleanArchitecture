@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchListBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -35,7 +34,8 @@ class SearchListFragment : Fragment(R.layout.fragment_search_list) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentSearchListBinding.bind(view)
 
-        val mainAdapter = ListSearchAdapter(viewLifecycleOwner.lifecycleScope,
+        val mainAdapter = ListSearchAdapter(
+            viewLifecycleOwner.lifecycleScope,
             onClickPhysicalDisability = { type ->
                 val options = sharedViewModel.physicalDisabilityOptions.value
                 showBottomSheet(options, type)
@@ -101,55 +101,55 @@ class SearchListFragment : Fragment(R.layout.fragment_search_list) {
 
         with(binding) {
             repeatOnViewStarted {
-                supervisorScope {
-                    launch {
-                        sharedViewModel.sharedOptionState.collect {
-                            viewModel.onChangeMapState(it)
-                        }
+                launch {
+                    sharedViewModel.sharedOptionState.collect {
+                        viewModel.onChangeMapState(it)
                     }
+                }
 
-                    launch {
-                        sharedViewModel.tabState.collect {
-                            binding.rvSearchResult.scrollToPosition(0)
-                            viewModel.onSelectedTab(it)
-                        }
+                launch {
+                    sharedViewModel.tabState.collect {
+                        binding.rvSearchResult.scrollToPosition(0)
+                        viewModel.onSelectedTab(it)
                     }
+                }
 
-                    launch {
-                        viewModel.networkState.collect { networkState ->
-                            when (networkState) {
-                                is NetworkState.Loading -> {
-                                    searchListProgressBar.visibility = View.VISIBLE
-                                }
-                                is NetworkState.Success -> {
-                                    searchListProgressBar.visibility = View.GONE
-                                    rvSearchResult.visibility = View.VISIBLE
-                                    noSearchResultContainer.visibility = View.GONE
-                                    searchListProgressBar.visibility = View.GONE
-                                }
-                                is NetworkState.Error -> {
-                                    searchListProgressBar.visibility = View.GONE
-                                    rvSearchResult.visibility = View.GONE
-                                    noSearchResultContainer.visibility = View.VISIBLE
-                                    textMsg.text = networkState.msg
-                                }
+                launch {
+                    viewModel.networkState.collect { networkState ->
+                        when (networkState) {
+                            is NetworkState.Loading -> {
+                                searchListProgressBar.visibility = View.VISIBLE
+                            }
+
+                            is NetworkState.Success -> {
+                                searchListProgressBar.visibility = View.GONE
+                                rvSearchResult.visibility = View.VISIBLE
+                                noSearchResultContainer.visibility = View.GONE
+                                searchListProgressBar.visibility = View.GONE
+                            }
+
+                            is NetworkState.Error -> {
+                                searchListProgressBar.visibility = View.GONE
+                                rvSearchResult.visibility = View.GONE
+                                noSearchResultContainer.visibility = View.VISIBLE
+                                textMsg.text = networkState.msg
                             }
                         }
                     }
+                }
 
-                    launch {
-                        viewModel.uiState
-                            .filter { uiState ->
-                                uiState.any { it is AreaModel && it.areas.isNotEmpty() }
-                            }.collect {
-                                mainAdapter.submitList(it)
-                            }
-                    }
-
-                    launch {
-                        sharedViewModel.bottomSheetOptionState.collect {
-                            viewModel.modifyCategoryModel(it)
+                launch {
+                    viewModel.uiState
+                        .filter { uiState ->
+                            uiState.any { it is AreaModel && it.areas.isNotEmpty() }
+                        }.collect {
+                            mainAdapter.submitList(it)
                         }
+                }
+
+                launch {
+                    sharedViewModel.bottomSheetOptionState.collect {
+                        viewModel.modifyCategoryModel(it)
                     }
                 }
             }

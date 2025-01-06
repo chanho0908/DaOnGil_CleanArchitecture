@@ -33,7 +33,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchMapBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -75,35 +74,33 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
         subscribeOptionStates(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch{
-                    viewModel.searchState.collect {
-                        if (it.not()){
-                            Snackbar.make(
-                                binding.root, "검색결과가 없습니다. 지도의 위치를 변경해보세요",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        }
+            launch {
+                viewModel.searchState.collect {
+                    if (it.not()) {
+                        Snackbar.make(
+                            binding.root, "검색결과가 없습니다. 지도의 위치를 변경해보세요",
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                 }
-
-                launch {
-                    sharedViewModel.sharedOptionState.filter { value ->
-                        value.detailFilter.isNotEmpty()
-                    }.collect {
-                        viewModel.onChangeMapState(it)
-                    }
-                }
-
-                launch {
-                    sharedViewModel.tabState.collect {
-                        clearMarker()
-                        viewModel.onSelectedTab(it)
-                    }
-                }
-
-                launch { collectNetworkState(binding) }
             }
+
+            launch {
+                sharedViewModel.sharedOptionState.filter { value ->
+                    value.detailFilter.isNotEmpty()
+                }.collect {
+                    viewModel.onChangeMapState(it)
+                }
+            }
+
+            launch {
+                sharedViewModel.tabState.collect {
+                    clearMarker()
+                    viewModel.onSelectedTab(it)
+                }
+            }
+
+            launch { collectNetworkState(binding) }
         }
 
         binding.btnReset.setOnClickListener {
@@ -137,9 +134,9 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
     }
 
     private suspend fun collectNetworkState(binding: FragmentSearchMapBinding) {
-        with(binding){
-            viewModel.networkState.collect{ networkState ->
-                when(networkState){
+        with(binding) {
+            viewModel.networkState.collect { networkState ->
+                when (networkState) {
                     is NetworkState.Loading -> progressBar.visibility = View.VISIBLE
                     is NetworkState.Success -> progressBar.visibility = View.GONE
                     is NetworkState.Error -> {
@@ -445,7 +442,7 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
         markers.clear()
     }
 
-    companion object{
+    companion object {
         val REQUEST_LOCATION_PERMISSIONS by lazy {
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,

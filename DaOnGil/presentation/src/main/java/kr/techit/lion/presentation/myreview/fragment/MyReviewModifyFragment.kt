@@ -23,7 +23,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentMyReviewModifyBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -121,10 +120,8 @@ class MyReviewModifyFragment : Fragment(R.layout.fragment_my_review_modify) {
         settingErrorHandling(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectMyReviewModifyState(binding) }
-                launch { observeConnectivity(binding) }
-            }
+            launch { collectMyReviewModifyState(binding) }
+            launch { observeConnectivity(binding) }
         }
     }
 

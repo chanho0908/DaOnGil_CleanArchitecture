@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentMyReviewBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -47,10 +46,8 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
         settingMyReviewRVAdapter(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectMyReviewState(binding) }
-                launch { observeConnectivity(binding) }
-            }
+            launch { collectMyReviewState(binding) }
+            launch { observeConnectivity(binding) }
         }
     }
 
@@ -61,10 +58,12 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
                     is NetworkState.Loading -> {
                         myReviewProgressBar.visibility = View.VISIBLE
                     }
+
                     is NetworkState.Success -> {
                         myReviewProgressBar.visibility = View.GONE
                         recyclerViewMyReview.visibility = View.VISIBLE
                     }
+
                     is NetworkState.Error -> {
                         myReviewProgressBar.visibility = View.GONE
                         recyclerViewMyReview.visibility = View.GONE
@@ -79,7 +78,7 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
     private suspend fun observeConnectivity(binding: FragmentMyReviewBinding) {
         with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity) {
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         recyclerViewMyReview.visibility = View.VISIBLE
                         myReviewErrorLayout.visibility = View.GONE
@@ -87,6 +86,7 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
                             viewModel.getMyPlaceReview()
                         }
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -97,7 +97,8 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
                         myReviewErrorMsg.text = msg
 
                         val fragmentManager = requireActivity().supportFragmentManager
-                        val deleteDialog = fragmentManager.findFragmentByTag("ConfirmDialogTag") as? ConfirmDialog
+                        val deleteDialog =
+                            fragmentManager.findFragmentByTag("ConfirmDialogTag") as? ConfirmDialog
                         deleteDialog?.let { dialog ->
                             if (dialog.isVisible) {
                                 dialog.dismiss()
@@ -125,7 +126,7 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
 
     private fun settingMyReviewRVAdapter(binding: FragmentMyReviewBinding) {
         viewModel.myPlaceReview.observe(viewLifecycleOwner) { myPlaceReview ->
-            if(myPlaceReview.myPlaceReviewInfoList.isNotEmpty()) {
+            if (myPlaceReview.myPlaceReviewInfoList.isNotEmpty()) {
                 binding.notExistReviewLayout.visibility = View.GONE
 
                 val myReviewRVAdapter = MyReviewRVAdapter(
@@ -156,7 +157,10 @@ class MyReviewFragment : Fragment(R.layout.fragment_my_review) {
                             }
                         }
                         deleteDialog.isCancelable = false
-                        deleteDialog.show(requireActivity().supportFragmentManager, "ConfirmDialogTag")
+                        deleteDialog.show(
+                            requireActivity().supportFragmentManager,
+                            "ConfirmDialogTag"
+                        )
                     }
                 )
 

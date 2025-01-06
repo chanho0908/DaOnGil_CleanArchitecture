@@ -9,7 +9,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.bookmark.adapter.PlaceBookmarkRVAdapter
 import kr.techit.lion.presentation.bookmark.adapter.PlanBookmarkRVAdapter
@@ -44,10 +43,8 @@ class BookmarkActivity : AppCompatActivity() {
         observeSnackbarMsg()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectBookmarkState() }
-                launch { observeConnectivity() }
-            }
+            launch { collectBookmarkState() }
+            launch { observeConnectivity() }
         }
     }
 
@@ -58,12 +55,17 @@ class BookmarkActivity : AppCompatActivity() {
                     is NetworkState.Loading -> {
                         bookmarkProgressBar.visibility = View.VISIBLE
                     }
+
                     is NetworkState.Success -> {
                         bookmarkProgressBar.visibility = View.GONE
                     }
+
                     is NetworkState.Error -> {
-                        if(viewModel.isUpdateError.value == true) {
-                            this@BookmarkActivity.showInfinitySnackBar(binding.root, networkState.msg)
+                        if (viewModel.isUpdateError.value == true) {
+                            this@BookmarkActivity.showInfinitySnackBar(
+                                binding.root,
+                                networkState.msg
+                            )
                         } else {
                             bookmarkProgressBar.visibility = View.GONE
                             tabLayoutBookmark.visibility = View.GONE
@@ -79,7 +81,7 @@ class BookmarkActivity : AppCompatActivity() {
     private suspend fun observeConnectivity() {
         with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity) {
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         tabLayoutBookmark.visibility = View.VISIBLE
                         recyclerViewBookmark.visibility = View.VISIBLE
@@ -90,6 +92,7 @@ class BookmarkActivity : AppCompatActivity() {
                             viewModel.getPlanBookmark()
                         }
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -123,8 +126,12 @@ class BookmarkActivity : AppCompatActivity() {
     }
 
     private fun settingTabLayout() {
-        binding.tabLayoutBookmark.addTab(binding.tabLayoutBookmark.newTab().setText(getString(R.string.tab_text_place)))
-        binding.tabLayoutBookmark.addTab(binding.tabLayoutBookmark.newTab().setText(getString(R.string.tab_text_plan)))
+        binding.tabLayoutBookmark.addTab(
+            binding.tabLayoutBookmark.newTab().setText(getString(R.string.tab_text_place))
+        )
+        binding.tabLayoutBookmark.addTab(
+            binding.tabLayoutBookmark.newTab().setText(getString(R.string.tab_text_plan))
+        )
 
         binding.tabLayoutBookmark.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

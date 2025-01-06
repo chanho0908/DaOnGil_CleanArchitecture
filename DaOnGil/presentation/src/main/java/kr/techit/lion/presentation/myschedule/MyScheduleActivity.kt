@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.myschedule.adapter.MyScheduleElapsedAdapter
 import kr.techit.lion.presentation.myschedule.adapter.MyScheduleUpcomingAdapter
@@ -107,10 +106,8 @@ class MyScheduleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         repeatOnStarted {
-            supervisorScope {
-                launch { observeConnectivity() }
-                launch { initProgressBarState() }
-            }
+            launch { observeConnectivity() }
+            launch { initProgressBarState() }
         }
 
         settingToolbar()

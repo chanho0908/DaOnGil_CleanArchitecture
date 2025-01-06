@@ -12,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.MyMainSchedule
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.scheduleform.ScheduleFormActivity
@@ -80,12 +79,9 @@ class ScheduleMainFragment : Fragment(R.layout.fragment_schedule_main) {
         initButtonClickListener(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
                 launch { collectScheduleMainState(binding) }
                 launch { observeConnectivity(binding) }
-            }
         }
-
     }
 
     private suspend fun collectScheduleMainState(binding: FragmentScheduleMainBinding){

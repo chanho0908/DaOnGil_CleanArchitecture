@@ -9,7 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.ConcernType
 import kr.techit.lion.domain.model.hasAnyTrue
 import kr.techit.lion.presentation.R
@@ -55,10 +54,8 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
         }
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectNetworkState(binding) }
-                launch { collectConcernType(binding) }
-            }
+            launch { collectNetworkState(binding) }
+            launch { collectConcernType(binding) }
         }
     }
 

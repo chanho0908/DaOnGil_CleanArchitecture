@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.placereviewlist.PlaceReview
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityReviewListBinding
@@ -55,11 +54,9 @@ class ReviewListActivity : AppCompatActivity() {
         settingToolbar()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectLoginState(placeId) }
-                launch { collectReviewNetworkState() }
-                launch { observeConnectivity(placeId) }
-            }
+            launch { collectLoginState(placeId) }
+            launch { collectReviewNetworkState() }
+            launch { observeConnectivity(placeId) }
         }
     }
 

@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentMyInfoBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -43,11 +42,9 @@ class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
         initializeListener(binding)
 
         repeatOnViewStarted {
-            supervisorScope {
-                launch { collectPersonalInfo(binding) }
-                launch { collectNetworkState(binding) }
-                launch { observeConnectivity() }
-            }
+            launch { collectPersonalInfo(binding) }
+            launch { collectNetworkState(binding) }
+            launch { observeConnectivity() }
         }
     }
 
@@ -172,7 +169,7 @@ class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
         }
     }
 
-    private fun setIceInfoTallBack(binding: FragmentMyInfoBinding, myInfo: IceInfo){
+    private fun setIceInfoTallBack(binding: FragmentMyInfoBinding, myInfo: IceInfo) {
         with(binding) {
             tvBirthTitle.setAccessibilityText(
                 if (myInfo.birth.isEmpty()) "${tvBirthTitle.text} ${getString(R.string.text_plz_enter_birth)}"

@@ -32,7 +32,6 @@ import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.domain.model.PharmacyMapInfo
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityPharmacyMapBinding
@@ -84,10 +83,8 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
         getPharmacyMap()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { observeConnectivity() }
-                launch { collectEmergencyMapState() }
-            }
+            launch { observeConnectivity() }
+            launch { collectEmergencyMapState() }
         }
 
         val contracts = ActivityResultContracts.RequestMultiplePermissions()
@@ -119,15 +116,16 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private suspend fun observeConnectivity() {
-        with(binding){
+        with(binding) {
             connectivityObserver.getFlow().collect() { connectivity ->
-                when(connectivity){
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         pharmacyMapErrorLayout.visibility = View.GONE
                         pharmacyMapErrorProgressBar.visibility = View.GONE
                         pharmacyMapLayout.visibility = View.VISIBLE
                         pharmacyMapProgressBar.visibility = View.VISIBLE
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -139,7 +137,8 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                                 "${getString(R.string.text_plz_check_network)} "
                         pharmacyMapErrorMsg.text = msg
 
-                        val emergencyAreaDialog = this@PharmacyMapActivity.supportFragmentManager.findFragmentByTag("PharmacyAreaDialog") as? PharmacyAreaDialog
+                        val emergencyAreaDialog =
+                            this@PharmacyMapActivity.supportFragmentManager.findFragmentByTag("PharmacyAreaDialog") as? PharmacyAreaDialog
                         emergencyAreaDialog.let { dialog ->
                             if (dialog?.isVisible == true) {
                                 dialog.dismiss()
@@ -152,20 +151,22 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private suspend fun collectEmergencyMapState() {
-        with(binding){
+        with(binding) {
             viewModel.networkState.collect { networksState ->
-                when(networksState){
+                when (networksState) {
                     is NetworkState.Loading -> {
                         pharmacyMapProgressBar.visibility = View.GONE
                         pharmacyMapErrorProgressBar.visibility = View.VISIBLE
                         pharmacyMapErrorLayout.visibility = View.GONE
                     }
+
                     is NetworkState.Success -> {
                         pharmacyMapProgressBar.visibility = View.VISIBLE
                         pharmacyMapLayout.visibility = View.VISIBLE
                         pharmacyMapErrorProgressBar.visibility = View.GONE
                         pharmacyMapErrorLayout.visibility = View.GONE
                     }
+
                     is NetworkState.Error -> {
                         pharmacyMapProgressBar.visibility = View.GONE
                         pharmacyMapLayout.visibility = View.GONE
@@ -178,13 +179,13 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun setToolbar(){
+    private fun setToolbar() {
         binding.toolbarPharmacyMap.setNavigationOnClickListener {
             finish()
         }
     }
 
-    private fun setAreaUi(){
+    private fun setAreaUi() {
         viewModel.area.observe(this@PharmacyMapActivity) { area ->
             binding.pharamcyMapArea.text = area
             binding.pharmacyMapProgressBar.setProgressCompat(20, true)
@@ -207,8 +208,9 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    private fun setBottomRecylcerView(pharmacyBottomList: List<PharmacyMapInfo>){
-        val pharmacyBottomSheet = PharmacyBottomSheet(binding.pharamcyBottomSheet, pharmacyBottomList)
+    private fun setBottomRecylcerView(pharmacyBottomList: List<PharmacyMapInfo>) {
+        val pharmacyBottomSheet =
+            PharmacyBottomSheet(binding.pharamcyBottomSheet, pharmacyBottomList)
         pharmacyBottomSheet.setRecyclerView()
         pharmacyBottomSheet.recyclerViewTopButton()
     }
@@ -245,7 +247,8 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // LocationSource 구현체를 지정
         // 네이버 지도 SDK에 위치를 제공하는 인터페이스
-        mLocationSource = FusedLocationSource(this,
+        mLocationSource = FusedLocationSource(
+            this,
             EmergencyMapActivity.LOCATION_PERMISSION_REQUEST_CODE
         )
         // 네이버맵 동적으로 불러오기
@@ -388,7 +391,12 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     pharmacyMapInfo.map {
                         addMarker(it, latitude, longitude)
-                        boundsBuilder.include(LatLng(it.pharmacyLat ?: latitude, it.pharmacyLon ?: longitude))
+                        boundsBuilder.include(
+                            LatLng(
+                                it.pharmacyLat ?: latitude,
+                                it.pharmacyLon ?: longitude
+                            )
+                        )
                         pharmacyList.add(it)
                     }
 
@@ -450,7 +458,12 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
             pharmacyMapInfo.map {
                 addMarker(it, latitude, longitude)
-                boundsBuilder.include(LatLng(it.pharmacyLat ?: latitude, it.pharmacyLon ?: longitude))
+                boundsBuilder.include(
+                    LatLng(
+                        it.pharmacyLat ?: latitude,
+                        it.pharmacyLon ?: longitude
+                    )
+                )
                 pharmacyList.add(it)
             }
 
@@ -467,7 +480,7 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun getPharmacyMap(){
+    private fun getPharmacyMap() {
         viewModel.area.observe(this@PharmacyMapActivity) { area ->
             area?.split(" ")?.let { parts ->
                 if (parts.isNotEmpty()) {
@@ -476,10 +489,12 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                             val (STAGE1, STAGE2, STAGE3) = parts
                             viewModel.getPharmacyMapInfo(STAGE2, STAGE3)
                         }
+
                         parts.size == 2 -> {
                             val (STAGE1, STAGE2) = parts
                             viewModel.getPharmacyMapInfo(STAGE1, STAGE2)
                         }
+
                         else -> {
                             viewModel.getPharmacyMapInfo(area, null)
                         }
@@ -510,7 +525,8 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
             setOnClickListener {
                 // 이전에 선택된 마커가 있다면 초기 상태로 되돌림
                 this@PharmacyMapActivity.selectedMarker?.let { previousMarker ->
-                    previousMarker.icon = OverlayImage.fromResource(R.drawable.marker_unselected_pharmacy_icon)
+                    previousMarker.icon =
+                        OverlayImage.fromResource(R.drawable.marker_unselected_pharmacy_icon)
                     previousMarker.isHideCollidedMarkers = true
                     previousMarker.isForceShowIcon = false
                     previousMarker.width = 56

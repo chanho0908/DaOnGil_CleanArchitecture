@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.supervisorScope
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityPublicScheduleBinding
 import kr.techit.lion.presentation.delegate.NetworkState
@@ -31,14 +30,15 @@ class PublicScheduleActivity : AppCompatActivity() {
         ActivityPublicScheduleBinding.inflate(layoutInflater)
     }
 
-    private val scheduleAdapter: PublicScheduleAdapter by lazy{
-        PublicScheduleAdapter{ position ->
+    private val scheduleAdapter: PublicScheduleAdapter by lazy {
+        PublicScheduleAdapter { position ->
             // 공개 일정 상세보기 페이지로 이동
             val intent = Intent(this@PublicScheduleActivity, ScheduleDetailActivity::class.java)
             intent.putExtra("planId", scheduleAdapter.currentList[position].planId)
             startActivity(intent)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -48,10 +48,8 @@ class PublicScheduleActivity : AppCompatActivity() {
         scrollPublicSchedule()
 
         repeatOnStarted {
-            supervisorScope {
-                launch { collectPublicScheduleState() }
-                launch { observeConnectivity() }
-            }
+            launch { collectPublicScheduleState() }
+            launch { observeConnectivity() }
         }
     }
 
@@ -85,14 +83,15 @@ class PublicScheduleActivity : AppCompatActivity() {
     }
 
     private suspend fun observeConnectivity() {
-        with(binding){
+        with(binding) {
             connectivityObserver.getFlow().collect { connectivity ->
-                when(connectivity){
+                when (connectivity) {
                     ConnectivityObserver.Status.Available -> {
                         publicScheduleErrorLayout.visibility = View.GONE
                         recyclerViewPublicScheduleList.visibility = View.VISIBLE
                         viewModel.getOpenPlanList()
                     }
+
                     ConnectivityObserver.Status.Unavailable,
                     ConnectivityObserver.Status.Losing,
                     ConnectivityObserver.Status.Lost -> {
@@ -119,7 +118,8 @@ class PublicScheduleActivity : AppCompatActivity() {
         binding.recyclerViewPublicScheduleList.adapter = scheduleAdapter
 
         viewModel.openPlanList.observe(this@PublicScheduleActivity) { newList ->
-            val rvState = binding.recyclerViewPublicScheduleList.layoutManager?.onSaveInstanceState()
+            val rvState =
+                binding.recyclerViewPublicScheduleList.layoutManager?.onSaveInstanceState()
             scheduleAdapter.submitList(newList) {
                 binding.recyclerViewPublicScheduleList.layoutManager?.onRestoreInstanceState(rvState)
             }
