@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.navigation.safe.args)
     alias(libs.plugins.kotlin.parcelize)
@@ -33,9 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    kapt{
-        correctErrorTypes = true
-    }
     viewBinding {
         enable = true
     }
@@ -55,7 +52,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.navigation.ktx)
     implementation(libs.navigation)
@@ -65,7 +62,7 @@ dependencies {
     implementation(libs.simple.rating.bar)
     implementation(libs.droidsonroids)
     implementation(libs.glide)
-    kapt(libs.glide.compiler)
+    ksp(libs.glide.compiler)
 
     implementation(libs.circleindicator)
 

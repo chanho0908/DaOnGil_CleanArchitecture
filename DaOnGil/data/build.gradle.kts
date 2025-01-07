@@ -3,7 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.room)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
@@ -78,7 +78,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.retrofit)
     implementation(libs.okhttp)
@@ -87,7 +87,7 @@ dependencies {
     implementation(libs.datastore)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     implementation(libs.gson)
     implementation(libs.kotlinx.serialization.json)
@@ -95,5 +95,5 @@ dependencies {
     implementation(libs.moshi.adapters)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
-    kapt(libs.moshi.codegen)
+    ksp(libs.moshi.codegen)
 }
