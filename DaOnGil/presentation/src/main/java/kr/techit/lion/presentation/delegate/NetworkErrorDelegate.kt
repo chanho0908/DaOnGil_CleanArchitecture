@@ -1,26 +1,29 @@
 package kr.techit.lion.presentation.delegate
 
+import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kr.techit.lion.domain.exception.AuthenticationError
-import kr.techit.lion.domain.exception.AuthorizationError
-import kr.techit.lion.domain.exception.BadRequestError
-import kr.techit.lion.domain.exception.ConnectError
-import kr.techit.lion.domain.exception.HttpError
+import kr.techit.lion.domain.exception.HttpError.AuthenticationError
+import kr.techit.lion.domain.exception.HttpError.AuthorizationError
+import kr.techit.lion.domain.exception.HttpError.BadRequestError
+import kr.techit.lion.domain.exception.HttpError.NotFoundError
+import kr.techit.lion.domain.exception.HttpError.ServerError
 import kr.techit.lion.domain.exception.NetworkError
-import kr.techit.lion.domain.exception.NotFoundError
-import kr.techit.lion.domain.exception.ServerError
-import kr.techit.lion.domain.exception.TimeoutError
-import kr.techit.lion.domain.exception.UnknownError
-import kr.techit.lion.domain.exception.UnknownHostError
+import kr.techit.lion.domain.exception.NetworkError.ConnectError
+import kr.techit.lion.domain.exception.NetworkError.TimeoutError
+import kr.techit.lion.domain.exception.NetworkError.UnknownError
+import kr.techit.lion.domain.exception.NetworkError.UnknownHostError
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class NetworkErrorDelegate @Inject constructor() {
+class NetworkErrorDelegate @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
     private val _networkState = MutableStateFlow<NetworkState>(NetworkState.Loading)
     val networkState: StateFlow<NetworkState> get() = _networkState.asStateFlow()
 
@@ -42,21 +45,13 @@ class NetworkErrorDelegate @Inject constructor() {
         }
     }
 
+    private fun asUiText(exception: NetworkError): String{
+        val uiTextProvider = UiTextProvider(context).asUiText(exception)
+        return uiTextProvider
+    }
+
     fun handleNetworkError(exception: NetworkError) {
-        val errorState = when (exception) {
-            is ConnectError -> "${ConnectError.title} \n ${ConnectError.message}"
-            is TimeoutError -> "${TimeoutError.title} \n ${TimeoutError.message}"
-            is UnknownHostError -> "${UnknownError.title} \n ${UnknownHostError.message}"
-            is HttpError -> when (exception) {
-                is BadRequestError -> "${BadRequestError.title} \n ${BadRequestError.message}"
-                is AuthenticationError -> "${AuthenticationError.title} \n ${AuthenticationError.message}"
-                is AuthorizationError -> "${AuthorizationError.title} \n ${AuthorizationError.message}"
-                is NotFoundError -> "${NotFoundError.title} \n ${NotFoundError.message}"
-                is ServerError -> "${ServerError.title} \n ${ServerError.message}"
-            }
-            is UnknownError -> "${UnknownError.title} \n ${UnknownError.message}"
-        }
-        _networkState.value = NetworkState.Error(errorState)
+        _networkState.value = NetworkState.Error(asUiText(exception))
     }
 
     fun handleNetworkSuccess(){
