@@ -1,110 +1,250 @@
 [versions]
+# SDK Versions
 minSdk = "26"
-packgeName = "kr.techit.lion.daongil_cleanarchitecture"
+applicationId = "kr.techit.lion.daongil_cleanarchitecture"
+targetSdk = "34"
+compileSdk = "35"
+jdkVersion = "17"
+
+# App Version
 versionCode = "30"
 versionName = "1.2.0"
-targetSdk = "34"
-compileSdk = "34"
+
+# Build Tools
+agp = "8.7.3"
+
+# Kotlin
 kotlin = "1.9.22"
-android = "8.2.0"
+kotlinx-serialization-json = "1.6.2"
+kotlinx-coroutines-core = "1.7.3"
+
+# AndroidX
+andoridx-core-ktx = "1.15.0"
+andoridx-appcompat = "1.7.0"
+androidx-activity-ktx = "1.9.0"
+androidx-datastore = "1.1.1"
+androidx-navigation = "2.7.7"
+androidx-navigation-safe-args = "2.7.7"
+
+# Java
+javax = "1"
+
+# Google
+google-services = "4.4.2"
+play-services-location = "21.3.0"
+material = "1.12.0"
+
+# Network
+retrofit = "2.11.0"
+okhttp = "4.12.0"
+logging-interceptor = "4.10.0"
+
+# Room
+room = "2.6.1"
+room-gradle-plugin = "2.6.1"
+
+# Hilt
+hilt = "2.49"
+
+# Ksp
+ksp = "1.9.22-1.0.16"
+
+# Splash
+splash = "1.0.1"
+
+# Mosi
+moshi = "1.15.1"
+
+# Glide
+glide = "4.16.0"
 glide-compiler = "4.13.2"
-googleServicesVersion = "4.4.2"
-coreKtx = "1.13.1"
+
+# Gson
+gson = "2.10.1"
+
+# Naver
+navercorp = "5.9.1"
+naver-map = "3.17.0"
+
+# Kakao
+kakao = "2.20.1"
+
+# Firebase
+firebase-bom = "33.1.2"
+firebase-crashlytics = "2.9.9"
+firebase-crashlytics-ktx = "19.2.0"
+
+# Test
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-appcompat = "1.7.0"
-material = "1.12.0"
-hilt = "2.49"
-loggingInterceptor = "4.10.0"
-photoview = "1.0.2"
-retrofit = "2.11.0"
-okhttp = "4.12.0"
-datastore = "1.1.1"
-room = "2.6.1"
-splash = "1.0.1"
-activity = "1.9.0"
-constraintlayout = "2.1.4"
-moshi = "1.15.1"
-navigation = "2.7.7"
-naverMap = "3.17.0"
-circleindicator = "2.1.6"
-kakao = "2.20.1"
-simpleRatingBar = "1.5.1"
+
+# Etc
+simple-rating-bar = "1.5.1"
 droidsonroids = "1.2.28"
-glide = "4.16.0"
-gson = "2.10.1"
-navercorp = "5.9.1"
-kotlinx-serialization-json = "1.6.2"
-navigationSafeArgs = "2.7.7"
-coroutines-core = "1.7.3"
-javaxInject="1"
-playServicesLocation = "21.3.0"
-googleServices = "4.4.2"
-firebaseBom = "33.1.2"
-firebaseCrashlytics = "2.9.9"
+circleindicator = "2.1.6"
 flexbox = "3.0.0"
-firebaseCrashlyticsKtx = "19.2.0"
+photoview = "1.0.2"
+unspecified = "1.0.0"
 
 [libraries]
-photoview = { module = "io.getstream:photoview", version.ref = "photoview" }
-play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+# Androidx Core
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "andoridx-core-ktx" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "androidx-activity-ktx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "andoridx-appcompat" }
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidx-navigation" }
+androidx-navigation-safe-args = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation-safe-args" }
+
+# Kotlin
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
+kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "kotlinx-coroutines-core" }
+
+# Glide
 glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide-compiler" }
-google-services-v441 = { module = "com.google.gms:google-services", version.ref = "googleServicesVersion" }
+
+# Hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+
+# Google
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+google-services-v441 = { module = "com.google.gms:google-services", version.ref = "google-services" }
+google-play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location" }
+
+# Network
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-interceptor" }
+
+# Mosi
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# Kakao
+kakao-user = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao" }
+
+# Naver
+naverMap = { group = "com.naver.maps", name = "map-sdk", version.ref = "naver-map" }
+navercorp = { group = "com.navercorp.nid", name = "oauth", version.ref = "navercorp" }
+
+# Glide
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# Splash
+splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
+
+# Gson
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+# Java
+javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "javax" }
+
+# FireBase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics-ktx = { group = "com.google.firebase", name = "firebase-crashlytics-ktx", version.ref = "firebase-crashlytics-ktx" }
+
+# Etc
+flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
+circleindicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }
+simple-rating-bar = { group = "com.github.ome450901", name = "SimpleRatingBar", version.ref = "simple-rating-bar" }
+droidsonroids = { group = "pl.droidsonroids.gif", name = "android-gif-drawable", version.ref = "droidsonroids" }
+photoview = { module = "io.getstream:photoview", version.ref = "photoview" }
+
+# Test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor"}
-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp"}
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
-navigation = { group="androidx.navigation", name="navigation-fragment-ktx", version.ref="navigation" }
-navigation-ktx = { group="androidx.navigation", name="navigation-ui-ktx", version.ref="navigation" }
-naverMap = { group="com.naver.maps", name="map-sdk", version.ref="naverMap" }
-circleindicator = { group="me.relex", name="circleindicator", version.ref="circleindicator" }
-kakao-user = { group="com.kakao.sdk", name="v2-user", version.ref="kakao" }
-simple-rating-bar = { group="com.github.ome450901", name="SimpleRatingBar", version.ref="simpleRatingBar" }
-droidsonroids = { group="pl.droidsonroids.gif", name="android-gif-drawable", version.ref="droidsonroids" }
-glide = { group="com.github.bumptech.glide", name="glide", version.ref="glide" }
-navercorp = { group="com.navercorp.nid", name="oauth", version.ref="navercorp" }
-moshi = { group="com.squareup.moshi", name="moshi", version.ref="moshi" }
-moshi-adapters = { group="com.squareup.moshi", name="moshi-adapters", version.ref="moshi" }
-moshi-codegen = { group="com.squareup.moshi", name="moshi-kotlin-codegen", version.ref="moshi" }
-moshi-kotlin = { group="com.squareup.moshi", name="moshi-kotlin", version.ref="moshi" }
-splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-converter-moshi = { group="com.squareup.retrofit2", name="converter-moshi", version.ref="retrofit"}
-navigation-safe-args = { group="androidx.navigation", name="navigation-safe-args-gradle-plugin", version.ref="navigationSafeArgs" }
-gson = { group="com.google.code.gson", name="gson", version.ref="gson" }
-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref="coroutines-core"}
-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref="coroutines-core"}
-javax-inject = { group = "javax.inject", name = "javax.inject", version.ref="javaxInject" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref="firebaseBom" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
-firebase-crashlytics-ktx = { group = "com.google.firebase", name = "firebase-crashlytics-ktx", version.ref = "firebaseCrashlyticsKtx" }
+
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+androidx-room-gradle-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room-gradle-plugin" }
+ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+
+[bundles]
+
+androidx = [
+    "androidx-core-ktx",
+    "androidx-activity",
+    "androidx-appcompat",
+    "androidx-navigation",
+    "androidx-navigation-ktx",
+]
+
+firebase = [
+    "firebase-analytics",
+    "firebase-crashlytics",
+    "firebase-crashlytics-ktx"
+]
+
+moshi = [
+    "moshi",
+    "moshi-adapters",
+    "moshi-converter",
+    "moshi-kotlin"
+]
+
+coroutines = [
+    "kotlinx-coroutines-core",
+    "kotlinx-coroutines-core-jvm"
+]
+
+naver = [
+    "naverMap",
+    "navercorp"
+]
+
+google = [
+    "google-material",
+    "google-services-v441",
+    "google-play-services-location"
+]
+
+room = [
+    "room-runtime",
+    "room-ktx"
+]
+
+network = [
+    "retrofit",
+    "okhttp",
+    "logging-interceptor"
+]
+
+test = [
+    "junit",
+    "androidx-junit",
+    "androidx-espresso-core"
+]
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "android" }
-android-library = { id = "com.android.library", version.ref = "android" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
-navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref="navigationSafeArgs" }
+navigation-safe-args = { id = "androidx.navigation.safeargs.kotlin", version.ref="androidx-navigation-safe-args" }
 room = { id = "androidx.room", version.ref="room" }
-google-services = { id = "com.google.gms.google-services", version.ref="googleServices" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref="firebaseCrashlytics" }
+google-services = { id = "com.google.gms.google-services", version.ref="google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref="firebase-crashlytics" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Custom Plugins (Build Logic)
+daongil-app = { id = "daongil.app", version.ref = "unspecified" }
+daongil-data = { id = "daongil.data", version.ref = "unspecified" }
+daongil-domain = { id = "daongil.domain", version.ref = "unspecified" }
+daongil-presentation = { id = "daongil.presentation", version.ref = "unspecified" }

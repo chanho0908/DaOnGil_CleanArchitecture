@@ -1,12 +1,7 @@
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kapt)
-    alias(libs.plugins.room)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.daongil.data)
 }
 
 val properties = Properties()
@@ -23,16 +18,8 @@ val naverMapSecret = properties.getProperty("naver_map_secret") ?: ""
 
 android {
     namespace = "kr.techit.lion.data"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 
     defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
         buildConfigField("String", "NAVER_MAP_BASE", "\"$naverMapBase\"")
@@ -46,54 +33,8 @@ android {
         buildConfigField("String", "NAVER_MAP_SECRET", "\"$naverMapSecret\"")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 
     buildFeatures {
         buildConfig = true
     }
-}
-
-dependencies {
-
-    implementation(project(":domain"))
-    implementation(libs.androidx.core.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.kotlinx.serialization.json)
-
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
-
-    implementation(libs.retrofit)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
-    implementation(libs.datastore)
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
-
-    implementation(libs.gson)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.converter.moshi)
-    implementation(libs.moshi.adapters)
-    implementation(libs.moshi)
-    implementation(libs.moshi.kotlin)
-    kapt(libs.moshi.codegen)
 }
