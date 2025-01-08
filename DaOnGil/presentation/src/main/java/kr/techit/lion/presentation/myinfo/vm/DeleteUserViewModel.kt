@@ -8,26 +8,27 @@ import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import javax.inject.Inject
 
 @HiltViewModel
 class DeleteUserViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val networkEventDelegate: NetworkEventDelegate
 ): BaseViewModel() {
 
     @Inject
     lateinit var networkErrorDelegate: NetworkErrorDelegate
 
-    val networkState get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     fun withdrawal(action: () -> Unit){
-        viewModelScope.launch(recordExceptionHandler) {
-            authRepository.withdraw()
-            .onSuccess {
+        execute(
+            action = { authRepository.withdraw() },
+            eventHandler = networkEventDelegate,
+            onSuccess = {
                 action()
-            }.onError { e ->
-                networkErrorDelegate.handleNetworkError(e)
             }
-        }
+        )
     }
 }

@@ -16,9 +16,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kr.techit.lion.domain.exception.NetworkError
-import kr.techit.lion.domain.exception.TimeoutError
-import kr.techit.lion.domain.exception.UnknownError
-import kr.techit.lion.domain.exception.UnknownHostError
+import kr.techit.lion.domain.exception.NetworkError.TimeoutError
+import kr.techit.lion.domain.exception.NetworkError.UnknownHostError
+import kr.techit.lion.domain.exception.NetworkError.UnknownError
 import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate

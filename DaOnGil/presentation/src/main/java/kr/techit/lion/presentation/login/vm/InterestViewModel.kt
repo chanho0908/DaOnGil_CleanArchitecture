@@ -13,6 +13,7 @@ import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.login.model.InterestType
 import javax.inject.Inject
@@ -20,15 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class InterestViewModel @Inject constructor(
     private val memberRepository: MemberRepository,
+    private val networkEventDelegate: NetworkEventDelegate
 ): BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-
-    val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _state = MutableStateFlow(ConcernType.create())
-
     val state get() = _state.asStateFlow()
 
     fun onSelectInterest(type: InterestType) {
@@ -46,12 +44,12 @@ class InterestViewModel @Inject constructor(
     }
 
     fun onClickSubmitButton() {
-        viewModelScope.launch(recordExceptionHandler){
-            memberRepository.updateConcernType(_state.value).onSuccess {
-                networkErrorDelegate.handleNetworkSuccess()
-            }.onError {
-                networkErrorDelegate.handleNetworkError(it)
-            }
-        }
+        execute(
+            action = {
+                memberRepository.updateConcernType(_state.value)
+            },
+            eventHandler = networkEventDelegate,
+            onSuccess = {}
+        )
     }
 }

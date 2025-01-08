@@ -25,6 +25,7 @@ import kr.techit.lion.presentation.connectivity.ConnectivityObserver
 import kr.techit.lion.presentation.connectivity.NetworkConnectivityObserver
 import kr.techit.lion.domain.model.PersonalInfo
 import kr.techit.lion.domain.model.IceInfo
+import kr.techit.lion.presentation.delegate.NetworkEvent
 
 @AndroidEntryPoint
 class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
@@ -232,10 +233,10 @@ class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
 
     private suspend fun collectNetworkState(binding: FragmentMyInfoBinding) {
         with(binding) {
-            viewModel.networkState.collect {
-                when (it) {
-                    is NetworkState.Loading -> progressBar.visibility = View.VISIBLE
-                    is NetworkState.Success -> {
+            viewModel.networkEvent.collect { event ->
+                when (event) {
+                    NetworkEvent.Loading -> progressBar.visibility = View.VISIBLE
+                    NetworkEvent.Success -> {
                         progressBar.visibility = View.GONE
                         errorContainer.visibility = View.GONE
                         mainContainer.visibility = View.VISIBLE
@@ -244,13 +245,13 @@ class MyInfoFragment : Fragment(R.layout.fragment_my_info) {
                         }
                     }
 
-                    is NetworkState.Error -> {
+                    is NetworkEvent.Error -> {
                         progressBar.visibility = View.GONE
                         mainContainer.visibility = View.GONE
                         errorContainer.visibility = View.VISIBLE
-                        textMsg.text = it.msg
+                        textMsg.text = event.msg
                         if (requireContext().isTallBackEnabled()) {
-                            requireActivity().announceForAccessibility(it.msg)
+                            requireActivity().announceForAccessibility(event.msg)
                         }
                     }
                 }

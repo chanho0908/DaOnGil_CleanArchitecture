@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchListBinding
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.addOnScrollEndListener
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
@@ -115,24 +116,24 @@ class SearchListFragment : Fragment(R.layout.fragment_search_list) {
                 }
 
                 launch {
-                    viewModel.networkState.collect { networkState ->
-                        when (networkState) {
-                            is NetworkState.Loading -> {
+                    viewModel.networkEvent.collect { event ->
+                        when (event) {
+                            is NetworkEvent.Loading -> {
                                 searchListProgressBar.visibility = View.VISIBLE
                             }
 
-                            is NetworkState.Success -> {
+                            is NetworkEvent.Success -> {
                                 searchListProgressBar.visibility = View.GONE
                                 rvSearchResult.visibility = View.VISIBLE
                                 noSearchResultContainer.visibility = View.GONE
                                 searchListProgressBar.visibility = View.GONE
                             }
 
-                            is NetworkState.Error -> {
+                            is NetworkEvent.Error -> {
                                 searchListProgressBar.visibility = View.GONE
                                 rvSearchResult.visibility = View.GONE
                                 noSearchResultContainer.visibility = View.VISIBLE
-                                textMsg.text = networkState.msg
+                                textMsg.text = event.msg
                             }
                         }
                     }

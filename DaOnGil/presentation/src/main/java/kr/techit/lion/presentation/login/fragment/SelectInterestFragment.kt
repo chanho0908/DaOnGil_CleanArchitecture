@@ -13,7 +13,7 @@ import kr.techit.lion.domain.model.ConcernType
 import kr.techit.lion.domain.model.hasAnyTrue
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSelectInterestBinding
-import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.ext.isTallBackEnabled
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.login.model.InterestType
@@ -54,24 +54,24 @@ class SelectInterestFragment : Fragment(R.layout.fragment_select_interest) {
         }
 
         repeatOnViewStarted {
-            launch { collectNetworkState(binding) }
+            launch { collectNetworkEvent(binding) }
             launch { collectConcernType(binding) }
         }
     }
 
-    private suspend fun collectNetworkState(binding: FragmentSelectInterestBinding){
-        viewModel.networkState.collect {
-            when(it) {
-                is NetworkState.Loading -> return@collect
-                is NetworkState.Error -> {
-                    binding.btnRetry.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    Snackbar.make(binding.root, getString(R.string.plz_retry), Snackbar.LENGTH_SHORT).show()
-                }
-                is NetworkState.Success -> {
+    private suspend fun collectNetworkEvent(binding: FragmentSelectInterestBinding){
+        viewModel.networkEvent.collect { event ->
+            when(event) {
+                NetworkEvent.Loading -> Unit
+                NetworkEvent.Success -> {
                     binding.progressBar.visibility = View.GONE
                     startActivity(Intent(requireActivity(), MainActivity::class.java))
                     requireActivity().finish()
+                }
+                is NetworkEvent.Error -> {
+                    binding.btnRetry.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    Snackbar.make(binding.root, getString(R.string.plz_retry), Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

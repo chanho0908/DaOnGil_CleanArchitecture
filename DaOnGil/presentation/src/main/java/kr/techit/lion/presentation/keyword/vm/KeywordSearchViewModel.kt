@@ -5,53 +5,40 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.retryWhen
 import kotlinx.coroutines.launch
-import kr.techit.lion.domain.exception.NetworkError
-import kr.techit.lion.domain.exception.TimeoutError
-import kr.techit.lion.domain.exception.UnknownError
-import kr.techit.lion.domain.exception.UnknownHostError
-import kr.techit.lion.domain.model.search.AutoCompleteKeyword
-import kr.techit.lion.domain.model.search.toRecentlySearchKeyword
 import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.domain.repository.RecentlySearchKeywordRepository
 import kr.techit.lion.presentation.base.BaseViewModel
-import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
-import kr.techit.lion.presentation.keyword.vm.model.KeywordInputStatus
-import kr.techit.lion.presentation.keyword.vm.model.KeywordSearchState
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityObserver
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
-import kr.techit.lion.presentation.delegate.NetworkState
+import kr.techit.lion.presentation.delegate.NetworkEvent
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.ext.stateInUi
-import java.net.UnknownHostException
-import java.util.concurrent.TimeoutException
+import kr.techit.lion.presentation.keyword.vm.model.KeywordInputStatus
+import kr.techit.lion.presentation.keyword.vm.model.KeywordSearchState
 import javax.inject.Inject
 
 @HiltViewModel
 class KeywordSearchViewModel @Inject constructor(
     private val placeRepository: PlaceRepository,
     private val recentlySearchKeywordRepository: RecentlySearchKeywordRepository,
+    private val networkEventDelegate: NetworkEventDelegate,
     connectivityObserver: ConnectivityObserver
 ) : BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-    val errorState get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _keyword = MutableStateFlow("")
     val keyword = _keyword.asStateFlow()
@@ -82,12 +69,12 @@ class KeywordSearchViewModel @Inject constructor(
     .distinctUntilChanged()
     .flatMapLatest { keyword ->
         val response = placeRepository.getAutoCompleteKeyword(keyword)
-        networkErrorDelegate.handleNetworkSuccess()
+        networkEventDelegate.event(viewModelScope, NetworkEvent.Success)
         response
     }
     .flowOn(recordExceptionHandler)
     .catch { e ->
-        submitThrowableState(e)
+        networkEventDelegate.submitThrowableEvent(viewModelScope, e)
     }
 
     fun inputTextChanged(keyword: String) {
@@ -130,26 +117,6 @@ class KeywordSearchViewModel @Inject constructor(
     fun deleteAllKeyword() {
         viewModelScope.launch {
             recentlySearchKeywordRepository.deleteAllKeyword()
-        }
-    }
-
-    private fun submitThrowableState(e: Throwable) {
-        when (e) {
-            is TimeoutException -> {
-                networkErrorDelegate.handleNetworkError(TimeoutError)
-            }
-
-            is UnknownHostException -> {
-                networkErrorDelegate.handleNetworkError(UnknownHostError)
-            }
-
-            is UnknownError -> {
-                networkErrorDelegate.handleNetworkError(UnknownError)
-            }
-
-            else -> {
-                networkErrorDelegate.handleNetworkError(e as NetworkError)
-            }
         }
     }
 

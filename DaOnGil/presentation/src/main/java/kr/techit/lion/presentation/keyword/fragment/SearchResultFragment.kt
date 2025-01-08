@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchResultBinding
-import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.addOnScrollEndListener
 import kr.techit.lion.presentation.ext.hideSoftInput
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
@@ -21,6 +20,7 @@ import kr.techit.lion.presentation.home.DetailActivity
 import kr.techit.lion.presentation.keyword.adapter.SearchResultAdapter
 import kr.techit.lion.presentation.keyword.vm.SearchResultViewModel
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
+import kr.techit.lion.presentation.delegate.NetworkEvent
 
 @AndroidEntryPoint
 class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
@@ -71,13 +71,13 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                 }
 
                 launch {
-                    combine(viewModel.networkState, viewModel.uiState) { networkState, uiState ->
-                        when (networkState) {
-                            is NetworkState.Loading -> {
+                    combine(viewModel.networkEvent, viewModel.uiState) { event, uiState ->
+                        when (event) {
+                            is NetworkEvent.Loading -> {
                                 progressBar.visibility = View.VISIBLE
                             }
 
-                            is NetworkState.Success -> {
+                            is NetworkEvent.Success -> {
                                 val place = uiState.place
                                 progressBar.visibility = View.GONE
                                 if (place.isEmpty()) {
@@ -90,8 +90,8 @@ class SearchResultFragment : Fragment(R.layout.fragment_search_result) {
                                 }
                             }
 
-                            is NetworkState.Error -> {
-                                showNetworkErrorPage(binding, progressBar, networkState.msg)
+                            is NetworkEvent.Error -> {
+                                showNetworkErrorPage(binding, progressBar, event.msg)
                             }
                         }
                     }.collect { }

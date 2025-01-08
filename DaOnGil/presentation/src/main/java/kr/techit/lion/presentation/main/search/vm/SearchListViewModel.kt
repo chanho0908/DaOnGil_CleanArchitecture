@@ -20,6 +20,7 @@ import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.domain.repository.SigunguCodeRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.main.search.vm.model.AreaModel
 import kr.techit.lion.presentation.main.search.vm.model.Category
 import kr.techit.lion.presentation.main.search.vm.model.CategoryModel
@@ -45,10 +46,8 @@ class SearchListViewModel @Inject constructor(
     private val areaCodeRepository: AreaCodeRepository,
     private val sigunguCodeRepository: SigunguCodeRepository,
     private val placeRepository: PlaceRepository,
+    private val networkEventDelegate: NetworkEventDelegate
 ) : BaseViewModel() {
-
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
 
     init {
         viewModelScope.launch {
@@ -63,7 +62,7 @@ class SearchListViewModel @Inject constructor(
         }
     }
 
-    val networkState get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _uiState: MutableStateFlow<List<ListSearchUIModel>> = MutableStateFlow(
         listOf(
@@ -86,7 +85,7 @@ class SearchListViewModel @Inject constructor(
     private val mapChanged get() = MutableSharedFlow<Boolean>()
 
     fun onSelectOption(optionCodes: List<Long>, type: DisabilityType) {
-        viewModelScope.launch(recordExceptionHandler){
+        viewModelScope.launch(recordExceptionHandler) {
             clearPlace()
             val updatedOptionState = updateListOptionState(optionCodes, type)
             listOptionState.update { updatedOptionState }
@@ -96,7 +95,10 @@ class SearchListViewModel @Inject constructor(
         }
     }
 
-    private fun updateListOptionState(optionCodes: List<Long>, type: DisabilityType): ListOptionState {
+    private fun updateListOptionState(
+        optionCodes: List<Long>,
+        type: DisabilityType
+    ): ListOptionState {
         val currentOptionState = listOptionState.value
         val updatedDisabilityTypes = TreeSet(currentOptionState.disabilityType)
         val updatedDetailFilters = TreeSet(currentOptionState.detailFilter)
@@ -165,7 +167,10 @@ class SearchListViewModel @Inject constructor(
         )
     }
 
-    private fun updateUiStateWithOptionCount(optionCodes: List<Long>, type: DisabilityType): List<ListSearchUIModel> {
+    private fun updateUiStateWithOptionCount(
+        optionCodes: List<Long>,
+        type: DisabilityType
+    ): List<ListSearchUIModel> {
         return _uiState.value.map { uiModel ->
             if (uiModel is CategoryModel) {
                 val newOptionState = uiModel.optionState.toMutableMap()
@@ -192,8 +197,10 @@ class SearchListViewModel @Inject constructor(
         }
     }
 
-    private fun updateCategoryModel(uiState: List<ListSearchUIModel>, optionState: Map<DisabilityType, Int>)
-    : List<ListSearchUIModel> {
+    private fun updateCategoryModel(
+        uiState: List<ListSearchUIModel>,
+        optionState: Map<DisabilityType, Int>
+    ): List<ListSearchUIModel> {
         return uiState.map { uiModel ->
             when (uiModel) {
                 is CategoryModel -> {
@@ -212,17 +219,18 @@ class SearchListViewModel @Inject constructor(
         }
     }
 
-    private fun loadPlaces(){
+    private fun loadPlaces() {
         viewModelScope.launch(recordExceptionHandler) {
             listOptionState.collect { listOption ->
-                networkErrorDelegate.handleNetworkLoading()
-                placeRepository.getSearchPlaceResultByList(listOption.toDomainModel())
-                    .onSuccess { result ->
+                execute(
+                    action = {
+                        placeRepository.getSearchPlaceResultByList(listOption.toDomainModel())
+                    },
+                    eventHandler = networkEventDelegate,
+                    onSuccess = { result ->
                         modifyUiState(result)
                     }
-                    .onError { e ->
-                        networkErrorDelegate.handleNetworkError(e)
-                    }
+                )
             }
         }
     }
@@ -231,18 +239,20 @@ class SearchListViewModel @Inject constructor(
         viewModelScope.launch(recordExceptionHandler) {
             clearPlace()
             listOptionState.take(1).collect { listOption ->
-                placeRepository.getSearchPlaceResultByList(listOption.toDomainModel())
-                    .onSuccess { result ->
+                execute(
+                    action = {
+                        placeRepository.getSearchPlaceResultByList(listOption.toDomainModel())
+                    },
+                    eventHandler = networkEventDelegate,
+                    onSuccess = { result ->
                         modifyUiState(result)
                     }
-                    .onError { e ->
-                        networkErrorDelegate.handleNetworkError(e)
-                    }
+                )
             }
         }
     }
 
-    private fun modifyUiState(newUiState: ListSearchResultList){
+    private fun modifyUiState(newUiState: ListSearchResultList) {
         _uiState.update {
             val currentUiState = it.toMutableList()
             val sortModelIndex = currentUiState.indexOfFirst { it is SortModel }
@@ -259,15 +269,15 @@ class SearchListViewModel @Inject constructor(
                 val newPlaceModels = newUiState.toUiModel()
                 currentUiState.addAll(newPlaceModels)
                 currentUiState
-            }else{
+            } else {
                 currentUiState
             }
         }
         _isLastPage.value = newUiState.isLastPage
-        networkErrorDelegate.handleNetworkSuccess()
+        //networkEvent.handleNetworkSuccess()
     }
 
-    private fun clearPlace(){
+    private fun clearPlace() {
         _uiState.update { uiState -> uiState.filterNot { it is PlaceModel } }
     }
 
@@ -313,7 +323,7 @@ class SearchListViewModel @Inject constructor(
         val currentSigunguCode = listOptionState.value.sigunguCode
         val newSigunguCode = sigunguCode.value.findSigunguCode(sigunguName)
 
-        if (currentSigunguCode != newSigunguCode){
+        if (currentSigunguCode != newSigunguCode) {
             clearPlace()
 
             val sigunguCode = sigunguCode.value.findSigunguCode(sigunguName)

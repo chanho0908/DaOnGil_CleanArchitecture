@@ -18,6 +18,7 @@ import kr.techit.lion.presentation.bookmark.BookmarkActivity
 import kr.techit.lion.presentation.concerntype.ConcernTypeActivity
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 import kr.techit.lion.presentation.databinding.FragmentMyInfoMainBinding
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.announceForAccessibility
 import kr.techit.lion.presentation.ext.isTallBackEnabled
@@ -173,19 +174,18 @@ class MyInfoMainFragment : Fragment(R.layout.fragment_my_info_main) {
 
     private suspend fun handleNetworkState(binding: FragmentMyInfoMainBinding) {
         with(binding) {
-            viewModel.networkState.collect {
-                when (it) {
-                    NetworkState.Loading -> progressBar.visibility = View.VISIBLE
-                    NetworkState.Success -> {
+            viewModel.networkEvent.collect { event ->
+                when (event) {
+                    NetworkEvent.Loading -> progressBar.visibility = View.VISIBLE
+                    NetworkEvent.Success -> {
                         mainContainer.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
                         errorContainer.visibility = View.GONE
                     }
-
-                    is NetworkState.Error -> {
+                    is NetworkEvent.Error -> {
                         mainContainer.visibility = View.GONE
                         binding.progressBar.visibility = View.GONE
-                        showErrorPage(binding, it.msg)
+                        showErrorPage(binding, event.msg)
                     }
                 }
             }

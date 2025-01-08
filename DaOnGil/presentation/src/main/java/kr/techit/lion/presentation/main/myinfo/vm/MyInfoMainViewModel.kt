@@ -15,9 +15,11 @@ import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.repository.AuthRepository
 import kr.techit.lion.domain.repository.MemberRepository
+import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityObserver
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.stateInUi
 import kr.techit.lion.presentation.main.myinfo.vm.model.ProfileState
@@ -29,12 +31,11 @@ import javax.inject.Inject
 class MyInfoMainViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val memberRepository: MemberRepository,
+    private val networkEventDelegate: NetworkEventDelegate,
     connectivityObserver: ConnectivityObserver
-) : ViewModel() {
+) : BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-    val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _uiState = MutableStateFlow(ProfileState.create())
     val uiState get() = _uiState.asStateFlow()
@@ -59,16 +60,16 @@ class MyInfoMainViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    suspend fun onStateLoggedIn() {
-        networkErrorDelegate.handleNetworkLoading()
-        memberRepository.getMyDefaultInfo().onSuccess { profile ->
-            _uiState.value = _uiState.value.copy(
-                myInfo = profile.toUiModel()
-            )
-            networkErrorDelegate.handleNetworkSuccess()
-        }.onError {
-            networkErrorDelegate.handleNetworkError(it)
-        }
+    fun onStateLoggedIn() {
+        execute(
+            action = { memberRepository.getMyDefaultInfo() },
+            eventHandler = networkEventDelegate,
+            onSuccess = {
+                _uiState.value = _uiState.value.copy(
+                    myInfo = it.toUiModel()
+                )
+            }
+        )
     }
 
     fun logout(action: () -> Unit) {

@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kr.techit.lion.domain.model.Activation
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivitySplashBinding
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.ext.repeatOnStarted
 import kr.techit.lion.presentation.ext.showInfinitySnackBar
 import kr.techit.lion.presentation.login.OnBoardingActivity
@@ -64,28 +65,36 @@ class SplashActivity : AppCompatActivity() {
                 viewModel.userActivationState.collect {
                     when (it) {
                         Activation.Activate -> {
-                            delay(2700)
+                            delay(DELAY_FOR_DISPLAY_SPLASH_ANIMATION)
                             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                             finish()
                         }
+
                         Activation.DeActivate -> {
-                            viewModel.whenUserActivationIsDeActivate {
-                                startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
-                                finish()
-                            }
+                            viewModel.whenUserActivationIsDeActivate()
                         }
-                        Activation.Loading -> return@collect
+                        Activation.Loading -> Unit
                     }
                 }
             }
 
             repeatOnStarted {
-                viewModel.errorState.collect {
-                    if (it) {
-                        showInfinitySnackBar(binding.root, getString(R.string.text_common_error))
+                viewModel.networkEvent.collect { event ->
+                    when (event) {
+                        NetworkEvent.Loading -> Unit
+                        NetworkEvent.Success -> {
+                            startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+                            finish()
+                        }
+                        is NetworkEvent.Error -> {
+                            showInfinitySnackBar(binding.root, event.msg)
+                        }
                     }
                 }
             }
         }
+    }
+    companion object{
+        private const val DELAY_FOR_DISPLAY_SPLASH_ANIMATION = 2700L
     }
 }
