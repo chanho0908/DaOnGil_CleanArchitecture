@@ -1,5 +1,6 @@
 package kr.techit.lion.convention
 
+import kr.techit.lion.convention.extension.Plugins.DAONGIL_JAVA_PLUGIN
 import kr.techit.lion.convention.extension.Plugins.KOTLINX_SERIALIZATION
 import kr.techit.lion.convention.extension.applyPlugins
 import kr.techit.lion.convention.extension.getLibrary
@@ -10,7 +11,7 @@ import org.gradle.kotlin.dsl.dependencies
 class DaongilDomainConventionPlugin : BuildLogicConventionPlugin(
     block = {
         applyPlugins(
-            "daongil.java.library",
+            DAONGIL_JAVA_PLUGIN,
             KOTLINX_SERIALIZATION
         )
 

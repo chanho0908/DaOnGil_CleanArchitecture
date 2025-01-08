@@ -1,6 +1,8 @@
 package kr.techit.lion.convention
 
 import kr.techit.lion.convention.extension.Plugins.ANDROIDX_NAVIGATION_SAFEARGS
+import kr.techit.lion.convention.extension.Plugins.DAONGIL_ANDROID_LIBRARY_PLUGIN
+import kr.techit.lion.convention.extension.Plugins.DAONGIL_HILT_PLUGIN
 import kr.techit.lion.convention.extension.Plugins.PARCELIZE
 import kr.techit.lion.convention.extension.applyPlugins
 import kr.techit.lion.convention.extension.getBundle
@@ -14,8 +16,8 @@ import org.gradle.kotlin.dsl.project
 class DaongilPresentationConventionPlugin : BuildLogicConventionPlugin(
     block = {
         applyPlugins(
-            "daongil.android.library",
-            "daongil.hilt.library",
+            DAONGIL_ANDROID_LIBRARY_PLUGIN,
+            DAONGIL_HILT_PLUGIN,
             ANDROIDX_NAVIGATION_SAFEARGS,
             PARCELIZE
         )

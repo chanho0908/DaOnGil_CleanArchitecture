@@ -20,4 +20,12 @@ internal object Plugins {
 
     const val GOOGLE_SERVICES = "com.google.gms.google-services"
     const val FIREBASE_CRASHLYTICS = "com.google.firebase.crashlytics"
+
+    const val DAONGIL_ANDROID_APPLICATION_PLUGIN = "daongil.android.application"
+    const val DAONGIL_ANDROID_LIBRARY_PLUGIN = "daongil.android.library"
+    const val DAONGIL_FIREBASE_PLUGIN = "daongil.android.firebase"
+    const val DAONGIL_HILT_PLUGIN = "daongil.hilt.library"
+    const val DAONGIL_ROOM_PLUGIN = "daongil.android.room"
+    const val DAONGIL_MOSHI_PLUGIN = "daongil.android.moshi"
+    const val DAONGIL_JAVA_PLUGIN = "daongil.java.library"
 }

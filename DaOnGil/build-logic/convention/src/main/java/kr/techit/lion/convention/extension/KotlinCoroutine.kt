@@ -9,7 +9,7 @@ internal fun Project.configureKotlinCoroutine(
 ) {
     commonExtension.apply {
         dependencies{
-            "implementation"(libs.getBundle("coroutines"))
+            implementation(libs.getBundle("coroutines"))
         }
     }
 }
