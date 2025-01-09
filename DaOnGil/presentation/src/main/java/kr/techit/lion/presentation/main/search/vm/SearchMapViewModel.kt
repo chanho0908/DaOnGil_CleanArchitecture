@@ -16,12 +16,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kr.techit.lion.domain.exception.NetworkError
-import kr.techit.lion.domain.exception.TimeoutError
-import kr.techit.lion.domain.exception.UnknownError
-import kr.techit.lion.domain.exception.UnknownHostError
+import kr.techit.lion.domain.exception.NetworkError.TimeoutError
+import kr.techit.lion.domain.exception.NetworkError.UnknownHostError
+import kr.techit.lion.domain.exception.NetworkError.UnknownError
 import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEvent
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.main.search.vm.model.Category
 import kr.techit.lion.presentation.main.search.vm.model.DisabilityType
 import kr.techit.lion.presentation.main.search.vm.model.ElderlyPeople
@@ -38,15 +40,14 @@ import java.util.TreeSet
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class SearchMapViewModel @Inject constructor(
     private val placeRepository: PlaceRepository,
-) : BaseViewModel(){
+    private val networkEventDelegate: NetworkEventDelegate
+) : BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-
-    val networkState get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _mapOptionState = MutableStateFlow(MapOptionState.create())
     val mapOptionState get() = _mapOptionState.asStateFlow()
@@ -54,47 +55,49 @@ class SearchMapViewModel @Inject constructor(
     private val _searchState = MutableSharedFlow<Boolean>()
     val searchState get() = _searchState.asSharedFlow()
 
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val mapSearchResult = _mapOptionState
         .debounce(DEBOUNCE_INTERVAL)
         .flatMapLatest { request ->
             val response = placeRepository.getSearchPlaceResultByMap(request.toDomainModel())
-            networkErrorDelegate.handleNetworkSuccess()
+            networkEventDelegate.event(
+                scope = viewModelScope,
+                event = NetworkEvent.Success
+            )
             response.map {
                 if (it.places.isEmpty()) _searchState.emit(false)
                 it.toUiModel()
             }
         }.flowOn(recordExceptionHandler)
         .catch { e: Throwable ->
-            submitThrowableState(e)
+            networkEventDelegate.submitThrowableEvent(viewModelScope, e)
         }
 
     fun onSelectedTab(category: Category) {
-        networkErrorDelegate.handleNetworkLoading()
+        networkEventDelegate.event(viewModelScope, NetworkEvent.Loading)
 
         if (_mapOptionState.value.category != category) {
             _mapOptionState.update { it.copy(category = category) }
         }
     }
 
-    fun onCameraPositionChanged(locate: Locate){
-        networkErrorDelegate.handleNetworkLoading()
+    fun onCameraPositionChanged(locate: Locate) {
+        networkEventDelegate.event(viewModelScope, NetworkEvent.Loading)
 
         if (_mapOptionState.value.location != locate) {
             _mapOptionState.update { it.copy(location = locate) }
         }
     }
 
-    fun onChangeMapState(state: SharedOptionState){
-        networkErrorDelegate.handleNetworkLoading()
+    fun onChangeMapState(state: SharedOptionState) {
+        networkEventDelegate.event(viewModelScope, NetworkEvent.Loading)
 
         _mapOptionState.update {
-            if (state.detailFilter.isEmpty()){
+            if (state.detailFilter.isEmpty()) {
                 it.copy(
                     disabilityType = TreeSet(),
                     detailFilter = TreeSet()
                 )
-            }else{
+            } else {
                 it.copy(
                     disabilityType = state.disabilityType,
                     detailFilter = state.detailFilter
@@ -104,76 +107,45 @@ class SearchMapViewModel @Inject constructor(
     }
 
     fun onSelectOption(optionCodes: List<Long>, type: DisabilityType) {
-        networkErrorDelegate.handleNetworkLoading()
+        networkEventDelegate.event(viewModelScope, NetworkEvent.Loading)
 
         val currentOptionState = _mapOptionState.value
         val mapUpdatedTypes = TreeSet(currentOptionState.disabilityType)
         val mapUpdatedFilters = TreeSet(currentOptionState.detailFilter)
 
-        viewModelScope.launch {
-            when (type) {
-                is PhysicalDisability -> {
-                    mapUpdatedFilters.removeAll(PhysicalDisability.filterCodes)
-                }
+        when (type) {
+            is PhysicalDisability -> mapUpdatedFilters.removeAll(PhysicalDisability.filterCodes)
+            is VisualImpairment -> mapUpdatedFilters.removeAll(VisualImpairment.filterCodes)
+            is HearingImpairment -> mapUpdatedFilters.removeAll(HearingImpairment.filterCodes)
+            is InfantFamily -> mapUpdatedFilters.removeAll(InfantFamily.filterCodes)
+            is ElderlyPeople -> mapUpdatedFilters.removeAll(ElderlyPeople.filterCodes)
+        }
 
-                is VisualImpairment -> {
-                    mapUpdatedFilters.removeAll(VisualImpairment.filterCodes)
-                }
+        if (optionCodes.isNotEmpty()) {
+            mapUpdatedTypes.add(type.code)
+            mapUpdatedFilters.addAll(optionCodes)
+        } else {
+            mapUpdatedTypes.remove(type.code)
+        }
 
-                is HearingImpairment -> {
-                    mapUpdatedFilters.removeAll(HearingImpairment.filterCodes)
-                }
-
-                is InfantFamily -> {
-                    mapUpdatedFilters.removeAll(InfantFamily.filterCodes)
-                }
-
-                is ElderlyPeople -> {
-                    mapUpdatedFilters.removeAll(ElderlyPeople.filterCodes)
-                }
-            }
-
-            if (optionCodes.isNotEmpty()) {
-                mapUpdatedTypes.add(type.code)
-                mapUpdatedFilters.addAll(optionCodes)
-            } else {
-                mapUpdatedTypes.remove(type.code)
-            }
-
-            _mapOptionState.update {
-                _mapOptionState.value.copy(
-                    disabilityType = mapUpdatedTypes,
-                    detailFilter = mapUpdatedFilters,
-                )
-            }
+        _mapOptionState.update {
+            _mapOptionState.value.copy(
+                disabilityType = mapUpdatedTypes,
+                detailFilter = mapUpdatedFilters,
+            )
         }
     }
 
-    fun onClickRestButton(){
-        _mapOptionState.update { it.copy(
-            disabilityType = DisabilityType.createDisabilityTypeCodes(),
-            detailFilter = DisabilityType.createFilterCodes(),
-        ) }
-    }
-
-    private fun submitThrowableState(e: Throwable){
-        when (e) {
-            is TimeoutException ->{
-                networkErrorDelegate.handleNetworkError(TimeoutError)
-            }
-            is UnknownHostException -> {
-                networkErrorDelegate.handleNetworkError(UnknownHostError)
-            }
-            is UnknownError -> {
-                networkErrorDelegate.handleNetworkError(UnknownError)
-            }
-            else -> {
-                networkErrorDelegate.handleNetworkError(e as NetworkError)
-            }
+    fun onClickRestButton() {
+        _mapOptionState.update {
+            it.copy(
+                disabilityType = DisabilityType.createDisabilityTypeCodes(),
+                detailFilter = DisabilityType.createFilterCodes(),
+            )
         }
     }
 
-    companion object{
-        private const val DEBOUNCE_INTERVAL = 1500L
+    companion object {
+        private const val DEBOUNCE_INTERVAL = 1000L
     }
 }

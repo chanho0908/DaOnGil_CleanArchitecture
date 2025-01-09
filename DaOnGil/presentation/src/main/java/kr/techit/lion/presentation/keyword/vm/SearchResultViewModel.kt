@@ -12,7 +12,8 @@ import kr.techit.lion.domain.model.search.ListSearchOption
 import kr.techit.lion.domain.model.search.ListSearchResultList
 import kr.techit.lion.domain.repository.PlaceRepository
 import kr.techit.lion.presentation.base.BaseViewModel
-import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEvent
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.stateInUi
 import kr.techit.lion.presentation.keyword.vm.model.SearchResultState
@@ -22,12 +23,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchResultViewModel @Inject constructor(
     private val placeRepository: PlaceRepository,
+    private val networkEventDelegate: NetworkEventDelegate,
     connectivityObserver: ConnectivityObserver
 ) : BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-    val networkState get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _uiState = MutableStateFlow(SearchResultState())
     val uiState get() = _uiState.asStateFlow()
@@ -50,7 +50,8 @@ class SearchResultViewModel @Inject constructor(
             ).onSuccess { response ->
                 updatePlace(response)
             }.onError { e ->
-                networkErrorDelegate.handleNetworkError(e)
+                val msg = networkEventDelegate.asUiText(e)
+                networkEventDelegate.event(viewModelScope, NetworkEvent.Error(msg))
             }
         }
     }
@@ -62,6 +63,9 @@ class SearchResultViewModel @Inject constructor(
             page = uiState.page + 1
         )
         if (response.isLastPage) _uiState.value = uiState.copy(isLastPage = true)
-        networkErrorDelegate.handleNetworkSuccess()
+        networkEventDelegate.event(
+            scope = viewModelScope,
+            event = NetworkEvent.Success
+        )
     }
 }

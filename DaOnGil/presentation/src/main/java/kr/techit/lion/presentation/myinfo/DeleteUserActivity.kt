@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.ActivityDeleteUserBinding
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.repeatOnStarted
 import kr.techit.lion.presentation.ext.showInfinitySnackBar
@@ -31,9 +33,9 @@ class DeleteUserActivity : AppCompatActivity() {
 
             btnDelete.setOnClickListener {
                 val dialog = ConfirmDialog(
-                    "회원 탈퇴",
-                    "정말 회원을 탈퇴 하시겠습니까?",
-                    "탈퇴 하기"
+                    this@DeleteUserActivity.getString(R.string.text_member_withdrawal_title),
+                    this@DeleteUserActivity.getString(R.string.text_member_withdrawal_message),
+                    this@DeleteUserActivity.getString(R.string.text_member_withdrawal_confirm),
                 ) {
                     viewModel.withdrawal {
                         startActivity(Intent(this@DeleteUserActivity, LoginActivity::class.java))
@@ -45,15 +47,15 @@ class DeleteUserActivity : AppCompatActivity() {
             }
         }
         repeatOnStarted {
-            viewModel.networkState.collect { state ->
-                when (state) {
-                    is NetworkState.Loading -> return@collect
-                    is NetworkState.Success -> {
+            viewModel.networkEvent.collect { event ->
+                when (event) {
+                    NetworkEvent.Loading -> Unit
+                    NetworkEvent.Success -> {
                         startActivity(Intent(this@DeleteUserActivity, LoginActivity::class.java))
                         finish()
                     }
-                    is NetworkState.Error -> {
-                        showInfinitySnackBar(binding.root, state.msg)
+                    is NetworkEvent.Error -> {
+                        showInfinitySnackBar(binding.root, event.msg)
                     }
                 }
             }

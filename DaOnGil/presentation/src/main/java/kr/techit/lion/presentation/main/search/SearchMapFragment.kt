@@ -35,6 +35,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.databinding.FragmentSearchMapBinding
+import kr.techit.lion.presentation.delegate.NetworkEvent
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.ext.setClickEvent
@@ -135,13 +136,13 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
 
     private suspend fun collectNetworkState(binding: FragmentSearchMapBinding) {
         with(binding) {
-            viewModel.networkState.collect { networkState ->
-                when (networkState) {
-                    is NetworkState.Loading -> progressBar.visibility = View.VISIBLE
-                    is NetworkState.Success -> progressBar.visibility = View.GONE
-                    is NetworkState.Error -> {
+            viewModel.networkEvent.collect { event ->
+                when (event) {
+                    NetworkEvent.Loading -> progressBar.visibility = View.VISIBLE
+                    NetworkEvent.Success -> progressBar.visibility = View.GONE
+                    is NetworkEvent.Error -> {
                         progressBar.visibility = View.GONE
-                        requireContext().showSnackbar(binding.root, networkState.msg)
+                        requireContext().showSnackbar(binding.root, event.msg)
                     }
                 }
             }
@@ -297,81 +298,79 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
 
     private fun addMaker() {
         repeatOnViewStarted {
-            viewModel.mapSearchResult
-                .combine(viewModel.mapOptionState) { result, option ->
-                    clearMarker()
-                    result.map { place ->
-                        val marker = Marker()
-                        with(marker) {
-                            icon = when (option.category) {
-                                Category.PLACE -> {
-                                    OverlayImage.fromResource(R.drawable.maker_unselected_tourist_spot_icon)
-                                }
-
-                                Category.RESTAURANT -> {
-                                    OverlayImage.fromResource(R.drawable.maker_unselected_restaurant_icon)
-                                }
-
-                                Category.ROOM -> {
-                                    OverlayImage.fromResource(R.drawable.maker_unselected_lodging_icon)
-                                }
+            viewModel.mapSearchResult.combine(viewModel.mapOptionState) { result, option ->
+                clearMarker()
+                result.map { place ->
+                    val marker = Marker()
+                    with(marker) {
+                        icon = when (option.category) {
+                            Category.PLACE -> {
+                                OverlayImage.fromResource(R.drawable.maker_unselected_tourist_spot_icon)
                             }
-                            position = LatLng(place.latitude, place.longitude)
-                            map = naverMap
-                            width = 86
-                            height = 90
 
-                            setOnClickListener {
-                                PlaceBottomSheet(place) {
+                            Category.RESTAURANT -> {
+                                OverlayImage.fromResource(R.drawable.maker_unselected_restaurant_icon)
+                            }
 
-                                }.show(parentFragmentManager, "place_bottom_sheet")
+                            Category.ROOM -> {
+                                OverlayImage.fromResource(R.drawable.maker_unselected_lodging_icon)
+                            }
+                        }
+                        position = LatLng(place.latitude, place.longitude)
+                        map = naverMap
+                        width = 86
+                        height = 90
 
-                                selectedMarker?.let { maker ->
-                                    maker.icon = when (option.category) {
-                                        Category.PLACE -> {
-                                            OverlayImage.fromResource(R.drawable.maker_unselected_tourist_spot_icon)
-                                        }
+                        setOnClickListener {
+                            PlaceBottomSheet(place) {
+                            }.show(parentFragmentManager, "place_bottom_sheet")
 
-                                        Category.RESTAURANT -> {
-                                            OverlayImage.fromResource(R.drawable.maker_unselected_restaurant_icon)
-                                        }
-
-                                        Category.ROOM -> {
-                                            OverlayImage.fromResource(R.drawable.maker_unselected_lodging_icon)
-                                        }
-                                    }
-                                    maker.isHideCollidedMarkers = true
-                                    maker.isForceShowIcon = false
-                                    maker.width = 86
-                                    maker.height = 90
-                                }
-
-                                icon = when (option.category) {
+                            selectedMarker?.let { maker ->
+                                maker.icon = when (option.category) {
                                     Category.PLACE -> {
-                                        OverlayImage.fromResource(R.drawable.maker_selected_tourist_spot_icon)
+                                        OverlayImage.fromResource(R.drawable.maker_unselected_tourist_spot_icon)
                                     }
 
                                     Category.RESTAURANT -> {
-                                        OverlayImage.fromResource(R.drawable.maker_selected_restauraunt_icon)
+                                        OverlayImage.fromResource(R.drawable.maker_unselected_restaurant_icon)
                                     }
 
                                     Category.ROOM -> {
-                                        OverlayImage.fromResource(R.drawable.maker_selected_lodging_icon)
+                                        OverlayImage.fromResource(R.drawable.maker_unselected_lodging_icon)
                                     }
                                 }
-                                isHideCollidedMarkers = true
-                                isForceShowIcon = false
-                                width = 100
-                                height = 130
-                                zIndex = 10
-
-                                selectedMarker = this
-                                true
+                                maker.isHideCollidedMarkers = true
+                                maker.isForceShowIcon = false
+                                maker.width = 86
+                                maker.height = 90
                             }
+
+                            icon = when (option.category) {
+                                Category.PLACE -> {
+                                    OverlayImage.fromResource(R.drawable.maker_selected_tourist_spot_icon)
+                                }
+
+                                Category.RESTAURANT -> {
+                                    OverlayImage.fromResource(R.drawable.maker_selected_restauraunt_icon)
+                                }
+
+                                Category.ROOM -> {
+                                    OverlayImage.fromResource(R.drawable.maker_selected_lodging_icon)
+                                }
+                            }
+                            isHideCollidedMarkers = true
+                            isForceShowIcon = false
+                            width = 100
+                            height = 130
+                            zIndex = 10
+
+                            selectedMarker = this
+                            true
                         }
-                        markers.add(marker)
                     }
-                }.collect { }
+                    markers.add(marker)
+                }
+            }.collect { }
         }
     }
 

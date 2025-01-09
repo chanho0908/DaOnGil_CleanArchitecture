@@ -1,16 +1,16 @@
 package kr.techit.lion.data.common
 
-import kr.techit.lion.domain.exception.AuthenticationError
-import kr.techit.lion.domain.exception.AuthorizationError
-import kr.techit.lion.domain.exception.BadRequestError
-import kr.techit.lion.domain.exception.ConnectError
+import kr.techit.lion.domain.exception.HttpError.AuthenticationError
+import kr.techit.lion.domain.exception.HttpError.AuthorizationError
+import kr.techit.lion.domain.exception.HttpError.BadRequestError
+import kr.techit.lion.domain.exception.NetworkError.ConnectError
 import kr.techit.lion.domain.exception.NetworkError
-import kr.techit.lion.domain.exception.NotFoundError
+import kr.techit.lion.domain.exception.HttpError.NotFoundError
 import kr.techit.lion.domain.exception.Result
-import kr.techit.lion.domain.exception.ServerError
-import kr.techit.lion.domain.exception.TimeoutError
-import kr.techit.lion.domain.exception.UnknownError
-import kr.techit.lion.domain.exception.UnknownHostError
+import kr.techit.lion.domain.exception.HttpError.ServerError
+import kr.techit.lion.domain.exception.NetworkError.TimeoutError
+import kr.techit.lion.domain.exception.NetworkError.UnknownError
+import kr.techit.lion.domain.exception.NetworkError.UnknownHostError
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -39,7 +39,7 @@ fun handleNetworkError(e: Throwable): NetworkError {
         is ConnectException -> ConnectError
         is SocketTimeoutException -> TimeoutError
         is UnknownHostException -> UnknownHostError
-        is HttpException -> { // HttpException으로 변경
+        is HttpException -> {
             when (e.code()) {
                 400 -> BadRequestError
                 401 -> AuthenticationError

@@ -2,10 +2,12 @@ package kr.techit.lion.presentation.myinfo.vm
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kr.techit.lion.domain.exception.NetworkError
 import kr.techit.lion.domain.exception.onError
 import kr.techit.lion.domain.exception.onSuccess
 import kr.techit.lion.domain.model.IceInfo
@@ -14,6 +16,8 @@ import kr.techit.lion.domain.model.PersonalInfo
 import kr.techit.lion.domain.repository.MemberRepository
 import kr.techit.lion.presentation.base.BaseViewModel
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
+import kr.techit.lion.presentation.delegate.NetworkEvent
+import kr.techit.lion.presentation.delegate.NetworkEventDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.myinfo.event.MyInfoEvent
 import kr.techit.lion.presentation.myinfo.model.ImgModifyState
@@ -23,13 +27,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyInfoViewModel @Inject constructor(
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
+    private val networkEventDelegate: NetworkEventDelegate
 ) : BaseViewModel() {
 
-    @Inject
-    lateinit var networkErrorDelegate: NetworkErrorDelegate
-
-    val networkState: StateFlow<NetworkState> get() = networkErrorDelegate.networkState
+    val networkEvent get() = networkEventDelegate.event
 
     private val _state = MutableStateFlow(MyInfoState.create())
     val state = _state.asStateFlow()
@@ -44,14 +46,13 @@ class MyInfoViewModel @Inject constructor(
     }
 
     private fun initUiData() {
-        viewModelScope.launch(recordExceptionHandler) {
-            memberRepository.getMyIfo().onSuccess { myInfo ->
+        execute(
+            action = { memberRepository.getMyIfo() },
+            eventHandler = networkEventDelegate,
+            onSuccess = { myInfo ->
                 initPersonalInfo(myInfo)
-                networkErrorDelegate.handleNetworkSuccess()
-            }.onError {
-                networkErrorDelegate.handleNetworkError(it)
             }
-        }
+        )
     }
 
     private fun initPersonalInfo(myInfo: MyInfo) {
@@ -95,7 +96,7 @@ class MyInfoViewModel @Inject constructor(
                 .onSuccess {
                     whenModifyMyInfoSuccess()
                 }.onError { e ->
-                    whenModifyMyInfoFail(e.title, e.message)
+                    whenModifyMyInfoFail(e)
                 }
         }
     }
@@ -109,7 +110,7 @@ class MyInfoViewModel @Inject constructor(
                 .onSuccess {
                     whenModifyMyInfoSuccess()
                 }.onError { e ->
-                    whenModifyMyInfoFail(e.title, e.message)
+                    whenModifyMyInfoFail(e)
                 }
         }
     }
@@ -121,9 +122,11 @@ class MyInfoViewModel @Inject constructor(
         )
     }
 
-    private fun whenModifyMyInfoFail(title: String, message: String) {
+    private fun whenModifyMyInfoFail(exception: NetworkError) {
         _state.value = _state.value.copy(
-            personalModifyNetworkState = NetworkState.Error("$title\n$message")
+            personalModifyNetworkState = NetworkState.Error(
+                networkEventDelegate.asUiText(exception)
+            )
         )
     }
 
@@ -138,7 +141,7 @@ class MyInfoViewModel @Inject constructor(
                     _state.value = _state.value.copy(iceModifyNetworkState = NetworkState.Success)
                 }.onError { e ->
                     _state.value = _state.value.copy(
-                        iceModifyNetworkState = NetworkState.Error("${e.title} \n ${e.message}")
+                        iceModifyNetworkState = NetworkState.Error(networkEventDelegate.asUiText(e))
                     )
                 }
         }

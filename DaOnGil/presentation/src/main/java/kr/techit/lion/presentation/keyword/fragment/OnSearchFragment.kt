@@ -16,8 +16,8 @@ import kr.techit.lion.domain.model.search.RecentlySearchKeyword
 import kr.techit.lion.presentation.R
 import kr.techit.lion.presentation.connectivity.connectivity.ConnectivityStatus
 import kr.techit.lion.presentation.databinding.FragmentOnSearchBinding
-import kr.techit.lion.presentation.delegate.NetworkState
-import kr.techit.lion.presentation.ext.repeatOnStarted
+import kr.techit.lion.presentation.delegate.NetworkEvent
+import kr.techit.lion.presentation.ext.repeatOnViewStarted
 import kr.techit.lion.presentation.home.DetailActivity
 import kr.techit.lion.presentation.keyword.adapter.SearchSuggestionsAdapter
 import kr.techit.lion.presentation.keyword.vm.KeywordSearchViewModel
@@ -70,49 +70,60 @@ class OnSearchFragment : Fragment(R.layout.fragment_on_search) {
                 showDeleteConfirmDialog()
             }
 
-            repeatOnStarted {
-                launch {
-                    viewModel.uiState.collect {
-                        checkSavedKeyword(it.keywordList.value, binding, recentlyKeywordAdapter)
-                        whenInputChanged(it.inputStatus, binding)
-                    }
-                }
+            repeatOnViewStarted {
+                launch { collectUiState(binding, recentlyKeywordAdapter) }
+                launch { collectAutoCompleteKeyword(binding, searchAdapter) }
+                launch { collectNetworkEvent(binding) }
+                launch { collectConnectivityStatus(binding) }
+            }
+        }
+    }
 
-                launch {
-                    viewModel.autocompleteKeyword.collect { suggestKeywords ->
-                        if (suggestKeywords.isEmpty() &&
-                            viewModel.uiState.value.inputStatus == KeywordInputStatus.NotEmpty
-                        ) {
-                            showNoSearchResultPage(binding)
-                        } else {
-                            showAutoCompletePage(binding, searchAdapter, suggestKeywords)
-                        }
-                    }
-                }
+    private suspend fun collectUiState(
+        binding: FragmentOnSearchBinding,
+        recentlyKeywordAdapter: RecentlyKeywordAdapter
+    ){
+        viewModel.uiState.collect {
+            checkSavedKeyword(it.keywordList.value, binding, recentlyKeywordAdapter)
+            whenInputChanged(it.inputStatus, binding)
+        }
+    }
 
-                launch {
-                    viewModel.errorState.collect {
-                        when (it) {
-                            is NetworkState.Loading -> Unit
-                            NetworkState.Success -> showRecentSearchKeywordPage(binding)
-                            is NetworkState.Error -> showNetworkErrorPage(it.msg, binding)
-                        }
-                    }
-                }
+    private suspend fun collectAutoCompleteKeyword(
+        binding: FragmentOnSearchBinding,
+        searchAdapter: SearchSuggestionsAdapter
+    ) {
+        viewModel.autocompleteKeyword.collect { suggestKeywords ->
+            if (suggestKeywords.isEmpty() &&
+                viewModel.uiState.value.inputStatus == KeywordInputStatus.NotEmpty
+            ) {
+                showNoSearchResultPage(binding)
+            } else {
+                showAutoCompletePage(binding, searchAdapter, suggestKeywords)
+            }
+        }
+    }
 
-                launch {
-                    viewModel.connectivityStatus.collectLatest { status ->
-                        when (status) {
-                            ConnectivityStatus.Loading -> Unit
-                            ConnectivityStatus.Available -> showRecentSearchKeywordPage(binding)
-                            is ConnectivityStatus.OnLost -> {
-                                showNetworkErrorPage(
-                                    requireContext().getString(R.string.can_not_access_network),
-                                    binding
-                                )
-                            }
-                        }
-                    }
+    private suspend fun collectNetworkEvent(binding: FragmentOnSearchBinding){
+        viewModel.networkEvent.collect { event ->
+            when (event) {
+                is NetworkEvent.Loading -> Unit
+                is NetworkEvent.Success -> showRecentSearchKeywordPage(binding)
+                is NetworkEvent.Error -> showNetworkErrorPage(event.msg, binding)
+            }
+        }
+    }
+
+    private suspend fun collectConnectivityStatus(binding: FragmentOnSearchBinding) {
+        viewModel.connectivityStatus.collectLatest { status ->
+            when (status) {
+                ConnectivityStatus.Loading -> Unit
+                ConnectivityStatus.Available -> showRecentSearchKeywordPage(binding)
+                is ConnectivityStatus.OnLost -> {
+                    showNetworkErrorPage(
+                        requireContext().getString(R.string.can_not_access_network),
+                        binding
+                    )
                 }
             }
         }
