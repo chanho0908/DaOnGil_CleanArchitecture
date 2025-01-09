@@ -73,3 +73,4 @@
 -keepclassmembers class **$WhenMappings { <fields>; }
 -keep class kotlin.Metadata { *; }
 -keepclassmembers class kotlin.Metadata { public <methods>; }
+

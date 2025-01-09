@@ -1,0 +1,1321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/presentation/src/main/res/layout/fragment_on_search.xml">
+        <config>
+          <theme>@style/Base.Theme.DaOnGil</theme>
+        </config>
+      </layout>
+    </layouts>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9f42e303-2a42-4a49-94f1-d0e8d56b2f71" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/ic_app_logo-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/ic_app_main_logo-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/ic_app_main_logo_test-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/ic_launcher-playstore.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/kr/techit/lion/daongil_cleanarchitecture/App.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_app_main_logo_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_app_main_logo_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_app_main_logo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_app_main_logo_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_app_main_logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_app_main_logo_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_app_main_logo_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_app_main_logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_app_main_logo_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_app_main_logo_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_app_main_logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_app_main_logo_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_app_main_logo_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_app_main_logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_app_main_logo_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_app_main_logo_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_app_main_logo.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_app_main_logo_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_app_main_logo_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/AndroidApplicationConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/AndroidApplicationFirebaseConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/AndroidLibraryPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/AndroidRoomConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/BuildLogicConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/DaongilAppConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/DaongilDataConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/DaongilDomainConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/DaongilPresentationConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/HiltConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/JavaLibraryPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/MoshiConventionPlugin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/DependenciesExtension.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/KotlinAndroid.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/KotlinCoroutine.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/Plugins.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/ProjectExtension.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/convention/src/main/java/kr/techit/lion/convention/extension/VersionCatalogExtension.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-logic/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/consumer-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/schemas/kr.techit.lion.data.database.MainDatabase/4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/schemas/kr.tekit.lion.data.database.MainDatabase/1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/schemas/kr.tekit.lion.data.database.MainDatabase/2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/schemas/kr.tekit.lion.data.database.MainDatabase/3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/schemas/kr.tekit.lion.data.database.MainDatabase/4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/androidTest/java/kr/techit/lion/data/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/common/NetworkResultHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/AppSettings.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/DataStore.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/ListConverter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/MainDatabase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/dao/AreaCodeDao.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/dao/RecentlySearchKeywordDAO.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/dao/SigunguCodeDao.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/entity/AreaCodeEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/entity/RecentlySearchKeywordEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/database/entity/SigunguCodeEntity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/ActivationDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/AedDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/AppThemeDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/AreaCodeDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/AuthDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/BookmarkDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/EmergencyDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/KorWithDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/MemberDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/NaverMapDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/PharmacyDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/PlaceDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/PlanDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/RecentlySearchKeywordDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/ReportDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/SigunguCodeDatasource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/datasource/TokenDataSource.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/AuthModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/DataSourceModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/DatabaseModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/NetworkModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/Qualifiers.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/di/RepositoryModule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/AreaCodeRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/ConcernTypeRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/DailyPlaceRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/ListSearchRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MapSearchRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/ModifyScheduleReviewRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MyIceInfoRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MyPersonalInfoRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MyPlaceReivewImgRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MyPlaceReviewRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/MyProfileImgRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/NewPlanRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/NewReviewDataRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/PlaceReviewImageRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/ReportReviewRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/ScheduleReviewRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/SignInRequest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/util/AdapterProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/request/util/LocalDateAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/SignUpResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/AedJsonAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/AedResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/aed/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/AreaCodeResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/areacode/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlaceBookmarkData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlaceBookmarkListData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlaceBookmarkListResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlaceBookmarkResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlanBookmarkData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlanBookmarkResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/bookmark/PlanDetailBookmarkResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplace/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplace/DetailPlaceResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplace/ReviewRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplace/SubDisabilityRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplaceguest/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplaceguest/DetailPlaceGuestResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplaceguest/ReviewGuestRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/detailplaceguest/SubDisabilityGuestRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/EmergencyBasicResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/basic/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/EmergencyMessageJsonAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/EmergencyMessageResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/message/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/EmergencyRealtimeJsonAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/EmergencyRealtimeResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/emergency/realtime/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/mainplace/AroundPlaceRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/mainplace/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/mainplace/MainPlaceResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/mainplace/RecommendPlaceRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/ConcernTypeData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/ConcernTypeResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/MyDefaultInfoData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/MyDefaultInfoResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/MyInfoData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/member/MyInfoResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/myreview/MyPlaceReviewData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/myreview/MyPlaceReviewDto.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/myreview/MyPlaceReviewResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Area0.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Center.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Code.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Coords.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Region.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Result.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/ReverseGeocodeResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/naverMap/Status.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/Body.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/Header.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/Item.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/Items.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/PharmacyResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/pharmacy/Response.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereview/WritePlaceReviewResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlist/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlist/MyPlaceReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlist/PlaceReviewResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlistguest/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlistguest/MyPlaceReviewGuest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/placereviewlistguest/PlaceReviewResponseGuest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/ScheduleDetailInfo/Daily.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/ScheduleDetailInfo/DailyPlaceInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/ScheduleDetailInfo/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/ScheduleDetailInfo/ScheduleDetailResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/briefScheduleInfo/BriefScheduleInfoResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/briefScheduleInfo/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myMainSchedule/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myMainSchedule/MyMainScheduleResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleElapsed/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleElapsed/MyElapsedResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleElapsed/PlanRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleUpcoming/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleUpcoming/MyUpcomingsResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/myScheduleUpcoming/PlanRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/openSchedule/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/openSchedule/OpenPlanListResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/openSchedule/OpenPlanRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/scheduleDetailReview/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/plan/scheduleDetailReview/ScheduleDetailReviewResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/scheduleform/PlaceSearchInfoData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/scheduleform/PlaceSearchResultsData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/scheduleform/PlaceSearchResultsResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/auto_complete_keyword/AutoCompleteKeywordResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/auto_complete_keyword/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/list/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/list/ListSearchResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/list/PlaceRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/map/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/map/MapSearchResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/searchplace/map/PlaceRes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/signin/Data.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/dto/response/signin/SignInResponse.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/mapper/MapperExtensions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/ActivationRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/AedRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/AppThemeRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/AreaCodeRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/AuthRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/BookmarkRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/EmergencyRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/KorWithRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/MemberRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/NaverMapRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/PharmacyRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/PlaceRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/PlanRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/RecentlySearchKeywordRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/ReportRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/repository/SigunguCodeRepositoryImpl.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/AedService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/AuthAuthenticator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/AuthInterceptor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/AuthService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/BookmarkService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/EmergencyService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/KorWithService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/MemberService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/NaverMapService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/PharmacyService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/PlaceService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/PlanService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/src/main/java/kr/techit/lion/data/service/ReportService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/exception/HttpError.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/exception/NetworkError.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/exception/Result.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/Activation.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/AedMapInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/AppTheme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/BookmarkedPlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ConcernType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/DailyPlan.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/EmergencyBasicInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/EmergencyMapInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/EmergencyMessageInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/EmergencyRealtimeInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/HospitalMapInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/IceInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyDefaultInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyMainSchedule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyPlaceReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyPlaceReviewImages.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/MyPlaceReviewInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/OpenPlan.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/OpenPlanInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/PersonalInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/PharmacyMapInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/Place.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/PlaceBookmark.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/PlanBookmark.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/PlanDetailBookmark.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ProfileImg.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ReportReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ReverseGeocodes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ScheduleDetail.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ScheduleDetailInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/ScheduleDetailReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/SchedulePlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/UpdateMyPlaceReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/area/AreaCode.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/area/SigunguCode.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/detailplace/PlaceDetailInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/detailplace/PlaceDetailInfoGuest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/detailplace/Review.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/detailplace/SubDisability.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/mainplace/AroundPlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/mainplace/PlaceMainInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/mainplace/RecommendPlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/placereview/NewReviewData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/placereview/NewReviewImages.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/placereview/WritePlaceReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/placereviewlist/PlaceReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/placereviewlist/PlaceReviewInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/BriefScheduleInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/ModifiedScheduleReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/MyElapsedScheduleInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/MyElapsedSchedules.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/MyUpcomingScheduleInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/MyUpcomingSchedules.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/NewScheduleReview.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/ReviewImage.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/ReviewImg.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/schedule/ScheduleReviewInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/DailyPlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/DailySchedule.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/FormPlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/NewPlan.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/PlaceSearchInfoList.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/scheduleform/PlaceSearchResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/Arrange.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/AutoCompleteKeyword.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/ListSearchOption.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/ListSearchResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/MapSearchOption.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/MapSearchResult.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/model/search/RecentlySearchKeyword.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/ActivationRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/AedRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/AppThemeRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/AreaCodeRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/AuthRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/BookmarkRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/EmergencyRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/KorWithRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/MemberRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/NaverMapRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/PharmacyRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/PlaceRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/PlanRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/RecentlySearchKeywordRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/ReportRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/repository/SigunguCodeRepository.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/areacode/InitAreaCodeInfoUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/base/BaseUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/base/Result.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/bookmark/UpdateScheduleDetailBookmarkUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/emergency/GetEmergencyMapInfoUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/emergency/GetHospitalMapInfoUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/plan/DeleteMyPlanReviewUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/plan/GetScheduleDetailGuestUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/plan/GetScheduleDetailUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/plan/GetScheduleReviewInfoUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain/src/main/java/kr/techit/lion/domain/usecase/plan/UpdateMyPlanPublicUseCase.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/consumer-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/androidTest/java/kr/techit/lion/presentation/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/base/BaseViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/bookmark/BookmarkActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/bookmark/adapter/BookmarkDisabilityRvAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/bookmark/adapter/PlaceBookmarkRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/bookmark/adapter/PlanBookmarkRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/bookmark/vm/BookmarkViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/ConcernTypeActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/fragment/ConcernTypeFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/fragment/ConcernTypeModifyFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/vm/ConcernTypeViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/vm/model/ConcernTypState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/vm/model/ConcernTypeUiModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/concerntype/vm/model/ConcernTypes.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/connectivity/ConnectivityObserver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/connectivity/NetworkConnectivityObserver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/connectivity/connectivity/ConnectivityObserver.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/connectivity/connectivity/ConnectivityStatus.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/delegate/NetworkErrorDelegate.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/delegate/NetworkEventDelegate.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/delegate/UiTextProvider.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/EmergencyInfoActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/EmergencyMapActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/PharmacyMapActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/adapter/EmergencyBottomAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/adapter/EmergencyMessageAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/adapter/PharmacyBottomAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/AedInfoFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/EmergencyAreaDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/EmergencyBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/EmergencyInfoFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/PharmacyAreaDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/PharmacyBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/fragment/PharmacyInfoFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/vm/EmergencyInfoViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/vm/EmergencyMapViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/emergency/vm/PharmacyMapViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/ActivityExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/BitmapExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/ContextExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/CoroutineExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/DateFormatExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/FlowExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/GlideExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/IntExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/RvExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/SnackbarExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/StringExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/TextViewExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/UriExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/ViewExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/ext/dpToPxExt.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/DetailActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/ReviewListActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/WriteReviewActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/DetailDisabilityRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/DetailInfoRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/DetailReviewRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/ReviewImageRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/ReviewListRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/adapter/WriteReviewImageRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/model/HomeViewPagerPage.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/model/NewReviewImgs.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/model/ReviewInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/vm/DetailViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/vm/ReviewListViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/home/vm/WriteReviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/KeywordSearchActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/adapter/SearchResultAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/adapter/SearchSuggestionsAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/fragment/OnSearchFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/fragment/SearchResultFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/viewholder/RecentlyKeywordViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/viewholder/SearchSuggestionsViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/KeywordSearchViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/SearchResultViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/model/KeywordInputStatus.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/model/KeywordSearch.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/model/KeywordSearchState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/keyword/vm/model/SearchResultState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/LoginActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/OnBoardingActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/fragment/LoginFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/fragment/SelectInterestFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/model/FocusOn.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/model/InterestType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/model/LoginType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/model/OnBoardingPage.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/model/UserType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/vm/InterestViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/vm/LoginViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/login/vm/OnBoardingViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/DisabilityRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/HomeLocationRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/HomeRecommendRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/HomeVPAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/ListSearchAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/RecentlyKeywordAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/RedDisabilityRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/ScheduleMyAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/SchedulePublicAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/AreaViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/CategoryViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/ItemCountViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/NoPlaceViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/PlaceHighViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/adapter/viewholder/SigunguViewHolder.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/bottomsheet/CategoryBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/bottomsheet/PlaceBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/customview/CustomPageIndicator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/customview/ItemOffsetDecoration.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/dialog/ConfirmDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/dialog/ThemeGuideDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/dialog/ThemeSettingDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/emergency/EmergencyMainFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/home/HomeMainFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/home/vm/HomeViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/myinfo/MyInfoMainFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/myinfo/vm/MyInfoMainViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/myinfo/vm/model/MyDefaultInfoFormat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/myinfo/vm/model/MyInfoUiModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/myinfo/vm/model/ProfileState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/schedule/ScheduleMainFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/schedule/vm/ScheduleMainViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/SearchListFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/SearchMapFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/SearchPlaceMainFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/SearchListViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/SearchMapViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/SearchViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/SharedViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/Category.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/DisabilityType.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/ListOptionState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/ListSearchUIModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/Locate.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/MapOptionState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/MapPlaceModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/Options.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/ScreenState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/search/vm/model/SharedOptionState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/model/AedInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/model/EmergencyInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/model/HospitalInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/model/PharmacyInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/DeleteUserActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/MyInfoActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/event/MyInfoEvent.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/fragment/IceModifyFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/fragment/MyInfoFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/fragment/PersonalInfoModifyFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/model/ImgModifyState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/model/MyInfoState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/model/UserProfileImg.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/vm/DeleteUserViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myinfo/vm/MyInfoViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/MyReviewActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/PhotoDialog.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/adapter/MyReviewImageRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/adapter/MyReviewModifyImageRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/adapter/MyReviewRVAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/adapter/PhotoVPAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/fragment/MyReviewFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/fragment/MyReviewModifyFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myreview/vm/MyReviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myschedule/MyScheduleActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myschedule/adapter/MyScheduleElapsedAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myschedule/adapter/MyScheduleUpcomingAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/myschedule/vm/MyScheduleViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/report/ReportActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/report/vm/ReportViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/PublicScheduleActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/ResultCode.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/ScheduleDetailActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/adapter/PublicScheduleAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/adapter/ScheduleImageViewPagerAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/adapter/ScheduleListAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/adapter/SchedulePlaceAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/customview/ScheduleManageBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/customview/ScheduleReviewManageBottomSheet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/vm/PublicScheduleViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedule/vm/ScheduleDetailViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/FormDateFormat.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/ModifyScheduleFormActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/ScheduleFormActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormBookmarkedPlacesAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormConfirmPlaceAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormConfirmScheduleAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormPlaceAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormScheduleAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/adapter/FormSearchResultAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/FormSearchFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ModifyNamePeriodFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ModifyScheduleConfirmFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ModifyScheduleDetailsFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ModifySearchFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/NameAndPeriodFormFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ScheduleConfirmFormFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/fragment/ScheduleDetailsFormFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/model/OriginalDailyPlan.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/model/OriginalScheduleInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/model/OriginalSchedulePlace.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/vm/ModifyScheduleFormViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/scheduleform/vm/ScheduleFormViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/ModifyScheduleReviewActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/WriteScheduleReviewActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/adapter/ModifyReviewImageAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/adapter/WriteReviewImageAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/model/OriginalScheduleReviewInfo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/vm/ModifyScheduleReviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/schedulereview/vm/WriteScheduleReviewViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/setting/PolicyActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/splash/SplashActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/splash/adapter/OnBoardingImageVPAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/splash/model/LogInState.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/splash/vm/SplashViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/anim/for_slide_in_right.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/anim/for_slide_out_left.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/color_bottom_navi.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/color_button_emergency_area.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/color_schedule_d_day.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/color_text_emergency_area.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/detail_category_chip_state_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/tab_text_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/color/text_input_box_stroke_state_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/add_image_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/aed_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/back_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/background_rectangle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/bookmark_fill_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/bookmark_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/bottom_sheet_head.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cancel_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_selected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_selected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_selected_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_selected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_selected_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_unselected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_unselected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_unselected_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_unselected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/cc_unselected_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_audio_guide_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_baby_spare_chair_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_cc_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_dot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_elevator_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_guide_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_help_dog_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_lactationroom_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_parking_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_restroom_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_seat_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_sign_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_stroller_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/chip_wheelchair_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/default_profile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_address_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_call_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_link_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_review_modify_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_review_write_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/detail_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/drop_down_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/elderly_people_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/elderly_people_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/elderly_people_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emer_aed_main_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emer_main_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emergency_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emergency_map_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/emergency_message_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/empty_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/empty_view_long.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/empty_view_small.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/hearing_impairment_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/hearing_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/hearing_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/highcontrast_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/home_more_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/home_search_banner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/ic_small_map.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/image_mode_setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/infant_familly_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/infant_family_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/infant_family_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/info_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/item_home_vp1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/item_home_vp2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/item_home_vp3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/item_vp_count_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/location_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_selected_lodging_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_selected_restauraunt_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_selected_tourist_spot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_unselected_lodging_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_unselected_restaurant_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/maker_unselected_tourist_spot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/map_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_selected_aed_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_selected_emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_selected_pharmacy_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_unselected_aed_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_unselected_emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/marker_unselected_pharmacy_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/onboarding_clover.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/pharmacy_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/pharmacy_main_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/physical_disability_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/physical_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/physical_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/progress_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/report_button.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/reset_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/review_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/review_image_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/review_report_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/review_star_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/right_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/schedule_detail_elderly.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/schedule_detail_hearing_impaired.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/schedule_detail_infant_family.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/schedule_detail_physical_disability.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/schedule_detail_visual_impairment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/search_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/selected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/selected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/selected_infant_familly_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/selected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/star_filled_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/star_half_filled_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/star_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_child_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_child_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_elderly_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_elderly_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_hearing_impaired_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_hearing_impaired_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_physical_disability_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_physical_disability_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_visual_impairment_select_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/sv_visual_impairment_unselect_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/toolbar_clover_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/visual_impairment_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/visual_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/visual_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable-night/x_button_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/add_image_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/address_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/aed_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/aed_pin_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/aed_time_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/back_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/background_radius_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/background_radius_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/background_radius_50.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/background_rectangle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bookmark_fill_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bookmark_fill_scheduledetail_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bookmark_filled_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bookmark_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bookmark_schedule_detail_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bottom_sheet_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/bottom_sheet_head.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/calendar_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/call_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/camera_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cancel_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_selected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_selected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_selected_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_selected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_selected_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_unselected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_unselected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_unselected_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_unselected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/cc_unselected_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_audio_guide_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_baby_spare_chair_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_cc_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_dot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_elevator_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_guide_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_help_dog_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_lactationroom_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_parking_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_restroom_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_seat_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_sign_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_stroller_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/chip_wheelchair_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/circle_button_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/close_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/default_profile.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/delete_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_address_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_call_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_link_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_review_modify_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_review_write_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/detail_visual_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/dotted_line_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/dotted_line_horizontal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/dotted_line_vertical.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/drop_down_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/edit_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/edittext_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/elderly_people_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/elderly_people_radius_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/elderly_people_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/elderly_people_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emer_aed_main_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emer_main_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emer_navi_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_bed_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_map_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_message_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_notice_img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/emergency_radius.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/empty_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/empty_view_long.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/empty_view_small.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/form_add_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/form_remove_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/hearing_impairment_radius_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/hearing_impairment_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/hearing_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/hearing_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/highcontrast_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/home_more_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/home_navi_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/home_search_banner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_add_24px.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_arrow_drop_down.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_chevron_right_24px.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_close.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_edit_24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_read_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_read_script.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_search.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_search_check.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/ic_small_map.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/icon_lock.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/icon_lock_open.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/image_mode_setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/image_theme_guide.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/image_theme_temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/img_fab_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/img_place_high_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/indicator_selected.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/indicator_unselected.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/infant_familly_radius_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/infant_familly_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/infant_family_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/infant_family_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/infant_family_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/info_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/info_navi_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_gradation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_gradation_big.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_home_vp1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_home_vp2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_home_vp3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/item_vp_count_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/kakao_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/list_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/location_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/login_yellow_line.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/login_yellow_line2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_selected_lodging_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_selected_restauraunt_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_selected_tourist_spot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_unselected_lodging_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_unselected_restaurant_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/maker_unselected_tourist_spot_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/map_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_selected_aed_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_selected_emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_selected_pharmacy_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_unselected_aed_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_unselected_emergency_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/marker_unselected_pharmacy_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/more_vert_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/my_navi_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/mypage_profile_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/naver_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/onboarding_clover.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/onboarding_first.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/onboarding_last.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/onboarding_second.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/onboarding_third.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/pharmacy_bottom_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/pharmacy_main_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/physical_disability_radius_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/physical_disability_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/physical_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/physical_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/progress_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/report_button.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/reset_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/review_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/review_image_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/review_report_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/review_star_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/review_star_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/right_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/rotate_progress_bar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sche_navi_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_basic_img.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_elderly.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_hearing_impaired.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_infant_family.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_physical_disability.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/schedule_detail_visual_impairment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/search_bar_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/search_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/search_view_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selected_elderly_people_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selected_hearing_impairment_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selected_infant_familly_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selected_physical_disability_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selector_review_public_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/selector_review_public_text.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/shape_schedule_image_overlay.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/shimmer_placeholder_circle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/shimmer_placeholder_rect.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/shimmer_placeholder_round_rect.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/spinner_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/star_filled_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/star_half_filled_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/star_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_child_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_child_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_elderly_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_elderly_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_hearing_impaired_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_hearing_impaired_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_physical_disability_selected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_physical_disability_unselected_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_visual_impairment_select_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/sv_visual_impairment_unselect_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/toolbar_clover_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/update_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/visual_impairment_radius_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/visual_impairment_radius_small_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/visual_no_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/visual_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/drawable/x_button_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/cafe24_oneprettynight.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_black.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_bold.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_extrabold.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_extralight.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_light.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_medium.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_semibold.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/font/pretendard_thin.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_bookmark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_concern_type.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_delete_user.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_detail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_emergency_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_emergency_map.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_keyword_search.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_modify_schedule_form.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_modify_schedule_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_my_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_my_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_my_schedule.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_on_boarding.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_pharmacy_map.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_policy.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_public_schedule.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_report.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_review_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_schedule_detail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_schedule_form.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_splash.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_write_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/activity_write_schedule_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/bottom_sheet_schedule_manage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/bottom_sheet_schedule_review_manage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/category_bottom_sheet_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_confirm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_emergency_area.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_mode_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_photo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_review_report.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dialog_theme_guide.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/dropdown_item_blood_type.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/emergency_bottom_sheet_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_aed_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_concern_type.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_concern_type_modify.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_emergency_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_emergency_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_form_search.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_home_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_ice_modify.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_modify_name_period.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_modify_schedule_confirm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_modify_schedule_details.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_my_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_my_info_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_my_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_my_review_modify.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_name_and_period_form.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_on_search.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_personal_info_modify.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_pharmacy_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_schedule_confirm_form.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_schedule_details_form.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_schedule_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_search_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_search_map.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_search_place_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_search_result.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/fragment_select_interest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_detail_disability_image.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_detail_review_big.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_detail_service_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_disability_type.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_emergency_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_emergency_message.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_bookmarked_places.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_confirm.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_empty.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_place.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_schedule.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_search_result.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_form_search_total.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_home_vp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_list_search_area.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_list_search_category.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_list_search_sigungu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_list_search_sort.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_my_review.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_my_review_header.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_my_schedule_elapsed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_my_schedule_upcoming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_no_place.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_onboarding_vp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_photo_vp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_place_bookmark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_place_high.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_plan_bookmark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_public_schedule.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_recently_search_keyword.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_review_big_image.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_review_write_image.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_schedule_empty.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_schedule_image.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_schedule_list.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_schedule_place.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_search_suggestion.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_tourist_location.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/item_tourist_recommend.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/place_bottom_sheet.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/row_schedule_my.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/layout/row_schedule_public.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/menu/menu_bottom_navigation.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/menu/menu_read_ice_script.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/menu/menu_read_my_info_script.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/menu/menu_schedule_private.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/menu/menu_schedule_public.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/bottom_navigation_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/login_navigation_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/modify_schedule_form_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/nav_concern_type_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/nav_keyword_search_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/nav_my_info_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/nav_my_review_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/navigation/schedule_form_graph.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/raw/splash_video.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values-night/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/arrays.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/presentation/src/test/java/kr/techit/lion/presentation/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=/Users/jeongchanho/.android/avd/Pixel_2_XL.avd)]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;chanho0908&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Journey-Together/DaOnGil_CleanArchitecture.git&quot;,
+    &quot;accountId&quot;: &quot;e56619b5-0b7f-4e9f-9af4-6ac2c941c245&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2rKtMb38jukCfe9nbUtSmfb8unk" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeongchanho/AndroidStudioProjects/DaOnGil_CleanArchitecture/DaOnGil/presentation/src/main/java/kr/techit/lion/presentation/delegate",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "vcs.Subversion"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/delegate" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="kr.techit.lion.domain.model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="DaOnGil_CleanArchitecture.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9f42e303-2a42-4a49-94f1-d0e8d56b2f71" name="Changes" comment="" />
+      <created>1736319547132</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736319547132</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/presentation/src/main/java/kr/techit/lion/presentation/main/home/HomeMainFragment.kt</url>
+          <line>468</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="play_dynamic_filters_status">
+    <option name="appIdToCheckInfo">
+      <map>
+        <entry key="kr.techit.lion.presentation.test">
+          <value>
+            <CheckInfo lastCheckTimestamp="1736321567742" />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
