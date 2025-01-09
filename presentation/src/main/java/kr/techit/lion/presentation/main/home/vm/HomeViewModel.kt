@@ -24,6 +24,8 @@ import kr.techit.lion.domain.repository.SigunguCodeRepository
 import kr.techit.lion.presentation.delegate.NetworkErrorDelegate
 import kr.techit.lion.presentation.delegate.NetworkState
 import kr.techit.lion.presentation.ext.stateInUi
+import kr.techit.lion.presentation.main.home.HomeMainFragment.Companion.DEFAULT_AREA
+import kr.techit.lion.presentation.main.home.HomeMainFragment.Companion.DEFAULT_SIGUNGU
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -37,11 +39,6 @@ class HomeViewModel @Inject constructor(
     private val activationRepository: ActivationRepository,
     private val naverMapRepository: NaverMapRepository
 ) : ViewModel() {
-
-    companion object {
-        const val DEFAULT_AREA = "서울특별시"
-        const val DEFAULT_SIGUNGU = "중구"
-    }
 
     @Inject
     lateinit var networkErrorDelegate: NetworkErrorDelegate

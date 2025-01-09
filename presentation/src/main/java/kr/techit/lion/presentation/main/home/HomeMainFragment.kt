@@ -78,11 +78,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
         NetworkConnectivityObserver(requireContext().applicationContext)
     }
 
-    companion object {
-        const val DEFAULT_AREA = "서울특별시"
-        const val DEFAULT_SIGUNGU = "중구"
-    }
-
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -126,7 +121,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
             viewLifecycleOwner
         ) { _, _ ->
             viewModel.onClickThemeChangeButton(AppTheme.HIGH_CONTRAST)
-            requireActivity().recreate()
         }
 
         childFragmentManager.setFragmentResultListener(
@@ -138,7 +132,6 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
 
         binding.homeHighcontrastBtn.setOnClickListener {
             viewModel.onClickThemeToggleButton(isDarkTheme(resources.configuration))
-            requireActivity().recreate()
         }
     }
 
@@ -508,7 +501,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                 AppTheme.SYSTEM ->
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
-                AppTheme.LOADING -> return@collect
+                AppTheme.LOADING -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }
@@ -583,5 +576,9 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                 }
             }
         }
+    }
+    companion object {
+        const val DEFAULT_AREA = "서울특별시"
+        const val DEFAULT_SIGUNGU = "중구"
     }
 }
