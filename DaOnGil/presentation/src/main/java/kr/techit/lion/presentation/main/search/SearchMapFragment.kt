@@ -393,7 +393,7 @@ class SearchMapFragment : Fragment(R.layout.fragment_search_map), OnMapReadyCall
         } else {
             permissionGrantedMapUiSetting()
 
-            naverMap.addOnCameraChangeListener { reason: Int, animated: Boolean ->
+            naverMap.addOnCameraChangeListener { _: Int, _: Boolean ->
                 val bounds = naverMap.contentBounds
                 val northWest = bounds.northWest // 상단 왼쪽 꼭지점
                 val southEast = bounds.southEast // 하단 오른쪽 꼭지점

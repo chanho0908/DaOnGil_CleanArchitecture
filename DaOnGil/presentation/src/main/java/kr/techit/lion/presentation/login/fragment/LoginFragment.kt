@@ -68,7 +68,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.progressbar.visibility = View.VISIBLE
 
         val kakao = LoginType.KAKAO.toString()
-        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, _ ->
             if (token != null) {
                 viewModel.onCompleteLogIn(kakao, token.accessToken, token.refreshToken)
             }

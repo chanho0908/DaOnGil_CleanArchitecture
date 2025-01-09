@@ -51,7 +51,7 @@ class EmergencyAreaDialog : DialogFragment(R.layout.dialog_emergency_area) {
 
             emergencyAreaSelected.setAdapter(areaAdapter)
 
-            emergencyAreaSelected.setOnItemClickListener { adapterView, view, position, id ->
+            emergencyAreaSelected.setOnItemClickListener { adapterView, _, position, _ ->
                 val selectedArea = adapterView.getItemAtPosition(position).toString()
                 // 선택된 지역의 영문 리소스 이름을 매핑합니다.
                 val areaNameInEnglish = mapAreaNameToEnglish(selectedArea)
@@ -76,7 +76,7 @@ class EmergencyAreaDialog : DialogFragment(R.layout.dialog_emergency_area) {
                 emergencyDetailAreaLayout.visibility = View.VISIBLE
             }
 
-            emergencyDetailAreaSelected.setOnItemClickListener { adapterView, view, i, l ->
+            emergencyDetailAreaSelected.setOnItemClickListener { _, _, _, _ ->
                 emergencyAreaPositive.isEnabled = true
             }
 

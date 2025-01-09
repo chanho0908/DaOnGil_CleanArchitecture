@@ -486,7 +486,7 @@ class PharmacyMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (parts.isNotEmpty()) {
                     when {
                         parts.size > 2 -> {
-                            val (STAGE1, STAGE2, STAGE3) = parts
+                            val (_, STAGE2, STAGE3) = parts
                             viewModel.getPharmacyMapInfo(STAGE2, STAGE3)
                         }
 

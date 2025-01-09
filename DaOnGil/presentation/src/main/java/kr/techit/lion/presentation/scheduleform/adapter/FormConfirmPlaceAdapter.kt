@@ -41,9 +41,7 @@ class FormConfirmPlaceAdapter(private val places: List<FormPlace>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is FormConfirmPlaceViewHolder -> {
-                places[position]?.let {
-                    holder.bind(it)
-                }
+                holder.bind(places[position])
             }
 
             is FormConfirmEmptyViewHolder -> {}

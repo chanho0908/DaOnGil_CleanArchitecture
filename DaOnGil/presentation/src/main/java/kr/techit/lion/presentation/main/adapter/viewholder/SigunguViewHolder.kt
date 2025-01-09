@@ -30,7 +30,7 @@ class SigunguViewHolder(
             )
             detailSelectedArea.setAdapter(sigunguAdapter)
             if (root.context.isTallBackEnabled()){
-                detailSelectedArea.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                detailSelectedArea.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
                     val selectedItem = parent.getItemAtPosition(position).toString()
                     val selectedAreaMessage = "선택된 지역은 ${selectedItem}입니다."
                     detailSelectedArea.context.announceForAccessibility(selectedAreaMessage)

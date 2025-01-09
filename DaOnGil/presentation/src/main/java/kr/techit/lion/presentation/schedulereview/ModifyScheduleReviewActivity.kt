@@ -172,7 +172,7 @@ class ModifyScheduleReviewActivity : AppCompatActivity() {
 
         // RatingBar 현재 선택한 별의 갯수 알려주기
         binding.ratingbarMsr.apply {
-            setOnRatingChangeListener { ratingBar, rating, fromUser ->
+            setOnRatingChangeListener { _, rating, _ ->
                 val formattedRating = String.format(Locale.KOREA, "%.1f", rating)
 
                 contentDescription = getString(

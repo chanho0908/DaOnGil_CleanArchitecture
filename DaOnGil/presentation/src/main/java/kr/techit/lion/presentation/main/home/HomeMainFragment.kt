@@ -391,7 +391,7 @@ class HomeMainFragment : Fragment(R.layout.fragment_home_main) {
                                 it.split(" ").let { parts ->
                                     when {
                                         parts.size > 2 -> {
-                                            val (STAGE1, STAGE2, STAGE3) = parts
+                                            val (STAGE1, STAGE2, _) = parts
                                             binding.homeMyLocationTv.text = "$STAGE1 $STAGE2"
                                             getAroundPlaceInfo(binding, STAGE1, STAGE2)
                                         }

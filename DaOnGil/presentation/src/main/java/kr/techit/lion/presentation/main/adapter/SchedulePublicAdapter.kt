@@ -23,7 +23,7 @@ class SchedulePublicAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                itemClickListener(adapterPosition)
+                itemClickListener(absoluteAdapterPosition)
             }
         }
 

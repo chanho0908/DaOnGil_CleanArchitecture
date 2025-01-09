@@ -1,7 +1,6 @@
 package kr.techit.lion.data.dto.response.member
 
 import com.squareup.moshi.JsonClass
-import kr.techit.lion.daongil.data.dto.remote.response.member.MyInfoData
 import kr.techit.lion.domain.model.MyInfo
 
 @JsonClass(generateAdapter = true)

@@ -323,19 +323,19 @@ class IceModifyFragment : Fragment(R.layout.fragment_ice_modify) {
                 }
             }
 
-            tvRelation1.setOnEditorActionListener { v, actionId, event ->
+            tvRelation1.setOnEditorActionListener { _, _, _ ->
                 tvContact1.requestFocus()
                 true
             }
 
-            tvContact1.setOnEditorActionListener { v, actionId, event ->
+            tvContact1.setOnEditorActionListener { _, _, _ ->
                 tvContact2.requestFocus()
                 true
             }
 
             with(tvRelation2) {
                 imeOptions = EditorInfo.IME_ACTION_NEXT
-                setOnEditorActionListener { v, _, _ ->
+                setOnEditorActionListener { _, _, _ ->
                     tvContact2.requestFocus()
                     true
                 }

@@ -166,7 +166,7 @@ class FormSearchFragment : Fragment(R.layout.fragment_form_search) {
 
     private fun settingPlaceSearchView(binding: FragmentFormSearchBinding) {
         binding.searchViewFsResult.apply {
-            editText.setOnEditorActionListener { textView, actionId, event ->
+            editText.setOnEditorActionListener { _, _, event ->
                 if (event != null && event.action == KeyEvent.ACTION_DOWN) {
                     val word = editText.text.toString()
                     if (word.isEmpty()) {

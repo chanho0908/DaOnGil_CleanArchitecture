@@ -1,4 +1,4 @@
-package kr.techit.lion.daongil.data.dto.remote.response.member
+package kr.techit.lion.data.dto.response.member
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
