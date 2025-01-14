@@ -102,5 +102,6 @@
 
 <br/>
 
-## 🏆 Prize
-<img src="https://github.com/APP-Android2/FinalProject-DaOnGil/assets/84930748/51103819-ad16-4c49-a7b1-0f50243c7782" width="400" height="600"/>
+## 🧬 현재 모듈 구조
+![project dot](https://github.com/user-attachments/assets/185f30f8-96f1-4b69-9bb8-e59da30c7d1f)
+
