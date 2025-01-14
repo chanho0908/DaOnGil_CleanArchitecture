@@ -102,6 +102,3 @@
 
 <br/>
 
-## 🧬 현재 모듈 구조
-![project dot](https://github.com/user-attachments/assets/185f30f8-96f1-4b69-9bb8-e59da30c7d1f)
-
